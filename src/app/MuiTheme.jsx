@@ -5,12 +5,25 @@ const theme = createTheme({
     mode: "light",
     primary: {
       main: "#51379B",
+      contrastText: "#ffffff",
     },
+  },
+  typography: {
+    fontFamily: "Gilroy-Regular",
   },
   spacing: 4,
   shape: {
     borderRadius: 0,
     containerBorderRadius: 4,
+  },
+  components: {
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          padding: "0px",
+        },
+      },
+    },
   },
 });
 
