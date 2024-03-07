@@ -1,7 +1,7 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import SHEVA from "../../src/assets/SHEVA.svg";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { IconButton, Link, Stack, Typography } from "@mui/material";
 import {
   ABOUT_US_ROUTE,
@@ -10,9 +10,9 @@ import {
   POPULAR_ROUTE,
   REVIEWS_ROUTE,
 } from "../app/Routes";
-import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import ShoppingCartIcon from "./icons/shopping/ShoppingCartIcon";
+import LikeIcon from "./icons/shopping/LikeIcon";
+import PersonIcon from "./icons/shopping/PersonIcon";
 
 const pages = [
   { pageName: "Каталог", linkTo: CATALOG_ROUTE, pageId: 0 },
@@ -23,6 +23,9 @@ const pages = [
 ];
 
 const Header = () => {
+  const location = useLocation();
+  const activePath = location.pathname;
+
   return (
     <AppBar
       component="header"
@@ -36,52 +39,60 @@ const Header = () => {
           maxWidth: "lg",
           width: "100%",
           justifyContent: "space-between",
-          gap: 24,
           p: 3,
+          py: 0,
         }}
       >
         <IconButton disableRipple>
           <img src={SHEVA} alt="Sheva logo" />
         </IconButton>
 
-        <Stack flexDirection="row" flex="1" justifyContent="space-between">
+        <Stack flexDirection="row" justifyContent="space-between">
           {pages.map((page) => (
             <Link
               key={page.pageId}
               to={page.linkTo}
               component={RouterLink}
               underline="none"
+              p={5}
+              px={10}
+              color={
+                activePath === page.linkTo
+                  ? "primary.main"
+                  : "primary.contrastText"
+              }
+              sx={{
+                backgroundColor:
+                  activePath === page.linkTo
+                    ? "primary.contrastText"
+                    : "primary.main",
+              }}
             >
-              <Typography
-                variant="h6"
-                textAlign="center"
-                color="primary.contrastText"
-                fontWeight="bold"
-              >
+              <Typography variant="h6" textAlign="center" fontWeight="bold">
                 {page.pageName}
               </Typography>
             </Link>
           ))}
         </Stack>
 
-        <Stack flexDirection="row" gap={1}>
+        <Stack flexDirection="row" gap={4}>
           <IconButton
             disableRipple
             sx={{ p: 0, color: (theme) => theme.palette.primary.contrastText }}
           >
-            <AddShoppingCartRoundedIcon fontSize="medium" />
+            <ShoppingCartIcon />
           </IconButton>
           <IconButton
             disableRipple
             sx={{ p: 0, color: (theme) => theme.palette.primary.contrastText }}
           >
-            <FavoriteBorderRoundedIcon fontSize="medium" />
+            <LikeIcon />
           </IconButton>
           <IconButton
             disableRipple
             sx={{ p: 0, color: (theme) => theme.palette.primary.contrastText }}
           >
-            <PersonRoundedIcon fontSize="medium" />
+            <PersonIcon />
           </IconButton>
         </Stack>
       </Toolbar>
