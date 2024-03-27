@@ -16,7 +16,10 @@ const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
         Колір
         {showColorsName && (
           <span>
-            : {selectedColor ? ShoesColors[selectedColor] : "не обрано"}
+            :{" "}
+            {selectedColor
+              ? ShoesColors[selectedColor]
+              : setSelectedColor(colors[0])}
           </span>
         )}
       </Typography>
