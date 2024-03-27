@@ -1,12 +1,12 @@
 import { IconButton, Link, Stack, Typography } from "@mui/material";
 import FooterLogo from "../../src/assets/footer-logo.svg";
 import { Link as RouterLink } from "react-router-dom";
-import TikTokIcon from "../components/icons/socials/TikTokIcon";
-import InstagramIcon from "../components/icons/socials/InstagramIcon";
-import TelegramIcon from "../components/icons/socials/TelegramIcon";
-import PromIcon from "./icons/socials/PromIcon";
-import PhoneIcon from "./icons/contacts/PhoneIcon";
-import EmailIcon from "./icons/contacts/EmailIcon";
+import TikTokIcon from "../icons/socials/TikTokIcon";
+import InstagramIcon from "../icons/socials/InstagramIcon";
+import TelegramIcon from "../icons/socials/TelegramIcon";
+import PromIcon from "../icons/socials/PromIcon";
+import PhoneIcon from "../icons/contacts/PhoneIcon";
+import EmailIcon from "../icons/contacts/EmailIcon";
 
 const socials = [
   { socialName: "Tik Tok", linkTo: "#", icon: <TikTokIcon />, socialId: 0 },
@@ -56,7 +56,7 @@ const Footer = () => {
         py={6}
         height="fit-content"
       >
-        <IconButton disableRipple sx={{ p: 0 }}>
+        <IconButton>
           <img src={FooterLogo} alt="Sheva logo" />
         </IconButton>
 

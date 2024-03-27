@@ -7,19 +7,32 @@ import {
   ABOUT_US_ROUTE,
   CATALOG_ROUTE,
   LATEST_ROUTE,
+  LIKED_ROUTE,
   POPULAR_ROUTE,
+  PROFILE_ROUTE,
   REVIEWS_ROUTE,
+  SHOPPING_CART_ROUTE,
 } from "../app/Routes";
-import ShoppingCartIcon from "./icons/shopping/ShoppingCartIcon";
-import LikeIcon from "./icons/shopping/LikeIcon";
-import PersonIcon from "./icons/shopping/PersonIcon";
+import ShoppingCartIcon from "../icons/shopping/ShoppingCartIcon";
+import LikeIcon from "../icons/shopping/LikeIcon";
+import PersonIcon from "../icons/shopping/PersonIcon";
 
-const pages = [
-  { pageName: "Каталог", linkTo: CATALOG_ROUTE, pageId: 0 },
-  { pageName: "Новинки", linkTo: LATEST_ROUTE, pageId: 1 },
-  { pageName: "Популярне", linkTo: POPULAR_ROUTE, pageId: 2 },
-  { pageName: "Відгуки", linkTo: REVIEWS_ROUTE, pageId: 3 },
-  { pageName: "Про нас", linkTo: ABOUT_US_ROUTE, pageId: 4 },
+const routes = [
+  { routeName: "Каталог", linkTo: CATALOG_ROUTE, routeId: 0 },
+  { routeName: "Новинки", linkTo: LATEST_ROUTE, routeId: 1 },
+  { routeName: "Популярне", linkTo: POPULAR_ROUTE, routeId: 2 },
+  { routeName: "Відгуки", linkTo: REVIEWS_ROUTE, routeId: 3 },
+  { routeName: "Про нас", linkTo: ABOUT_US_ROUTE, routeId: 4 },
+];
+
+const iconRoutes = [
+  {
+    icon: <ShoppingCartIcon color="white" />,
+    linkTo: SHOPPING_CART_ROUTE,
+    routeId: 5,
+  },
+  { icon: <LikeIcon color="white" />, linkTo: LIKED_ROUTE, routeId: 6 },
+  { icon: <PersonIcon color="white" />, linkTo: PROFILE_ROUTE, routeId: 7 },
 ];
 
 const Header = () => {
@@ -43,57 +56,48 @@ const Header = () => {
           py: 0,
         }}
       >
-        <IconButton disableRipple>
+        <IconButton>
           <img src={SHEVA} alt="Sheva logo" />
         </IconButton>
 
         <Stack flexDirection="row" justifyContent="space-between">
-          {pages.map((page) => (
+          {routes.map((route) => (
             <Link
-              key={page.pageId}
-              to={page.linkTo}
+              key={route.routeId}
+              to={route.linkTo}
               component={RouterLink}
               underline="none"
               p={5}
               px={10}
               color={
-                activePath === page.linkTo
+                activePath === route.linkTo
                   ? "primary.main"
                   : "primary.contrastText"
               }
               sx={{
                 backgroundColor:
-                  activePath === page.linkTo
-                    ? "primary.contrastText"
+                  activePath === route.linkTo
+                    ? "background.default"
                     : "primary.main",
               }}
             >
               <Typography variant="h6" textAlign="center" fontWeight="bold">
-                {page.pageName}
+                {route.routeName}
               </Typography>
             </Link>
           ))}
         </Stack>
 
         <Stack flexDirection="row" gap={4}>
-          <IconButton
-            disableRipple
-            sx={{ p: 0, color: (theme) => theme.palette.primary.contrastText }}
-          >
-            <ShoppingCartIcon />
-          </IconButton>
-          <IconButton
-            disableRipple
-            sx={{ p: 0, color: (theme) => theme.palette.primary.contrastText }}
-          >
-            <LikeIcon />
-          </IconButton>
-          <IconButton
-            disableRipple
-            sx={{ p: 0, color: (theme) => theme.palette.primary.contrastText }}
-          >
-            <PersonIcon />
-          </IconButton>
+          {iconRoutes.map((iconRoute) => (
+            <Link
+              key={iconRoute.routeId}
+              component={RouterLink}
+              to={iconRoute.linkTo}
+            >
+              <IconButton>{iconRoute.icon}</IconButton>
+            </Link>
+          ))}
         </Stack>
       </Toolbar>
     </AppBar>

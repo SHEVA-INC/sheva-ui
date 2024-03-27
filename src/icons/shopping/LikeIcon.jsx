@@ -1,13 +1,13 @@
-const LikeIcon = (props) => (
+const LikeIcon = ({ color, fill = "none", ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={27}
     height={28}
-    fill="none"
+    fill={fill}
     {...props}
+    stroke={color}
   >
     <path
-      stroke="#fff"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2.508}
