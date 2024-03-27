@@ -4,9 +4,12 @@ import {
   CATALOG_ROUTE,
   HOME_ROUTE,
   LATEST_ROUTE,
+  LIKED_ROUTE,
   MAIN_ROUTE,
   POPULAR_ROUTE,
+  PROFILE_ROUTE,
   REVIEWS_ROUTE,
+  SHOPPING_CART_ROUTE,
   SIGN_IN_ROUTE,
   SIGN_UP_ROUTE,
 } from "./Routes";
@@ -21,6 +24,9 @@ import LatestRoute from "../routes/LatestRoute";
 import PopularRoute from "../routes/PopularRoute";
 import ReviewsRoute from "../routes/ReviewsRoute";
 import AboutUsRoute from "../routes/AboutUsRoute";
+import LikedRoute from "../routes/LikedRoute";
+import ProfileRoute from "../routes/ProfileRoute";
+import ShoppingCartRoute from "../routes/ShoppingCartRoute";
 
 const Router = () => {
   return (
@@ -34,6 +40,10 @@ const Router = () => {
           <Route path={POPULAR_ROUTE} element={<PopularRoute />} />
           <Route path={REVIEWS_ROUTE} element={<ReviewsRoute />} />
           <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
+
+          <Route path={SHOPPING_CART_ROUTE} element={<ShoppingCartRoute />} />
+          <Route path={LIKED_ROUTE} element={<LikedRoute />} />
+          <Route path={PROFILE_ROUTE} element={<ProfileRoute />} />
         </Route>
         <Route path={MAIN_ROUTE} element={<AuthLayout />}>
           <Route index element={<Navigate to={SIGN_IN_ROUTE} replace />} />
