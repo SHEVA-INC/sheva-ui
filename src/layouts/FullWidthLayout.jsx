@@ -9,7 +9,7 @@ const FullWidthLayout = () => {
       <Header />
       <Container
         component="main"
-        maxWidth="xl"
+        maxWidth="lg"
         disableGutters
         sx={{
           display: "flex",
