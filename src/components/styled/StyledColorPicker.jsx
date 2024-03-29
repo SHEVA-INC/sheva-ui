@@ -6,7 +6,8 @@ import ShoesColors from "../../utils/ShoesColors";
 const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
   const [selectedColor, setSelectedColor] = useState(null);
 
-  const handleColorChange = (col) => {
+  const handleColorChange = (col, e) => {
+    e.stopPropagation();
     setSelectedColor(col);
   };
 
@@ -29,7 +30,7 @@ const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
             key={color}
             color={color}
             selectedColor={selectedColor}
-            onClick={() => handleColorChange(color)}
+            onClick={(e) => handleColorChange(color, e)}
           />
         ))}
       </Stack>

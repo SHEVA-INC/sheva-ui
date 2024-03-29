@@ -4,7 +4,7 @@ const StyledColorButton = ({ color, selectedColor, onClick }) => {
   let borderColor;
   if (color === selectedColor) {
     if (selectedColor === "white" || selectedColor === "another") {
-      borderColor = "grey";
+      borderColor = "black";
     } else {
       borderColor = selectedColor;
     }
@@ -31,7 +31,7 @@ const StyledColorButton = ({ color, selectedColor, onClick }) => {
           style={{
             backgroundColor: color === "another" ? "grey" : color,
             borderRadius: "50%",
-            boxShadow: "0px 0px 2px 2px rgba(0, 0, 0, 0.05)",
+            boxShadow: "inset 0px -1px 1px 1px rgba(0, 0, 0, 0.1)",
             padding: 8,
             minWidth: 0,
             flex: 1,
