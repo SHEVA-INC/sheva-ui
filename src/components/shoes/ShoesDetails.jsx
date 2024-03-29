@@ -4,6 +4,7 @@ import StyledRating from "../styled/StyledRating";
 import StyledColorPicker from "../styled/StyledColorPicker";
 import StyledSelect from "../styled/StyledSelect";
 import ItemCounter from "../ItemCounter";
+import StyledTitle from "../styled/StyledTitle";
 
 const ShoesDetails = () => {
   const shoesDetails = Shoes[0];
@@ -100,9 +101,7 @@ const ShoesDetails = () => {
           </Stack>
         </Stack>
       </Stack>
-      <Typography variant="h3" fontWeight="bold" textTransform="uppercase">
-        Опис
-      </Typography>
+      <StyledTitle title="Опис" />
       <Stack flexDirection="row" alignItems="center">
         <Typography variant="h6">
           Sorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
@@ -114,6 +113,9 @@ const ShoesDetails = () => {
           egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
           Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
           lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
+          elementum. Morbi convallis convallis diam sit amet lacinia. Aliquam in
+          elementum. Morbi convallis convallis diam sit amet lacinia. Aliquam in
+          elementum. Morbi convallis convallis diam sit amet lacinia. Aliquam in
           elementum. Morbi convallis convallis diam sit amet lacinia. Aliquam in
           elementum. Morbi convallis convallis diam sit amet lacinia. Aliquam in
           elementum.

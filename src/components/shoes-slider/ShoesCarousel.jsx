@@ -1,13 +1,12 @@
 import Carousel from "react-material-ui-carousel";
 import ShoesCarouselItem from "./ShoesCarouselItem";
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
+import StyledTitle from "../styled/StyledTitle";
 
 const ShoesCarousel = ({ title, shoesCarouselData }) => {
   return (
     <>
-      <Typography variant="h3" fontWeight="bold" textTransform="uppercase">
-        {title}
-      </Typography>
+      <StyledTitle title={title} />
       <Carousel autoPlay={true} cycleNavigation>
         {shoesCarouselData.map((shoesItems, idx) => (
           <Grid container spacing={8} key={idx}>
