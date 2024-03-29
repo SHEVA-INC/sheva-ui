@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import {
   ABOUT_US_ROUTE,
   CATALOG_ROUTE,
+  DETAILED_SHOES_ROUTE,
   HOME_ROUTE,
   LATEST_ROUTE,
   LIKED_ROUTE,
@@ -27,6 +28,7 @@ import AboutUsRoute from "../routes/AboutUsRoute";
 import LikedRoute from "../routes/LikedRoute";
 import ProfileRoute from "../routes/ProfileRoute";
 import ShoppingCartRoute from "../routes/ShoppingCartRoute";
+import DetailedShoesRoute from "../routes/DetailedShoesRoute";
 
 const Router = () => {
   return (
@@ -36,6 +38,7 @@ const Router = () => {
           <Route index element={<Navigate to={HOME_ROUTE} replace />} />
           <Route path={HOME_ROUTE} element={<HomeRoute />} />
           <Route path={CATALOG_ROUTE} element={<CatalogRoute />} />
+          <Route path={DETAILED_SHOES_ROUTE} element={<DetailedShoesRoute />} />
           <Route path={LATEST_ROUTE} element={<LatestRoute />} />
           <Route path={POPULAR_ROUTE} element={<PopularRoute />} />
           <Route path={REVIEWS_ROUTE} element={<ReviewsRoute />} />

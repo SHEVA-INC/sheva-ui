@@ -17,9 +17,14 @@ const Shoes = [
     ],
     stock: true,
     brand: "Nike",
-    images: [ShoesImage1, ShoesImage2, ShoesImage3],
-    mainImage: ShoesImageMain,
+    images: [ShoesImageMain, ShoesImage1, ShoesImage2, ShoesImage3],
+    mainImage: ShoesImage1,
     liked: true,
+    modelNumber: "B0028",
+    rating: {
+      reviewAmount: 3205,
+      ratingNumber: 4.4,
+    },
   },
   {
     id: 2,

@@ -3,6 +3,8 @@ import LikeIcon from "../../icons/shopping/LikeIcon";
 import StyledColorPicker from "../styled/StyledColorPicker";
 import StyledSelect from "../styled/StyledSelect";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { DETAILED_SHOES_ROUTE } from "../../app/Routes";
 
 const ShoesItem = ({
   name,
@@ -16,8 +18,16 @@ const ShoesItem = ({
 }) => {
   const [isLiked, setIsLiked] = useState(liked);
 
-  const handleLikeClick = () => {
+  const handleLikeClick = (e) => {
+    e.stopPropagation();
     setIsLiked(!isLiked);
+  };
+
+  const navigate = useNavigate();
+
+  const handleShoesItemClick = (shoesName) => {
+    const formattedName = shoesName.replace(/\s+/g, "-").toLowerCase();
+    navigate(`${DETAILED_SHOES_ROUTE.replace(":shoesName", formattedName)}`);
   };
 
   return (
@@ -29,6 +39,7 @@ const ShoesItem = ({
       border={1}
       borderColor="secondary.light"
       p={3}
+      onClick={() => handleShoesItemClick(name)}
     >
       <Stack flexDirection="row" alignItems="center">
         <img
@@ -62,6 +73,9 @@ const ShoesItem = ({
           selectId="size-select"
           defaultValue={sizes[0].value}
           formControlSize="small"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
           {sizes.map((size) => (
             <MenuItem key={size.id} value={size.value}>
@@ -86,7 +100,13 @@ const ShoesItem = ({
                 <LikeIcon color="black" fill="black" />
               )}
             </IconButton>
-            <Button variant="contained" color="secondary">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               <Typography px={3}>В корзину</Typography>
             </Button>
           </Stack>
