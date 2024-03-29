@@ -27,12 +27,20 @@ const routes = [
 
 const iconRoutes = [
   {
-    icon: <ShoppingCartIcon color="white" />,
+    icon: <ShoppingCartIcon color="white" fontSize="medium" />,
     linkTo: SHOPPING_CART_ROUTE,
     routeId: 5,
   },
-  { icon: <LikeIcon color="white" />, linkTo: LIKED_ROUTE, routeId: 6 },
-  { icon: <PersonIcon color="white" />, linkTo: PROFILE_ROUTE, routeId: 7 },
+  {
+    icon: <LikeIcon color="white" fontSize="medium" />,
+    linkTo: LIKED_ROUTE,
+    routeId: 6,
+  },
+  {
+    icon: <PersonIcon color="white" fontSize="medium" />,
+    linkTo: PROFILE_ROUTE,
+    routeId: 7,
+  },
 ];
 
 const Header = () => {

@@ -9,27 +9,42 @@ import PhoneIcon from "../icons/contacts/PhoneIcon";
 import EmailIcon from "../icons/contacts/EmailIcon";
 
 const socials = [
-  { socialName: "Tik Tok", linkTo: "#", icon: <TikTokIcon />, socialId: 0 },
+  {
+    socialName: "Tik Tok",
+    linkTo: "#",
+    icon: <TikTokIcon color="white" fontSize="medium" />,
+    socialId: 0,
+  },
   {
     socialName: "Instagram",
     linkTo: "#",
-    icon: <InstagramIcon />,
+    icon: <InstagramIcon color="white" fontSize="medium" />,
     socialId: 1,
   },
-  { socialName: "Telegram", linkTo: "#", icon: <TelegramIcon />, socialId: 2 },
-  { socialName: "Prom", linkTo: "#", icon: <PromIcon />, socialId: 3 },
+  {
+    socialName: "Telegram",
+    linkTo: "#",
+    icon: <TelegramIcon color="white" fontSize="medium" />,
+    socialId: 2,
+  },
+  {
+    socialName: "Prom",
+    linkTo: "#",
+    icon: <PromIcon color="white" fontSize="medium" />,
+    socialId: 3,
+  },
 ];
 
 const contacts = [
   {
     contactInfo: "+(380) 68 346 12 13",
     contactInfoAdditional: "+(380) 68 346 12 13",
-    icon: <PhoneIcon />,
+    icon: <PhoneIcon color="white" fontSize="medium" />,
     contactId: 0,
   },
   {
     contactInfo: "sheva.boots@gmail.com",
-    icon: <EmailIcon />,
+    icon: <EmailIcon color="white" fontSize="medium" />,
     contactId: 1,
   },
 ];
