@@ -9,6 +9,7 @@ const StyledSelect = ({
   selectId,
   children,
   gap,
+  onClick,
 }) => {
   return (
     <FormControl size={formControlSize} sx={{ gap: gap }}>
@@ -22,6 +23,7 @@ const StyledSelect = ({
         onChange={onChange}
         color="secondary"
         IconComponent={DropDownIcon}
+        onClick={onClick}
       >
         {children}
       </Select>
