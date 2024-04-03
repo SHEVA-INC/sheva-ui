@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material";
 
-const StyledTitle = ({ title, textAlign = "left" }) => {
+const StyledTitle = ({ title, variant = "h4", textAlign = "left" }) => {
   return (
     <Typography
-      variant="h4"
+      variant={variant}
       fontWeight="bold"
       textTransform="uppercase"
       textAlign={textAlign}
