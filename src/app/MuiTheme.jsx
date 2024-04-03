@@ -11,6 +11,7 @@ const theme = createTheme({
       main: "#000000",
       light: "rgba(0, 0, 0, 0.23)",
     },
+    thirdly: { main: "#ffffff" },
   },
   typography: {
     fontFamily: "Gilroy-Regular",
