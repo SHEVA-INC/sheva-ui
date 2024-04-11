@@ -5,15 +5,9 @@ import StyledTitle from "../components/styled/StyledTitle";
 
 const LikedRoute = () => {
   return (
-    <Stack px={3} my={8} gap={6}>
+    <Stack px={3} my={8} gap={6} maxWidth="lg" width={1}>
       <StyledTitle title="Вподобане" />
-      <Stack
-        flexDirection="row"
-        justifyContent="space-between"
-        maxWidth="lg"
-        width={1}
-        gap={13}
-      >
+      <Stack flexDirection="row" justifyContent="space-between" gap={13}>
         <ShoesList />
         <ShoesFilterForm />
       </Stack>

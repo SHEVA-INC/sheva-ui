@@ -64,7 +64,7 @@ const Footer = () => {
         flexDirection="row"
         justifyContent="space-between"
         alignItems="flex-start"
-        maxWidth="lg"
+        maxWidth="xl"
         width={1}
         gap={10}
         px={3}

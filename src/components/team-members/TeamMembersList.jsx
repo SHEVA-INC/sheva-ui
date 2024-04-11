@@ -4,12 +4,7 @@ import TeamMemberItem from "./TeamMemberItem";
 
 const TeamMembersList = () => {
   return (
-    <Stack
-      flexDirection="row"
-      justifyContent="space-between"
-      flexWrap="wrap"
-      gap={6}
-    >
+    <Stack flexDirection="row" justifyContent="start" flexWrap="wrap" gap={6}>
       {TeamMembers.map((teamMember) => (
         <TeamMemberItem
           key={teamMember.id}

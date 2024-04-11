@@ -15,7 +15,7 @@ const AboutUsRoute = () => {
   ];
 
   return (
-    <Stack px={3} my={8} gap={10}>
+    <Stack px={3} my={8} gap={10} maxWidth="xl">
       <Stack
         flexDirection="row"
         justifyContent="space-between"

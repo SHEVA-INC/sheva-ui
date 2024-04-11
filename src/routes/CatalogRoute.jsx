@@ -7,11 +7,11 @@ const CatalogRoute = () => {
     <Stack
       flexDirection="row"
       justifyContent="space-between"
-      maxWidth="lg"
-      width={1}
       gap={13}
       px={3}
       my={8}
+      maxWidth="lg"
+      width={1}
     >
       <ShoesFilterForm />
       <ShoesList />
