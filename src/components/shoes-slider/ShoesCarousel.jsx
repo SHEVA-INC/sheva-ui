@@ -1,11 +1,11 @@
 import Carousel from "react-material-ui-carousel";
 import ShoesCarouselItem from "./ShoesCarouselItem";
-import { Grid } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import StyledTitle from "../styled/StyledTitle";
 
-const ShoesCarousel = ({ title, shoesCarouselData }) => {
+const ShoesCarousel = ({ title, shoesCarouselData, id }) => {
   return (
-    <>
+    <Stack gap={8} id={id}>
       <StyledTitle title={title} />
       <Carousel autoPlay={true} cycleNavigation>
         {shoesCarouselData.map((shoesItems, idx) => (
@@ -25,7 +25,7 @@ const ShoesCarousel = ({ title, shoesCarouselData }) => {
           </Grid>
         ))}
       </Carousel>
-    </>
+    </Stack>
   );
 };
 

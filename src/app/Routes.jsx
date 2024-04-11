@@ -13,9 +13,6 @@ export const HOME_ROUTE = "/home";
 
 export const CATALOG_ROUTE = "/catalog";
 export const DETAILED_SHOES_ROUTE = "/catalog/:shoesName";
-export const LATEST_ROUTE = "/latest";
-export const POPULAR_ROUTE = "/popular";
-export const REVIEWS_ROUTE = "/reviews";
 export const ABOUT_US_ROUTE = "/about-us";
 
 export const SHOPPING_CART_ROUTE = "/shopping-cart";

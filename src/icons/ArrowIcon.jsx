@@ -1,11 +1,11 @@
 import { SvgIcon } from "@mui/material";
 
 const ArrowIcon = ({ color, fontSize, padding, ...props }) => (
-  <SvgIcon fontSize={fontSize} viewBox="0 0 13 11" sx={{ p: padding }}>
+  <SvgIcon fontSize={fontSize} viewBox="0 0 13 13" sx={{ p: padding }}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={13}
-      height={11}
+      height={13}
       fill="none"
       {...props}
     >

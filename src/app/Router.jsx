@@ -4,12 +4,9 @@ import {
   CATALOG_ROUTE,
   DETAILED_SHOES_ROUTE,
   HOME_ROUTE,
-  LATEST_ROUTE,
   LIKED_ROUTE,
   MAIN_ROUTE,
-  POPULAR_ROUTE,
   PROFILE_ROUTE,
-  REVIEWS_ROUTE,
   SHOPPING_CART_ROUTE,
   SIGN_IN_ROUTE,
   SIGN_UP_ROUTE,
@@ -21,9 +18,6 @@ import FullWidthLayout from "../layouts/FullWidthLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import HomeRoute from "../routes/HomeRoute";
 import CatalogRoute from "../routes/CatalogRoute";
-import LatestRoute from "../routes/LatestRoute";
-import PopularRoute from "../routes/PopularRoute";
-import ReviewsRoute from "../routes/ReviewsRoute";
 import AboutUsRoute from "../routes/AboutUsRoute";
 import LikedRoute from "../routes/LikedRoute";
 import ProfileRoute from "../routes/ProfileRoute";
@@ -39,9 +33,6 @@ const Router = () => {
           <Route path={HOME_ROUTE} element={<HomeRoute />} />
           <Route path={CATALOG_ROUTE} element={<CatalogRoute />} />
           <Route path={DETAILED_SHOES_ROUTE} element={<DetailedShoesRoute />} />
-          <Route path={LATEST_ROUTE} element={<LatestRoute />} />
-          <Route path={POPULAR_ROUTE} element={<PopularRoute />} />
-          <Route path={REVIEWS_ROUTE} element={<ReviewsRoute />} />
           <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
 
           <Route path={SHOPPING_CART_ROUTE} element={<ShoppingCartRoute />} />
