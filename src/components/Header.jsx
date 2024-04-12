@@ -2,7 +2,14 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import SHEVA from "../../src/assets/SHEVA.svg";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
-import { IconButton, Link, Stack, Typography } from "@mui/material";
+import {
+  IconButton,
+  Link,
+  Menu,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import {
   ABOUT_US_ROUTE,
   CATALOG_ROUTE,
@@ -10,11 +17,13 @@ import {
   LIKED_ROUTE,
   PROFILE_ROUTE,
   SHOPPING_CART_ROUTE,
+  SIGN_OUT_ROUTE,
 } from "../app/Routes";
 import ShoppingCartIcon from "../icons/shopping/ShoppingCartIcon";
 import LikeIcon from "../icons/shopping/LikeIcon";
 import PersonIcon from "../icons/shopping/PersonIcon";
 import useHeaderHeight from "../custom-hooks/useHeaderHeight";
+import { useState } from "react";
 
 const routes = [
   { routeName: "Каталог", linkTo: CATALOG_ROUTE, routeId: 0 },
@@ -37,9 +46,14 @@ const iconRoutes = [
   },
   {
     icon: <PersonIcon color="white" fontSize="medium" />,
-    linkTo: PROFILE_ROUTE,
+    linkTo: "#",
     routeId: 7,
   },
+];
+
+const settings = [
+  { settingName: "Профіль", linkTo: PROFILE_ROUTE },
+  { settingName: "Вийти", linkTo: SIGN_OUT_ROUTE },
 ];
 
 const Header = () => {
@@ -66,6 +80,16 @@ const Header = () => {
     } else {
       handleTabClick(route?.id);
     }
+  };
+
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
 
   return (
@@ -124,9 +148,47 @@ const Header = () => {
               component={RouterLink}
               to={iconRoute.linkTo}
             >
-              <IconButton>{iconRoute.icon}</IconButton>
+              <IconButton
+                onClick={iconRoute.routeId === 7 ? handleOpenUserMenu : null}
+              >
+                {iconRoute.icon}
+              </IconButton>
             </Link>
           ))}
+          <Menu
+            sx={{ mt: "35px" }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting, index) => (
+              <MenuItem key={index} onClick={handleCloseUserMenu}>
+                <Typography
+                  variant="caption"
+                  textAlign="center"
+                  fontWeight="bold"
+                >
+                  <Link
+                    to={setting.linkTo}
+                    component={RouterLink}
+                    underline="none"
+                  >
+                    {setting.settingName.toLocaleUpperCase()}
+                  </Link>
+                </Typography>
+              </MenuItem>
+            ))}
+          </Menu>
         </Stack>
       </Toolbar>
     </AppBar>
