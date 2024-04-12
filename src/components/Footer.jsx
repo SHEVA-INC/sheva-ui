@@ -67,7 +67,7 @@ const Footer = () => {
         maxWidth="xl"
         width={1}
         gap={10}
-        px={3}
+        px={10}
         py={6}
         height="fit-content"
       >

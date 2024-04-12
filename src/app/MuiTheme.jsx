@@ -18,7 +18,7 @@ const theme = createTheme({
   },
   spacing: 4,
   shape: {
-    borderRadius: 8,
+    borderRadius: 4,
     containerBorderRadius: 1,
   },
   components: {
@@ -65,8 +65,29 @@ const theme = createTheme({
       },
     },
     MuiCheckbox: {
+      styleOverrides: {
+        root: { paddingLeft: 0 },
+      },
       defaultProps: {
         disableRipple: true,
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: { width: "fit-content" },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: { textTransform: "none" },
+      },
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: { marginLeft: 0, marginRight: 0 },
       },
     },
   },
