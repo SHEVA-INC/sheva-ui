@@ -7,6 +7,7 @@ import {
   HOME_ROUTE,
   LIKED_ROUTE,
   MAIN_ROUTE,
+  NOT_FOUND_ROUTE,
   PROFILE_ROUTE,
   RESET_PASSWORD_ROUTE,
   SHOPPING_CART_ROUTE,
@@ -26,6 +27,8 @@ import DetailedShoesRoute from "../routes/DetailedShoesRoute";
 import SignInAndSignUpRoute from "../routes/SignInAndSignUpRoute";
 import ForgotPasswordRoute from "../routes/ForgotPasswordRoute";
 import ResetPasswordRoute from "../routes/ResetPasswordRoute";
+import PageNotFoundRoute from "../routes/PageNotFoundRoute";
+import ErrorLayout from "../layouts/ErrorLayout";
 
 const Router = () => {
   return (
@@ -57,6 +60,12 @@ const Router = () => {
             element={<ForgotPasswordRoute />}
           />
           <Route path={RESET_PASSWORD_ROUTE} element={<ResetPasswordRoute />} />
+        </Route>
+        <Route path={MAIN_ROUTE} element={<ErrorLayout />}>
+          <Route path={NOT_FOUND_ROUTE} element={<PageNotFoundRoute />} />
+          <Route path="*" element={<Navigate to={NOT_FOUND_ROUTE} replace />} />
+
+          <Route path="*" element={<PageNotFoundRoute />} />
         </Route>
       </Route>
     </Routes>

@@ -1,7 +1,9 @@
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
+import { Stack, Typography } from "@mui/material";
+import ErrorImg from "../assets/404-error.svg";
+import ArrowIconLeft from "../icons/ArrowIconLeft";
+import HomeIcon from "../icons/HomeIcon";
 
 const PageNotFoundRoute = () => {
   const navigate = useNavigate();
@@ -11,12 +13,47 @@ const PageNotFoundRoute = () => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" mt="20%">
-      <Typography variant="h3">Page not found</Typography>
-      <Button variant="contained" size="large" onClick={handleBackClick}>
-        Go back
-      </Button>
-    </Box>
+    <Stack my={20} alignItems="center">
+      <img
+        src={ErrorImg}
+        alt="Error"
+        style={{ width: "100%", maxWidth: "500px" }}
+      />
+      <Stack alignItems="center" gap={5}>
+        <Typography variant="h4" fontWeight="bold">
+          Помилка 404
+        </Typography>
+        <Typography variant="p" textAlign="center">
+          Щось пішло не так. Схоже, що ваш запит не знайдено. Ймовірно посилання
+          не працює або сторінку видалено.
+        </Typography>
+        <Stack flexDirection="row" gap={5}>
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            onClick={handleBackClick}
+            startIcon={<ArrowIconLeft color="white" fontSize="large" />}
+          >
+            <Typography textTransform="uppercase" fontWeight="bold">
+              Назад
+            </Typography>
+          </Button>
+          <Button
+            variant="outlined"
+            size="large"
+            color="primary"
+            sx={{ borderColor: "#FFE7D6" }}
+            onClick={handleBackClick}
+            startIcon={<HomeIcon color="#51379B" padding={0.4} />}
+          >
+            <Typography textTransform="uppercase" fontWeight="bold">
+              На головну
+            </Typography>
+          </Button>
+        </Stack>
+      </Stack>
+    </Stack>
   );
 };
 
