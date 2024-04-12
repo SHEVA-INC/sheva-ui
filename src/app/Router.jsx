@@ -3,17 +3,17 @@ import {
   ABOUT_US_ROUTE,
   CATALOG_ROUTE,
   DETAILED_SHOES_ROUTE,
+  FORGOT_PASSWORD_ROUTE,
   HOME_ROUTE,
   LIKED_ROUTE,
   MAIN_ROUTE,
   PROFILE_ROUTE,
+  RESET_PASSWORD_ROUTE,
   SHOPPING_CART_ROUTE,
   SIGN_IN_ROUTE,
   SIGN_UP_ROUTE,
 } from "./Routes";
 
-import SignUpRoute from "../routes/SignUpRoute";
-import SignInRoute from "../routes/SignInRoute";
 import FullWidthLayout from "../layouts/FullWidthLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import HomeRoute from "../routes/HomeRoute";
@@ -23,6 +23,9 @@ import LikedRoute from "../routes/LikedRoute";
 import ProfileRoute from "../routes/ProfileRoute";
 import ShoppingCartRoute from "../routes/ShoppingCartRoute";
 import DetailedShoesRoute from "../routes/DetailedShoesRoute";
+import SignInAndSignUpRoute from "../routes/SignInAndSignUpRoute";
+import ForgotPasswordRoute from "../routes/ForgotPasswordRoute";
+import ResetPasswordRoute from "../routes/ResetPasswordRoute";
 
 const Router = () => {
   return (
@@ -41,8 +44,19 @@ const Router = () => {
         </Route>
         <Route path={MAIN_ROUTE} element={<AuthLayout />}>
           <Route index element={<Navigate to={SIGN_IN_ROUTE} replace />} />
-          <Route path={SIGN_IN_ROUTE} element={<SignInRoute />} />
-          <Route path={SIGN_UP_ROUTE} element={<SignUpRoute />} />
+          <Route
+            path={SIGN_IN_ROUTE}
+            element={<SignInAndSignUpRoute active="login" />}
+          />
+          <Route
+            path={SIGN_UP_ROUTE}
+            element={<SignInAndSignUpRoute active="register" />}
+          />
+          <Route
+            path={FORGOT_PASSWORD_ROUTE}
+            element={<ForgotPasswordRoute />}
+          />
+          <Route path={RESET_PASSWORD_ROUTE} element={<ResetPasswordRoute />} />
         </Route>
       </Route>
     </Routes>
