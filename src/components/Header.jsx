@@ -13,6 +13,7 @@ import {
   ListItem,
   ListItemButton,
   Drawer,
+  Box,
 } from "@mui/material";
 import {
   ABOUT_US_ROUTE,
@@ -181,7 +182,12 @@ const Header = () => {
         >
           <Link component={RouterLink} to={HOME_ROUTE}>
             <IconButton>
-              <img src={SHEVA} alt="Sheva logo" />
+              <Box
+                component="img"
+                src={SHEVA}
+                alt="Sheva logo"
+                height={{ xs: "20px", md: "inherit" }}
+              />
             </IconButton>
           </Link>
 
