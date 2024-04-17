@@ -21,10 +21,13 @@ const SignInForm = () => {
         autoComplete="password"
         helperText="Введіть пароль"
       />
-      <Link to={FORGOT_PASSWORD_ROUTE} component={RouterLink} underline="none">
-        <Typography variant="p" color="info.light">
-          Забули пароль?
-        </Typography>
+      <Link
+        to={FORGOT_PASSWORD_ROUTE}
+        component={RouterLink}
+        underline="none"
+        color="info.light"
+      >
+        <Typography>Забули пароль?</Typography>
       </Link>
       <Button
         variant="contained"

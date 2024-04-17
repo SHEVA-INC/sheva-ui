@@ -4,7 +4,7 @@ import ShoesItem from "./ShoesItem";
 
 const ShoesList = () => {
   return (
-    <Stack maxWidth="lg" gap={5}>
+    <Stack gap={5}>
       {Shoes.map((shoesItem) => (
         <ShoesItem
           key={shoesItem.id}

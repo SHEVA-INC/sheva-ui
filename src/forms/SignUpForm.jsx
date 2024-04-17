@@ -41,13 +41,23 @@ const SignUpForm = () => {
       <FormControlLabel
         control={<StyledCheckbox fill="#F3F6F9" />}
         label={
-          <Typography fontWeight="bold">
+          <Typography>
             Ви погоджуєтеся з{" "}
-            <Link to={"#"} component={RouterLink} underline="none">
+            <Link
+              to={"#"}
+              component={RouterLink}
+              underline="none"
+              color="info.light"
+            >
               Terms of Condition{" "}
             </Link>
             та{" "}
-            <Link to={"#"} component={RouterLink} underline="none">
+            <Link
+              to={"#"}
+              component={RouterLink}
+              underline="none"
+              color="info.light"
+            >
               Privacy Policy
             </Link>
             .

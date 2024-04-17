@@ -7,6 +7,7 @@ const StyledStackForRoutes = ({
   alignItems,
   children,
   gap,
+  minHeight,
 }) => {
   return (
     <Stack
@@ -18,6 +19,7 @@ const StyledStackForRoutes = ({
       px={3}
       gap={gap ? gap : 5}
       my={8}
+      minHeight={minHeight}
     >
       {children}
     </Stack>
