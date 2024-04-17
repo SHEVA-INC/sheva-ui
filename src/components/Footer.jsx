@@ -53,22 +53,23 @@ const Footer = () => {
   return (
     <Stack
       component="footer"
-      width={1}
       alignItems="center"
       sx={{
         backgroundColor: (theme) => theme.palette.primary.main,
       }}
+      px={3}
+      py={6}
+      gap={4}
+      width={1}
     >
       <Stack
         component="nav"
-        flexDirection="row"
-        justifyContent="space-between"
-        alignItems="flex-start"
-        maxWidth="lg"
         width={1}
-        gap={10}
-        px={3}
-        py={6}
+        flexDirection={{ xs: "column", md: "row" }}
+        justifyContent={{ xs: "flex-start", md: "space-between" }}
+        alignItems={{ xs: "center", md: "flex-start" }}
+        maxWidth="lg"
+        gap={8}
         height="fit-content"
       >
         <IconButton>
@@ -112,12 +113,13 @@ const Footer = () => {
             </Typography>
           ))}
         </Stack>
-        <Stack>
-          <Typography maxWidth="140px" color="primary.contrastText">
-            Працюємо <br /> з <strong>10:00</strong> до{" "}
-            <strong>22:00 без вихідних</strong>
-          </Typography>
-        </Stack>
+        <Typography
+          color="primary.contrastText"
+          maxWidth={{ xs: "100%", md: "140px" }}
+        >
+          Працюємо з <strong>10:00</strong> до{" "}
+          <strong>22:00 без вихідних</strong>
+        </Typography>
       </Stack>
     </Stack>
   );
