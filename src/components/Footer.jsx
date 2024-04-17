@@ -64,10 +64,10 @@ const Footer = () => {
         flexDirection="row"
         justifyContent="space-between"
         alignItems="flex-start"
-        maxWidth="xl"
+        maxWidth="lg"
         width={1}
         gap={10}
-        px={10}
+        px={3}
         py={6}
         height="fit-content"
       >

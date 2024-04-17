@@ -19,7 +19,7 @@ const HomeRoute = () => {
       <HomeMainBlock />
       <NumbersBlock />
 
-      <Stack px={10} gap={10} my={8} width={1} maxWidth="xl">
+      <Stack px={3} gap={10} my={8} maxWidth="lg" width={1}>
         <ShoesCarousel
           title="Новинки"
           id="new-items"
@@ -31,7 +31,9 @@ const HomeRoute = () => {
           <ShoesSmallList title="Best sellers" />
           <ShoesSmallList title="Top Rated" />
         </Stack>
-        <GradientShoesBlock />
+      </Stack>
+      <GradientShoesBlock />
+      <Stack px={3} gap={10} my={8} maxWidth="lg" width={1}>
         <ShoesCarousel
           title="Популярне"
           id="popular"

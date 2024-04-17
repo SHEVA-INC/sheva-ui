@@ -111,7 +111,7 @@ const HomeMainBlock = () => {
           zIndex={5}
           position="relative"
         >
-          <Stack zIndex={5} position="absolute" width={1} maxWidth="xl">
+          <Stack zIndex={5} position="absolute" width={1} maxWidth="lg">
             <img src={AirZoomFull} alt="Air Zoom" />
             <Typography
               textAlign="start"
@@ -134,7 +134,7 @@ const HomeMainBlock = () => {
               style={{ width: "700px" }}
             />
           </Stack>
-          <Stack zIndex={7} position="absolute" width={1} maxWidth="xl">
+          <Stack zIndex={7} position="absolute" width={1} maxWidth="lg">
             <img src={AirZoomOutlined} alt="Air Zoom" />
             <Typography
               textAlign="end"
@@ -146,7 +146,12 @@ const HomeMainBlock = () => {
           </Stack>
         </Stack>
 
-        <Stack flexDirection="row" gap={30} justifyContent="space-between">
+        <Stack
+          flexDirection="row"
+          gap={30}
+          justifyContent="space-between"
+          maxWidth="lg"
+        >
           <Stack
             zIndex={6}
             position="relative"
@@ -180,7 +185,7 @@ const HomeMainBlock = () => {
               </Typography>
             </Stack>
           </Stack>
-          <Stack gap={8} width={0.4} maxWidth="700px">
+          <Stack gap={8} width={0.4}>
             <Typography variant="variant6" color="primary.contrastText">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
               vulputate libero et velit interdum, ac aliquet odio mattis. Class

@@ -26,7 +26,7 @@ const NumbersBlock = () => {
       alignItems="center"
     >
       <Stack
-        maxWidth="xl"
+        maxWidth="lg"
         flexDirection="row"
         justifyContent="space-between"
         width={1}

@@ -5,7 +5,7 @@ import ShoesCarouselData from "../components/shoes-slider/ShoesCarouselData";
 
 const DetailedShoesRoute = () => {
   return (
-    <Stack px={3} my={8} gap={10}>
+    <Stack px={3} my={8} gap={13} maxWidth="lg">
       <ShoesDetails />
       <ShoesCarousel
         title="Рекомендовані"

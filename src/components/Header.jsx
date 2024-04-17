@@ -103,12 +103,12 @@ const Header = () => {
       <Toolbar
         component="nav"
         sx={{
-          maxWidth: "xl",
+          maxWidth: "lg",
           width: "100%",
           justifyContent: "space-between",
           "&.MuiToolbar-root": {
-            paddingLeft: 10,
-            paddingRight: 10,
+            paddingLeft: 3,
+            paddingRight: 3,
             py: 0,
           },
         }}
@@ -172,20 +172,23 @@ const Header = () => {
             onClose={handleCloseUserMenu}
           >
             {settings.map((setting, index) => (
-              <MenuItem key={index} onClick={handleCloseUserMenu}>
-                <Typography
-                  variant="caption"
-                  textAlign="center"
-                  fontWeight="bold"
+              <MenuItem key={index} onClick={handleCloseUserMenu} sx={{ p: 0 }}>
+                <Link
+                  to={setting.linkTo}
+                  component={RouterLink}
+                  underline="none"
+                  px={6}
+                  py={1}
+                  minWidth={1}
                 >
-                  <Link
-                    to={setting.linkTo}
-                    component={RouterLink}
-                    underline="none"
+                  <Typography
+                    variant="caption"
+                    textAlign="center"
+                    fontWeight="bold"
                   >
                     {setting.settingName.toLocaleUpperCase()}
-                  </Link>
-                </Typography>
+                  </Typography>
+                </Link>
               </MenuItem>
             ))}
           </Menu>
