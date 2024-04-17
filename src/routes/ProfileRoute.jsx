@@ -1,5 +1,7 @@
+import UserProfile from "../components/UserProfile";
+
 const ProfileRoute = () => {
-  return <div>ProfileRoute</div>;
+  return <UserProfile />;
 };
 
 export default ProfileRoute;
