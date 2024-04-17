@@ -9,7 +9,7 @@ import StyledFormControlWithTextFieldForPassword from "../components/styled/Styl
 
 const SignInForm = () => {
   return (
-    <StyledForm>
+    <StyledForm px={6} py={4}>
       <StyledFormControlWithTextField
         title="Пошта"
         htmlFor="email"

@@ -1,6 +1,8 @@
 import { FormControl, TextField, Typography } from "@mui/material";
 
 const StyledFormControlWithTextField = ({
+  value,
+  onChange,
   title,
   htmlFor,
   type,
@@ -15,6 +17,8 @@ const StyledFormControlWithTextField = ({
     <FormControl fullWidth sx={{ gap: 2 }}>
       <Typography htmlFor={htmlFor}>{title}</Typography>
       <TextField
+        value={value}
+        onChange={onChange}
         id={htmlFor}
         fullWidth
         type={type}

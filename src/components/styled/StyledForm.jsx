@@ -5,14 +5,16 @@ const StyledForm = ({
   alignItems = "flex-end",
   onSubmit,
   children,
+  py,
+  px,
 }) => {
   return (
     <Stack
       component={component}
-      gap={2}
+      gap={4}
       width={1}
-      py={6}
-      px={8}
+      py={py}
+      px={px}
       onSubmit={onSubmit}
       alignItems={alignItems}
     >

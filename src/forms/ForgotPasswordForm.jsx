@@ -5,7 +5,7 @@ import ArrowIcon from "../icons/ArrowIcon";
 
 const ForgotPasswordForm = () => {
   return (
-    <StyledForm alignItems="center">
+    <StyledForm alignItems="center" px={6} py={4}>
       <Typography variant="h6" fontWeight="bold">
         Відновлення пароля
       </Typography>

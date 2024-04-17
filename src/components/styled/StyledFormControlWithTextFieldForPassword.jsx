@@ -9,6 +9,8 @@ import { useState } from "react";
 import EyeIcon from "../../icons/EyeIcon";
 
 const StyledFormControlWithTextFieldForPassword = ({
+  value,
+  onChange,
   title,
   htmlFor,
   register,
@@ -28,6 +30,8 @@ const StyledFormControlWithTextFieldForPassword = ({
     <FormControl fullWidth sx={{ gap: 2 }}>
       <Typography htmlFor={htmlFor}>{title}</Typography>
       <TextField
+        value={value}
+        onChange={onChange}
         id={htmlFor}
         fullWidth
         type={isPasswordVisible ? "text" : "password"}
