@@ -27,7 +27,7 @@ import DetailedShoesRoute from "../routes/DetailedShoesRoute";
 import SignInAndSignUpRoute from "../routes/SignInAndSignUpRoute";
 import ForgotPasswordRoute from "../routes/ForgotPasswordRoute";
 import ResetPasswordRoute from "../routes/ResetPasswordRoute";
-import PageNotFoundRoute from "../routes/PageNotFoundRoute";
+import NotFoundRoute from "../routes/NotFoundRoute";
 import ErrorLayout from "../layouts/ErrorLayout";
 
 const Router = () => {
@@ -62,10 +62,10 @@ const Router = () => {
           <Route path={RESET_PASSWORD_ROUTE} element={<ResetPasswordRoute />} />
         </Route>
         <Route path={MAIN_ROUTE} element={<ErrorLayout />}>
-          <Route path={NOT_FOUND_ROUTE} element={<PageNotFoundRoute />} />
+          <Route path={NOT_FOUND_ROUTE} element={<NotFoundRoute />} />
           <Route path="*" element={<Navigate to={NOT_FOUND_ROUTE} replace />} />
 
-          <Route path="*" element={<PageNotFoundRoute />} />
+          <Route path="*" element={<NotFoundRoute />} />
         </Route>
       </Route>
     </Routes>

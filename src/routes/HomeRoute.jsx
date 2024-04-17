@@ -12,6 +12,7 @@ import ReviewsCarouselData from "../components/reviews/ReviewsCarouselData";
 import HomeMainBlock from "../components/HomeMainBlock";
 import { Link } from "react-router-dom";
 import { CATALOG_ROUTE } from "../app/Routes";
+import StyledStackForRoutes from "../components/styled/StyledStackForRoutes";
 
 const HomeRoute = () => {
   return (
@@ -19,7 +20,7 @@ const HomeRoute = () => {
       <HomeMainBlock />
       <NumbersBlock />
 
-      <Stack px={3} gap={10} my={8} maxWidth="lg" width={1}>
+      <StyledStackForRoutes>
         <ShoesCarousel
           title="Новинки"
           id="new-items"
@@ -31,9 +32,9 @@ const HomeRoute = () => {
           <ShoesSmallList title="Best sellers" />
           <ShoesSmallList title="Top Rated" />
         </Stack>
-      </Stack>
+      </StyledStackForRoutes>
       <GradientShoesBlock />
-      <Stack px={3} gap={10} my={8} maxWidth="lg" width={1}>
+      <StyledStackForRoutes>
         <ShoesCarousel
           title="Популярне"
           id="popular"
@@ -61,7 +62,7 @@ const HomeRoute = () => {
           reviewsAmount="3,126"
           reviewsCarouselData={ReviewsCarouselData}
         />
-      </Stack>
+      </StyledStackForRoutes>
     </Stack>
   );
 };

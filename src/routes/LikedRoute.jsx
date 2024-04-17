@@ -2,16 +2,17 @@ import { Stack } from "@mui/material";
 import ShoesFilterForm from "../forms/ShoesFilterForm";
 import ShoesList from "../components/shoes/ShoesList";
 import StyledTitle from "../components/styled/StyledTitle";
+import StyledStackForRoutes from "../components/styled/StyledStackForRoutes";
 
 const LikedRoute = () => {
   return (
-    <Stack px={3} my={8} gap={6} maxWidth="lg" width={1}>
+    <StyledStackForRoutes>
       <StyledTitle title="Вподобане" />
-      <Stack flexDirection="row" justifyContent="space-between" gap={13}>
+      <Stack flexDirection="row" justifyContent="space-between" gap={12}>
         <ShoesList />
         <ShoesFilterForm />
       </Stack>
-    </Stack>
+    </StyledStackForRoutes>
   );
 };
 

@@ -1,11 +1,11 @@
-import { Stack } from "@mui/material";
 import ShoesDetails from "../components/shoes/ShoesDetails";
 import ShoesCarousel from "../components/shoes-slider/ShoesCarousel";
 import ShoesCarouselData from "../components/shoes-slider/ShoesCarouselData";
+import StyledStackForRoutes from "../components/styled/StyledStackForRoutes";
 
 const DetailedShoesRoute = () => {
   return (
-    <Stack px={3} my={8} gap={13} maxWidth="lg">
+    <StyledStackForRoutes>
       <ShoesDetails />
       <ShoesCarousel
         title="Рекомендовані"
@@ -15,7 +15,7 @@ const DetailedShoesRoute = () => {
         title="Нещодавно переглянуті"
         shoesCarouselData={ShoesCarouselData}
       />
-    </Stack>
+    </StyledStackForRoutes>
   );
 };
 
