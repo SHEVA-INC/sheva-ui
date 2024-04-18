@@ -28,7 +28,7 @@ const UpdateUserDataForm = () => {
   };
 
   return (
-    <Stack flexDirection="row" gap={6} p={6}>
+    <Stack flexDirection={{ xs: "column", md: "row" }} gap={6} p={6}>
       <Avatar
         src={userData.imageSrc}
         alt={userData.fullName}

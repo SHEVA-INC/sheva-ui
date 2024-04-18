@@ -5,11 +5,18 @@ import UpdateUserDataForm from "../forms/UpdateUserDataForm";
 
 const ProfileRoute = () => {
   return (
-    <StyledStackForRoutes flexDirection="row" justifyContent="space-between">
+    <StyledStackForRoutes
+      flexDirection={{ xs: "column", md: "row" }}
+      justifyContent="space-between"
+    >
       <StyledStackWithBordersAndTitle title="Налаштування" flex={1}>
         <UpdateUserDataForm />
       </StyledStackWithBordersAndTitle>
-      <StyledStackWithBordersAndTitle title="Змінити пароль">
+      <StyledStackWithBordersAndTitle
+        title="Змінити пароль"
+        width="100%"
+        maxWidth="340px"
+      >
         <ChangePasswordForm />
       </StyledStackWithBordersAndTitle>
     </StyledStackForRoutes>
