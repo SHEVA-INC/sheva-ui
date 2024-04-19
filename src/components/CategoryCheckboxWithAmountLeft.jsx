@@ -16,9 +16,13 @@ const CategoryCheckboxWithAmountLeft = ({ title, categories }) => {
         >
           <FormControlLabel
             control={<StyledCheckbox fill="#F3F6F9" />}
-            label={<Typography fontWeight="bold">{categorie.label}</Typography>}
+            label={
+              <Typography fontWeight="bold" variant="body1">
+                {categorie.label}
+              </Typography>
+            }
           />
-          <Typography color="secondary.light" fontWeight="bold">
+          <Typography color="secondary.light" fontWeight="bold" variant="body2">
             {categorie.amountLeft}
           </Typography>
         </Stack>

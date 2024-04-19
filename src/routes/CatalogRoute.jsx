@@ -5,12 +5,12 @@ import StyledStackForRoutes from "../components/styled/StyledStackForRoutes";
 const CatalogRoute = () => {
   return (
     <StyledStackForRoutes
-      flexDirection="row"
+      flexDirection={{ xs: "column", md: "row" }}
       justifyContent="space-between"
-      gap={12}
+      gap={6}
     >
-      <ShoesFilterForm />
-      <ShoesList />
+      <ShoesFilterForm order={1} />
+      <ShoesList order={2} />
     </StyledStackForRoutes>
   );
 };

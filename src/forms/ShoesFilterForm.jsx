@@ -10,18 +10,19 @@ const sizes = [
   { id: 3, value: 40 },
 ];
 
-const ShoesFilterForm = () => {
+const ShoesFilterForm = ({ order }) => {
   return (
     <Stack
       component="form"
       gap={5}
-      flex={1}
       px={9}
       py={8}
       height="fit-content"
       borderRadius={(theme) => theme.shape.containerBorderRadius}
       border="none"
       boxShadow="0px 0px 12px 12px rgba(0, 0, 0, 0.01)"
+      order={order}
+      maxWidth="340px"
     >
       <CategoryCheckboxWithAmountLeft
         title="Категорія"

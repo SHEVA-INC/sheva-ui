@@ -24,7 +24,7 @@ const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
           </span>
         )}
       </Typography>
-      <Stack flexDirection="row" gap={1}>
+      <Stack flexDirection="row" gap={1} flexWrap="wrap">
         {colors.map((color) => (
           <StyledColorButton
             key={color}

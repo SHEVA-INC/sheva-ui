@@ -2,9 +2,9 @@ import { Stack } from "@mui/material";
 import Shoes from "./Shoes";
 import ShoesItem from "./ShoesItem";
 
-const ShoesList = () => {
+const ShoesList = ({ order }) => {
   return (
-    <Stack gap={5}>
+    <Stack gap={5} flex={1} order={order}>
       {Shoes.map((shoesItem) => (
         <ShoesItem
           key={shoesItem.id}

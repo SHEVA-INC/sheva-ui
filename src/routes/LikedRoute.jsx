@@ -8,9 +8,13 @@ const LikedRoute = () => {
   return (
     <StyledStackForRoutes>
       <StyledTitle title="Вподобане" />
-      <Stack flexDirection="row" justifyContent="space-between" gap={12}>
-        <ShoesList />
-        <ShoesFilterForm />
+      <Stack
+        flexDirection={{ xs: "column", md: "row" }}
+        justifyContent="space-between"
+        gap={6}
+      >
+        <ShoesList order={{ xs: 2, md: 1 }} />
+        <ShoesFilterForm order={{ xs: 1, md: 2 }} />
       </Stack>
     </StyledStackForRoutes>
   );

@@ -1,4 +1,5 @@
 import { Box, Button, Tooltip } from "@mui/material";
+import ShoesColors from "../../utils/ShoesColors";
 
 const StyledColorButton = ({ color, selectedColor, onClick }) => {
   let borderColor;
@@ -13,7 +14,7 @@ const StyledColorButton = ({ color, selectedColor, onClick }) => {
   }
 
   return (
-    <Tooltip title={color}>
+    <Tooltip title={ShoesColors[color] || color}>
       <Box
         sx={{
           display: "flex",

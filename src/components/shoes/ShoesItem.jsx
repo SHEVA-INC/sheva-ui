@@ -1,4 +1,11 @@
-import { Button, IconButton, MenuItem, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  MenuItem,
+  Stack,
+  Typography,
+  Box,
+} from "@mui/material";
 import LikeIcon from "../../icons/shopping/LikeIcon";
 import StyledColorPicker from "../styled/StyledColorPicker";
 import StyledSelect from "../styled/StyledSelect";
@@ -32,7 +39,7 @@ const ShoesItem = ({
 
   return (
     <Stack
-      flexDirection="row"
+      flexDirection={{ xs: "column", sm: "row" }}
       justifyContent="space-between"
       gap={9}
       borderRadius={(theme) => theme.shape.containerBorderRadius}
@@ -40,26 +47,48 @@ const ShoesItem = ({
       borderColor="secondary.light"
       p={3}
       onClick={() => handleShoesItemClick(name)}
+      // width={1}
     >
-      <Stack flexDirection="row" alignItems="center">
-        <img
+      <Stack
+        flexDirection={{ xs: "column", lg: "row" }}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Box
+          component="img"
           src={mainImage}
           alt={name}
-          style={{ width: "320px", height: "max-content" }}
+          width="100%"
+          minWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "420px" }}
+          maxWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "420px" }}
+          height="max-content"
         />
-        <Stack spacing={1}>
+
+        <Stack
+          flexDirection={{ xs: "row", lg: "column" }}
+          alignItems="center"
+          justifyContent="center"
+          flex={1}
+        >
           {images.slice(0, 3).map((image) => (
-            <img
+            <Box
+              component="img"
               key={image}
               src={image}
-              alt={name}
-              style={{ width: "114px" }}
+              alt={image}
+              width={{ xs: "calc(100%/3)", sm: "100px" }}
+              height="max-content"
             />
           ))}
         </Stack>
       </Stack>
 
-      <Stack width="286px" gap={3}>
+      <Stack
+        maxWidth={{ xs: "100%", md: "420px" }}
+        flex={1}
+        gap={4}
+        justifyContent="space-between"
+      >
         <Stack>
           <Typography variant="h5" fontWeight="bold">
             {name}
@@ -85,14 +114,21 @@ const ShoesItem = ({
         </StyledSelect>
 
         <Stack
-          flexDirection="row"
+          flexDirection={{ xs: "row", md: "column" }}
           justifyContent="space-between"
           alignItems="center"
+          gap={2}
         >
-          <Typography variant="h5" fontWeight="bold">
-            {price}
-          </Typography>
-          <Stack flexDirection="row" gap={2} alignItems="center">
+          <Stack
+            flexDirection="row"
+            alignItems="center"
+            flex={1}
+            width={1}
+            justifyContent="space-between"
+          >
+            <Typography variant="h5" fontWeight="bold">
+              {price}
+            </Typography>
             <IconButton onClick={handleLikeClick}>
               {!isLiked ? (
                 <LikeIcon color="black" />
@@ -100,16 +136,17 @@ const ShoesItem = ({
                 <LikeIcon color="black" fill="black" />
               )}
             </IconButton>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              <Typography px={3}>В корзину</Typography>
-            </Button>
           </Stack>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            sx={{ width: { xs: "inherit", md: "100%" } }}
+          >
+            <Typography px={3}>В корзину</Typography>
+          </Button>
         </Stack>
       </Stack>
     </Stack>
