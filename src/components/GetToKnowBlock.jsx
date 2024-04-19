@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, Box } from "@mui/material";
 import ShoesImageMain from "../assets/shoes/shoes-image-1.png";
 import DoubleCheckIcon from "../icons/DoubleCheckIcon";
 import StyledTitle from "../components/styled/StyledTitle";
@@ -13,11 +13,11 @@ const items = [
 const GetToKnowBlock = () => {
   return (
     <Stack
-      flexDirection="row"
+      flexDirection={{ xs: "column", md: "row" }}
       justifyContent="space-between"
       alignItems="center"
     >
-      <Stack gap={8}>
+      <Stack gap={6}>
         <StyledTitle title="YOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT." />
         <Typography>
           Forem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
@@ -31,23 +31,40 @@ const GetToKnowBlock = () => {
           lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
           elementum tellus.
         </Typography>
-        <Stack gap={3}>
-          {items.map((item, idx) => (
-            <Stack key={idx} flexDirection="row" gap={2} alignItems="center">
-              <DoubleCheckIcon />
-              <Typography>{item}</Typography>
-            </Stack>
-          ))}
+        <Stack
+          flexDirection="row"
+          justifyContent="space-between"
+          alignItems="center"
+          width={1}
+          gap={2}
+        >
+          <Stack gap={3}>
+            {items.map((item, idx) => (
+              <Stack key={idx} flexDirection="row" gap={2} alignItems="center">
+                <DoubleCheckIcon />
+                <Typography>{item}</Typography>
+              </Stack>
+            ))}
+          </Stack>
+          <Box
+            component="img"
+            src={ShoesImageMain}
+            alt="Boots"
+            width="100%"
+            maxWidth={{ xs: "50%", sm: "50%" }}
+            height="max-content"
+            display={{ xs: "block", md: "none" }}
+          />
         </Stack>
       </Stack>
-      <img
+      <Box
+        component="img"
         src={ShoesImageMain}
         alt="Boots"
-        style={{
-          width: "100%",
-          maxWidth: "700px",
-          height: "max-content",
-        }}
+        width="100%"
+        maxWidth="50%"
+        height="max-content"
+        display={{ xs: "none", md: "block" }}
       />
     </Stack>
   );

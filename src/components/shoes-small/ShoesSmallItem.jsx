@@ -11,7 +11,8 @@ const ShoesSmallItem = ({ imageSrc, name, description, price }) => {
       borderColor="secondary.light"
       px={4}
       py={6}
-      width="340px"
+      maxWidth="420px"
+      width="100%"
     >
       <img
         src={imageSrc}

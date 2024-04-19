@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography, Box } from "@mui/material";
 import ArrowIcon from "../icons/ArrowIcon";
 import ShoesImage from "../assets/transparent-bcg-shoes/nike-air-zoom.png";
 
@@ -13,9 +13,11 @@ const GradientShoesBlock = () => {
       <Stack
         maxWidth="lg"
         width={1}
-        flexDirection="row"
+        flexDirection={{ xs: "column", sm: "row" }}
         justifyContent="space-between"
+        alignItems="center"
         px={3}
+        gap={10}
       >
         <Stack gap={5}>
           <Typography
@@ -58,10 +60,14 @@ const GradientShoesBlock = () => {
             </Typography>
           </Button>
         </Stack>
-        <img
+
+        <Box
+          component="img"
           src={ShoesImage}
           alt="Nike Air Zoom"
-          style={{ maxWidth: "400px", height: "max-content" }}
+          width="50%"
+          maxWidth={{ xs: "50%", md: "400px" }}
+          height="max-content"
         />
       </Stack>
     </Stack>

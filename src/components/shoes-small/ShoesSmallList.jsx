@@ -6,7 +6,7 @@ import StyledTitle from "../styled/StyledTitle";
 const ShoesSmallList = ({ title }) => {
   return (
     <Stack gap={6}>
-      <StyledTitle variant="h5" title={title} />
+      <StyledTitle variant="h5" title={title} textAlign="left" />
       {ShoesSmall.map((shoesSmallItem) => (
         <ShoesSmallItem
           key={shoesSmallItem.id}

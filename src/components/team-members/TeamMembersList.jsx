@@ -5,11 +5,15 @@ import StyledTitle from "../styled/StyledTitle";
 
 const TeamMembersList = () => {
   return (
-    <>
+    <Stack gap={6}>
       <StyledTitle title="Команда" textAlign="center" />
       <Stack
         flexDirection="row"
-        justifyContent="center"
+        justifyContent={{
+          xs: "center",
+
+          lg: "space-between",
+        }}
         flexWrap="wrap"
         gap={6}
       >
@@ -22,7 +26,7 @@ const TeamMembersList = () => {
           />
         ))}
       </Stack>
-    </>
+    </Stack>
   );
 };
 

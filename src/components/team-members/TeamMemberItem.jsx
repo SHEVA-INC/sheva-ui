@@ -11,7 +11,8 @@ const TeamMemberItem = ({ imageSrc, fullName, jobPosition }) => {
       borderColor="secondary.light"
       px={4}
       py={6}
-      width="270px"
+      maxWidth="270px"
+      width="100%"
     >
       <Avatar alt={fullName} src={imageSrc} sx={{ width: 64, height: 64 }} />
       <Stack>

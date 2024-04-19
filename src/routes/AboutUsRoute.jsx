@@ -13,7 +13,11 @@ const AboutUsRoute = () => {
         <TeamMembersList />
       </StyledStackForRoutes>
       <GradientShoesBlock />
-      <StyledStackForRoutes flexDirection="row" justifyContent="space-between">
+      <StyledStackForRoutes
+        flexDirection={{ xs: "column", md: "row" }}
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <ShoesSmallList title="Flash sale today" />
         <ShoesSmallList title="Best sellers" />
         <ShoesSmallList title="Top Rated" />
