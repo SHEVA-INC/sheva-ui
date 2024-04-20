@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import LikeIcon from "../../icons/shopping/LikeIcon";
 import StyledColorPicker from "../styled/StyledColorPicker";
-import StyledSelect from "../styled/StyledSelect";
+import StyledFormControlWithSelect from "../styled/StyledFormControlWithSelect";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DETAILED_SHOES_ROUTE } from "../../app/Routes";
@@ -47,7 +47,6 @@ const ShoesItem = ({
       borderColor="secondary.light"
       p={3}
       onClick={() => handleShoesItemClick(name)}
-      // width={1}
     >
       <Stack
         flexDirection={{ xs: "column", lg: "row" }}
@@ -98,7 +97,8 @@ const ShoesItem = ({
 
         <StyledColorPicker colors={colors} showColorsName={true} gap={1} />
 
-        <StyledSelect
+        <StyledFormControlWithSelect
+          title="Розмір"
           selectId="size-select"
           defaultValue={sizes[0].value}
           formControlSize="small"
@@ -111,7 +111,7 @@ const ShoesItem = ({
               {size.value}
             </MenuItem>
           ))}
-        </StyledSelect>
+        </StyledFormControlWithSelect>
 
         <Stack
           flexDirection={{ xs: "row", md: "column" }}

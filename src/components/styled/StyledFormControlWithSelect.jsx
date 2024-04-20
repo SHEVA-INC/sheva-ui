@@ -1,10 +1,11 @@
 import { FormControl, Select, Typography } from "@mui/material";
 import DropDownIcon from "../../icons/DropDownIcon";
 
-const StyledSelect = ({
+const StyledFormControlWithSelect = ({
   value,
   defaultValue,
   onChange,
+  title,
   formControlSize,
   selectId,
   children,
@@ -14,7 +15,7 @@ const StyledSelect = ({
   return (
     <FormControl size={formControlSize} sx={{ gap: gap }}>
       <Typography variant="h6" fontWeight="bold" htmlFor={selectId}>
-        Розмір
+        {title}
       </Typography>
       <Select
         id={selectId}
@@ -31,4 +32,4 @@ const StyledSelect = ({
   );
 };
 
-export default StyledSelect;
+export default StyledFormControlWithSelect;

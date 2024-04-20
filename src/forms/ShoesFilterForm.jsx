@@ -2,7 +2,7 @@ import { Button, MenuItem, Stack, Typography } from "@mui/material";
 import CategoryCheckboxWithAmountLeft from "../components/CategoryCheckboxWithAmountLeft";
 import StyledColorPicker from "../components/styled/StyledColorPicker";
 import ShoesColors from "../utils/ShoesColors";
-import StyledSelect from "../components/styled/StyledSelect";
+import StyledFormControlWithSelect from "../components/styled/StyledFormControlWithSelect";
 
 const sizes = [
   { id: 1, value: 38 },
@@ -18,7 +18,7 @@ const ShoesFilterForm = ({ order }) => {
       px={9}
       py={8}
       height="fit-content"
-      borderRadius={(theme) => theme.shape.containerBorderRadius}
+      borderRadius={(theme) => theme.shape.containerBorderRadius * 2}
       border="none"
       boxShadow="0px 0px 12px 12px rgba(0, 0, 0, 0.01)"
       order={order}
@@ -40,7 +40,8 @@ const ShoesFilterForm = ({ order }) => {
         ]}
       />
 
-      <StyledSelect
+      <StyledFormControlWithSelect
+        title="Розмір"
         selectId="size-select"
         defaultValue={sizes[0].value}
         formControlSize="small"
@@ -51,7 +52,7 @@ const ShoesFilterForm = ({ order }) => {
             {size.value}
           </MenuItem>
         ))}
-      </StyledSelect>
+      </StyledFormControlWithSelect>
 
       <StyledColorPicker
         colors={Object.keys(ShoesColors)}

@@ -18,7 +18,7 @@ let theme = createTheme({
   },
   spacing: 4,
   shape: {
-    borderRadius: 4,
+    borderRadius: 8,
     containerBorderRadius: 1,
   },
   components: {

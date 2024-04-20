@@ -1,8 +1,8 @@
 import Shoes from "./Shoes";
-import { Button, MenuItem, Stack, Typography } from "@mui/material";
+import { Button, MenuItem, Stack, Typography, Box } from "@mui/material";
 import StyledRating from "../styled/StyledRating";
 import StyledColorPicker from "../styled/StyledColorPicker";
-import StyledSelect from "../styled/StyledSelect";
+import StyledFormControlWithSelect from "../styled/StyledFormControlWithSelect";
 import ItemCounter from "../ItemCounter";
 import StyledTitle from "../styled/StyledTitle";
 
@@ -10,12 +10,17 @@ const ShoesDetails = () => {
   const shoesDetails = Shoes[0];
 
   return (
-    <>
-      <Stack flexDirection="row" justifyContent="space-between">
-        <Stack width={0.5}>
+    <Stack gap={6}>
+      <Stack
+        flexDirection={{ xs: "column", sm: "row" }}
+        justifyContent="space-between"
+        alignItems="center"
+        gap={8}
+      >
+        <Stack width={{ xs: 1, md: 0.5 }}>
           <img
             src={shoesDetails.mainImage}
-            alt={name}
+            alt={shoesDetails.name}
             style={{ width: "100%", height: "max-content" }}
           />
           <Stack flexDirection="row">
@@ -23,14 +28,14 @@ const ShoesDetails = () => {
               <img
                 key={image}
                 src={image}
-                alt={name}
+                alt={shoesDetails.name}
                 style={{ width: "calc(100%/4)" }}
               />
             ))}
           </Stack>
         </Stack>
 
-        <Stack gap={6} width={0.4}>
+        <Stack width={{ xs: 1, md: 0.5 }} gap={{ xs: 4, sm: 2, md: 6 }}>
           <Stack>
             <Typography variant="h4" fontWeight="bold">
               {shoesDetails.name}
@@ -39,7 +44,6 @@ const ShoesDetails = () => {
               {shoesDetails.description}
             </Typography>
           </Stack>
-
           <Stack
             flexDirection="row"
             justifyContent="space-between"
@@ -61,14 +65,13 @@ const ShoesDetails = () => {
               {shoesDetails.price}
             </Typography>
           </Stack>
-
           <StyledColorPicker
             colors={shoesDetails.colors}
             showColorsName={true}
             gap={1}
           />
-
-          <StyledSelect
+          <StyledFormControlWithSelect
+            title="Розмір"
             selectId="size-select"
             defaultValue={shoesDetails.sizes[0].value}
             formControlSize="small"
@@ -81,8 +84,7 @@ const ShoesDetails = () => {
                 {size.value}
               </MenuItem>
             ))}
-          </StyledSelect>
-
+          </StyledFormControlWithSelect>
           <Stack
             flexDirection="row"
             justifyContent="space-between"
@@ -101,8 +103,13 @@ const ShoesDetails = () => {
           </Stack>
         </Stack>
       </Stack>
+
       <StyledTitle title="Опис" />
-      <Stack flexDirection="row" alignItems="center">
+      <Stack
+        flexDirection={{ xs: "column", sm: "row" }}
+        alignItems="center"
+        width={1}
+      >
         <Typography variant="h6">
           Sorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
           turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec
@@ -120,24 +127,32 @@ const ShoesDetails = () => {
           elementum. Morbi convallis convallis diam sit amet lacinia. Aliquam in
           elementum.
         </Typography>
-        <Stack width={0.5}>
-          <Stack width={0.6} alignSelf="flex-start">
-            <img
+        <Stack width={{ xs: 1, sm: 0.5 }} gap={10}>
+          <Stack
+            width={0.6}
+            alignSelf={{ xs: "flex-start", sm: "center", md: "flex-start" }}
+          >
+            <Box
+              component="img"
               src={shoesDetails.images[1]}
-              alt={name}
-              style={{ height: "max-content" }}
+              alt={shoesDetails.name}
+              height="max-content"
             />
           </Stack>
-          <Stack width={0.6} alignSelf="flex-end">
-            <img
+          <Stack
+            width={0.6}
+            alignSelf={{ xs: "flex-end", sm: "center", md: "flex-end" }}
+          >
+            <Box
+              component="img"
               src={shoesDetails.images[2]}
-              alt={name}
-              style={{ height: "max-content" }}
+              alt={shoesDetails.name}
+              height="max-content"
             />
           </Stack>
         </Stack>
       </Stack>
-    </>
+    </Stack>
   );
 };
 
