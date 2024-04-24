@@ -5,7 +5,7 @@ import StyledTitle from "../styled/StyledTitle";
 
 const ShoesSmallList = ({ title }) => {
   return (
-    <Stack gap={6}>
+    <Stack gap={6} width={1} maxWidth={{ sm: "420px" }}>
       <StyledTitle variant="h5" title={title} textAlign="left" />
       {ShoesSmall.map((shoesSmallItem) => (
         <ShoesSmallItem
@@ -19,5 +19,4 @@ const ShoesSmallList = ({ title }) => {
     </Stack>
   );
 };
-
 export default ShoesSmallList;

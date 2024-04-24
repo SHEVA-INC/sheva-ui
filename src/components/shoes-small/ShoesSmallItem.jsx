@@ -5,14 +5,13 @@ const ShoesSmallItem = ({ imageSrc, name, description, price }) => {
     <Stack
       flexDirection="row"
       alignItems="center"
-      gap={5}
+      gap={{ xs: 2, md: 5 }}
       borderRadius={(theme) => theme.shape.containerBorderRadius / 2}
       border={1}
       borderColor="secondary.light"
       px={4}
       py={6}
-      maxWidth="420px"
-      width="100%"
+      width={1}
     >
       <img
         src={imageSrc}
@@ -20,10 +19,10 @@ const ShoesSmallItem = ({ imageSrc, name, description, price }) => {
         style={{ width: 88, height: "max-content" }}
       />
       <Stack>
-        <Typography variant="body2" fontWeight="bold">
+        <Typography variant="h6" fontWeight="bold">
           {name}
         </Typography>
-        <Typography variant="body2">{description}</Typography>
+        <Typography variant="body1">{description}</Typography>
         <Typography variant="body2" fontWeight="bold" color="info.light" mt={1}>
           {price}
         </Typography>

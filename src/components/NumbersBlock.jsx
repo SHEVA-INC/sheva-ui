@@ -27,22 +27,19 @@ const NumbersBlock = () => {
     >
       <Stack
         maxWidth="lg"
-        flexDirection="row"
+        flexDirection={{ xs: "column", md: "row" }}
         justifyContent="space-between"
-        width={1}
-        px={10}
-        py={22}
+        width={{ xs: "min-content", md: 1 }}
+        gap={6}
+        px={{ xs: 3, md: 10 }}
+        py={{ xs: 2, md: 22 }}
       >
         {numbers.map((numberItem) => (
           <Stack key={numberItem.id}>
-            <Typography variant="h1" color="thirdly.main" fontWeight="bold">
+            <Typography color="thirdly.main" fontWeight="bold" variant="h1">
               {numberItem.number}
             </Typography>
-            <Typography
-              color="thirdly.main"
-              textAlign="center"
-              fontWeight="bold"
-            >
+            <Typography color="thirdly.main" fontWeight="bold">
               {numberItem.text}
             </Typography>
           </Stack>

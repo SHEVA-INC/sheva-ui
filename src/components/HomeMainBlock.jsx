@@ -25,7 +25,13 @@ const HomeMainBlock = () => {
         right="0"
         sx={{ transform: "translateY(-50%)", top: "50%" }}
       >
-        <img src={ShoesAdPng} alt="Main Shoes" />
+        <Box
+          component="img"
+          src={ShoesAdPng}
+          alt="Main Shoes"
+          width={{ xs: "90px", sm: "120px", md: "220px" }}
+          height={"max-content"}
+        />
       </Stack>
       <Box
         position="absolute"
@@ -56,9 +62,11 @@ const HomeMainBlock = () => {
         position="absolute"
         top="0"
         right="0"
-        width="15%"
+        width={{ xs: "35%", md: "15%" }}
         height="100%"
         zIndex="1"
+        pl={{ xs: 6, md: 8 }}
+        pr={2}
         sx={{
           background: "linear-gradient(0.5turn, #FF702C 60%, #51379B)",
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%)",
@@ -68,148 +76,164 @@ const HomeMainBlock = () => {
         alignItems="center"
       >
         <Typography
-          variant="h5"
           color="primary.contrastText"
           fontWeight="bold"
           textTransform="uppercase"
           mt={10}
+          variant="body1"
         >
           Nike Air Zoom
         </Typography>
-        <Typography variant="body2" color="primary.contrastText">
+        <Typography
+          color="primary.contrastText"
+          textAlign="center"
+          variant="body2"
+        >
           Mercurial Vapor XV Elite FG
         </Typography>
       </Box>
-
       <Stack
-        px={30}
-        pt={10}
-        pb={50}
+        px={{ xs: 3, sm: 12, md: 20 }}
+        py={{ xs: 10, md: 10 }}
+        gap={{ xs: 12, lg: 6 }}
         zIndex={4}
         position="absolute"
         width={1}
         height="100%"
         flexDirection="column"
         alignItems="center"
-        justifyContent="space-between"
+        justifyContent="center"
         display="flex"
         top={0}
         left={0}
         bottom={0}
       >
-        <img
+        <Box
+          component="img"
           src={FooterLogo}
           alt="Sheva logo"
-          width="80px"
+          width={{ xs: "46px", sm: "60px", md: "80px" }}
           height="max-content"
         />
-        <Stack
-          width={1}
-          justifyContent="center"
-          alignItems="center"
-          display="flex"
-          zIndex={5}
-          position="relative"
-        >
-          <Stack zIndex={5} position="absolute" width={1} maxWidth="lg">
-            <img src={AirZoomFull} alt="Air Zoom" />
-            <Typography
-              textAlign="start"
-              variant="h4"
-              color="primary.contrastText"
-            >
-              Nike Air Zoom
-            </Typography>
-          </Stack>
-
+        <Stack>
           <Stack
-            zIndex={6}
-            position="relative"
-            width="100%"
+            width={1}
+            justifyContent="center"
             alignItems="center"
-          >
-            <img
-              src={MainShoesLanding}
-              alt="Main Shoes"
-              style={{ width: "700px" }}
-            />
-          </Stack>
-          <Stack zIndex={7} position="absolute" width={1} maxWidth="lg">
-            <img src={AirZoomOutlined} alt="Air Zoom" />
-            <Typography
-              textAlign="end"
-              variant="h4"
-              color="primary.contrastText"
-            >
-              Mercurial Vapor XV Elite FG
-            </Typography>
-          </Stack>
-        </Stack>
-
-        <Stack
-          flexDirection="row"
-          gap={30}
-          justifyContent="space-between"
-          maxWidth="lg"
-        >
-          <Stack
-            zIndex={6}
+            display="flex"
+            zIndex={5}
             position="relative"
-            flexDirection="row"
-            alignItems="center"
-            width={0.6}
-            maxWidth="700px"
-            gap={5}
-            p={3}
-            sx={{
-              background: "rgba(0, 0, 0, 0.1)",
-              backdropFilter: "blur(30px)",
-            }}
           >
-            <img
-              src={NikeAirZoom}
-              alt="nike air zoom"
-              style={{ width: "200px", height: "max-content" }}
-            />
-            <Stack gap={2}>
+            <Stack zIndex={5} position="absolute" width={1} maxWidth="lg">
+              <Box component="img" src={AirZoomFull} alt="Air Zoom" />
               <Typography
-                variant="h6"
+                textAlign="start"
                 color="primary.contrastText"
-                fontWeight="bold"
+                variant="h6"
               >
-                Lorem ipsum dolor
+                Nike Air Zoom
               </Typography>
-              <Typography variant="body2" color="primary.contrastText">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.{" "}
+            </Stack>
+
+            <Stack
+              zIndex={6}
+              position="relative"
+              width="100%"
+              alignItems="center"
+            >
+              <Box
+                component="img"
+                src={MainShoesLanding}
+                alt="Main Shoes"
+                maxWidth="50%"
+                height="max-content"
+              />
+            </Stack>
+            <Stack zIndex={7} position="absolute" width={1} maxWidth="lg">
+              <Box component="img" src={AirZoomOutlined} alt="Air Zoom" />
+              <Typography
+                textAlign="end"
+                color="primary.contrastText"
+                variant="h6"
+              >
+                Mercurial Vapor XV Elite FG
               </Typography>
             </Stack>
           </Stack>
-          <Stack gap={8} width={0.4}>
-            <Typography variant="variant6" color="primary.contrastText">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis. Class
-              aptent taciti sociosqu ad litora torquent per conubia nostra, per
-              inceptos himenaeos.
-            </Typography>
-            <Button
-              variant="contained"
-              size="large"
-              color="thirdly"
-              onClick={(e) => {
-                e.stopPropagation();
+
+          <Stack
+            flexDirection={{ xs: "column", md: "row" }}
+            gap={{ xs: 6, md: 12, lg: 30 }}
+            justifyContent="space-between"
+            alignItems="center"
+            maxWidth="lg"
+          >
+            <Stack
+              zIndex={6}
+              position="relative"
+              flexDirection="row"
+              alignItems="center"
+              width={{ xs: 1, md: 0.6 }}
+              height={1}
+              maxWidth={{ xs: "300px", sm: "400px", md: "700px" }}
+              gap={5}
+              p={{ xs: 2, md: 5 }}
+              sx={{
+                background: "rgba(0, 0, 0, 0.1)",
+                backdropFilter: "blur(30px)",
               }}
-              endIcon={<ArrowIcon color="black" padding={1} />}
-              sx={{ display: "flex", alignItems: "center" }}
             >
-              <Typography
-                textTransform="uppercase"
-                color="secondary.main"
-                fontWeight="bold"
-              >
-                Купити
+              <Box
+                component="img"
+                src={NikeAirZoom}
+                alt="Nike air zoom"
+                width={0.4}
+                height="max-content"
+              />
+              <Stack gap={2}>
+                <Typography
+                  variant="h6"
+                  color="primary.contrastText"
+                  fontWeight="bold"
+                >
+                  Lorem ipsum dolor
+                </Typography>
+                <Typography variant="body2" color="primary.contrastText">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                  vulputate libero et velit interdum.
+                </Typography>
+              </Stack>
+            </Stack>
+            <Stack
+              gap={{ xs: 4, md: 8 }}
+              width={{ xs: 1, md: 0.4 }}
+              alignItems={{ xs: "center", md: "flex-start" }}
+            >
+              <Typography color="primary.contrastText" variant="p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                vulputate libero et velit interdum, ac aliquet odio mattis.
+                Class aptent taciti sociosqu ad litora torquent per conubia
+                nostra, per inceptos himenaeos.
               </Typography>
-            </Button>
+              <Button
+                variant="contained"
+                size="large"
+                color="thirdly"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                endIcon={<ArrowIcon color="black" padding={1} />}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Typography
+                  textTransform="uppercase"
+                  color="secondary.main"
+                  fontWeight="bold"
+                >
+                  Купити
+                </Typography>
+              </Button>
+            </Stack>
           </Stack>
         </Stack>
       </Stack>
