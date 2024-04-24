@@ -1,7 +1,7 @@
-import Carousel from "react-material-ui-carousel";
 import StyledTitle from "../styled/StyledTitle";
 import { Grid, Stack, Typography } from "@mui/material";
 import ReviewCarouselItem from "./ReviewCarouselItem";
+import StyledCarousel from "../styled/StyledCarousel";
 
 const ReviewsCarousel = ({ title, reviewsAmount, reviewsCarouselData, id }) => {
   return (
@@ -9,7 +9,7 @@ const ReviewsCarousel = ({ title, reviewsAmount, reviewsCarouselData, id }) => {
       <StyledTitle title={title} />
       <Stack>
         <Typography variant="h6">{reviewsAmount} reviews</Typography>
-        <Carousel autoPlay={true} cycleNavigation>
+        <StyledCarousel>
           {reviewsCarouselData.map((reviewItems, idx) => (
             <Grid container spacing={8} key={idx} flexDirection="column">
               {reviewItems.map((reviewItem) => (
@@ -30,7 +30,7 @@ const ReviewsCarousel = ({ title, reviewsAmount, reviewsCarouselData, id }) => {
               ))}
             </Grid>
           ))}
-        </Carousel>
+        </StyledCarousel>
       </Stack>
     </Stack>
   );

@@ -1,8 +1,8 @@
-import Carousel from "react-material-ui-carousel";
 import ShoesCarouselItem from "./ShoesCarouselItem";
 import { Grid, Stack, useMediaQuery, useTheme } from "@mui/material";
-import StyledTitle from "../styled/StyledTitle";
 import { useState, useEffect } from "react";
+import StyledCarousel from "../styled/StyledCarousel";
+import StyledTitle from "../styled/StyledTitle";
 
 const gridItemSize = {
   xs: 12,
@@ -53,8 +53,8 @@ const ShoesCarousel = ({ title, shoesCarouselData, id }) => {
 
   return (
     <Stack gap={6} id={id}>
-      <StyledTitle title={title} />
-      <Carousel autoPlay={true} cycleNavigation swipe navButtonsAlwaysVisible>
+      <StyledTitle title="Новинки" />
+      <StyledCarousel title={title}>
         {groupArrayByAmountOfItemsPerScreenSize(
           shoesCarouselData,
           screenSize,
@@ -80,7 +80,7 @@ const ShoesCarousel = ({ title, shoesCarouselData, id }) => {
             ))}
           </Grid>
         ))}
-      </Carousel>
+      </StyledCarousel>
     </Stack>
   );
 };

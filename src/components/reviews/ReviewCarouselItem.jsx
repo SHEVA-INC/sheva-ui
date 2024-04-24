@@ -16,7 +16,7 @@ const ReviewCarouselItem = ({
     <Stack
       borderTop={1}
       borderBottom={1}
-      flexDirection="row"
+      flexDirection={{ xs: "column", sm: "row" }}
       width={1}
       py={6}
       gap={6}
@@ -26,7 +26,8 @@ const ReviewCarouselItem = ({
         py={6}
         px={5}
         gap={1}
-        minWidth="300px"
+        maxWidth={{ xs: 1, sm: "300px" }}
+        width={1}
         sx={{ backgroundColor: "#F2F2F2" }}
       >
         <Typography variant="h6" fontWeight="bold">
