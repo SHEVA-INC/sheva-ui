@@ -171,7 +171,7 @@ const Header = () => {
           sx={{
             maxWidth: "lg",
             width: "100%",
-            gap: { md: 24, lg: 34 },
+            gap: { md: 26, lg: 34 },
             justifyContent: "space-between",
             "&.MuiToolbar-root": {
               paddingLeft: 3,

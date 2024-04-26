@@ -15,7 +15,7 @@ import StyledCheckbox from "../components/styled/StyledCheckbox";
 
 const SignUpForm = () => {
   return (
-    <StyledForm px={6} py={4}>
+    <StyledForm px={6} py={6} alignItems="flex-start" boxShadow="none">
       <StyledFormControlWithTextField
         title="Ім'я"
         htmlFor="name"

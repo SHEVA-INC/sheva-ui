@@ -3,7 +3,7 @@ import StyledCheckbox from "./styled/StyledCheckbox";
 
 const CategoryCheckboxWithAmountLeft = ({ title, categories }) => {
   return (
-    <FormGroup>
+    <FormGroup sx={{ width: 1 }}>
       <Typography variant="h6" fontWeight="bold" mb={2}>
         {title}
       </Typography>

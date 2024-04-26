@@ -4,9 +4,13 @@ const StyledForm = ({
   component = "form",
   alignItems = "flex-end",
   onSubmit,
-  children,
   py,
   px,
+  boxShadow = "0 0 10px 10px rgba(0, 0, 0, 0.05)",
+  maxWidth,
+  order,
+  borderRadius,
+  children,
 }) => {
   return (
     <Stack
@@ -17,6 +21,11 @@ const StyledForm = ({
       px={px}
       onSubmit={onSubmit}
       alignItems={alignItems}
+      boxShadow={boxShadow}
+      maxWidth={maxWidth}
+      order={order}
+      height="fit-content"
+      borderRadius={borderRadius}
     >
       {children}
     </Stack>

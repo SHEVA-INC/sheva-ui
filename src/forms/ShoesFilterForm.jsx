@@ -3,7 +3,7 @@ import CategoryCheckboxWithAmountLeft from "../components/CategoryCheckboxWithAm
 import StyledColorPicker from "../components/styled/StyledColorPicker";
 import ShoesColors from "../utils/ShoesColors";
 import StyledFormControlWithSelect from "../components/styled/StyledFormControlWithSelect";
-
+import StyledForm from "../components/styled/StyledForm";
 const sizes = [
   { id: 1, value: 38 },
   { id: 2, value: 39 },
@@ -12,17 +12,13 @@ const sizes = [
 
 const ShoesFilterForm = ({ order }) => {
   return (
-    <Stack
-      component="form"
-      gap={5}
+    <StyledForm
       px={9}
       py={8}
-      height="fit-content"
-      borderRadius={(theme) => theme.shape.containerBorderRadius * 2}
-      border="none"
-      boxShadow="0px 0px 12px 12px rgba(0, 0, 0, 0.01)"
+      alignItems="flex-start"
       order={order}
       maxWidth="340px"
+      borderRadius={(theme) => theme.shape.containerBorderRadius * 3}
     >
       <CategoryCheckboxWithAmountLeft
         title="Категорія"
@@ -61,7 +57,7 @@ const ShoesFilterForm = ({ order }) => {
         gap={4}
       />
 
-      <Stack flexDirection="row">
+      <Stack flexDirection="row" flexWrap="wrap">
         <Button variant="contained">
           <Typography variant="h6" fontWeight="bold" px={3} py={2}>
             Скинути
@@ -79,7 +75,7 @@ const ShoesFilterForm = ({ order }) => {
           </Typography>
         </Button>
       </Stack>
-    </Stack>
+    </StyledForm>
   );
 };
 

@@ -17,8 +17,8 @@ const StyledStackForRoutes = ({
       justifyContent={justifyContent}
       alignItems={alignItems}
       px={3}
-      gap={gap ? gap : 5}
-      my={8}
+      gap={gap ? gap : 6}
+      my={10}
       minHeight={minHeight}
     >
       {children}

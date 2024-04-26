@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AppBar, Tab, Tabs, Typography } from "@mui/material";
+import { AppBar, Stack, Tab, Tabs, Typography } from "@mui/material";
 import SignInForm from "../forms/SignInForm";
 import SignUpForm from "../forms/SignUpForm";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ const AuthTabs = ({ active }) => {
   };
 
   return (
-    <>
+    <Stack boxShadow="0 0 10px 10px rgba(0, 0, 0, 0.02)">
       <AppBar
         position="static"
         color="transparent"
@@ -33,8 +33,8 @@ const AuthTabs = ({ active }) => {
           textColor="secondary"
           variant="fullWidth"
           sx={{
-            ".MuiTabs-indicator": {
-              height: "2px",
+            "& .MuiTabs-indicator": {
+              height: "1px",
             },
           }}
         >
@@ -59,7 +59,7 @@ const AuthTabs = ({ active }) => {
         </Tabs>
       </AppBar>
       {activeTab === "login" ? <SignInForm /> : <SignUpForm />}
-    </>
+    </Stack>
   );
 };
 

@@ -5,7 +5,7 @@ import StyledFormControlWithTextFieldForPassword from "../components/styled/Styl
 
 const ResetPasswordForm = () => {
   return (
-    <StyledForm alignItems="center" px={6} py={4}>
+    <StyledForm alignItems="center" px={6} py={6}>
       <Typography variant="h6" fontWeight="bold">
         Відновлення пароля
       </Typography>
@@ -32,7 +32,6 @@ const ResetPasswordForm = () => {
           width: "100%",
           p: 3,
           borderRadius: (theme) => theme.shape.containerBorderRadius,
-          mb: 3,
         }}
         endIcon={<ArrowIcon color="white" fontSize="large" />}
       >
