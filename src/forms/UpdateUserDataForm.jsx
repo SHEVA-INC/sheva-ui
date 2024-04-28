@@ -34,7 +34,7 @@ const UpdateUserDataForm = () => {
         alt={userData.fullName}
         sx={{ width: 180, height: 180 }}
       />
-      <StyledForm alignItems="flex-start">
+      <StyledForm alignItems="flex-start" boxShadow="none" borderRadius={0}>
         <StyledFormControlWithTextField
           title="Ім'я"
           value={userName}

@@ -19,7 +19,13 @@ const ChangePasswordForm = () => {
   };
 
   return (
-    <StyledForm alignItems="flex-start" px={6} py={6}>
+    <StyledForm
+      alignItems="flex-start"
+      px={6}
+      py={6}
+      boxShadow="none"
+      borderRadius={0}
+    >
       <StyledFormControlWithTextFieldForPassword
         title="Поточний пароль"
         value={currentPassword}
