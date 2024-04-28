@@ -5,7 +5,7 @@ import Header from "../components/Header";
 
 const FullWidthLayout = () => {
   return (
-    <Stack flexDirection="column" minHeight="100vh">
+    <Stack flexDirection="column" minHeight="100vh" m={0}>
       <Header />
       <Container
         component="main"
