@@ -1,4 +1,4 @@
-import { Button, MenuItem, Stack, Typography } from "@mui/material";
+import { Button, MenuItem, Typography } from "@mui/material";
 import CategoryCheckboxWithAmountLeft from "../components/CategoryCheckboxWithAmountLeft";
 import StyledColorPicker from "../components/styled/StyledColorPicker";
 import ShoesColors from "../utils/ShoesColors";
@@ -18,6 +18,7 @@ const ShoesFilterForm = ({ order }) => {
       alignItems="flex-start"
       order={order}
       maxWidth="340px"
+      boxShadow="0 0 10px 10px rgba(0, 0, 0, 0.03)"
       borderRadius={(theme) => theme.shape.containerBorderRadius * 3}
     >
       <CategoryCheckboxWithAmountLeft
@@ -57,24 +58,11 @@ const ShoesFilterForm = ({ order }) => {
         gap={4}
       />
 
-      <Stack flexDirection="row" flexWrap="wrap">
-        <Button variant="contained">
-          <Typography variant="h6" fontWeight="bold" px={3} py={2}>
-            Скинути
-          </Typography>
-        </Button>
-        <Button>
-          <Typography
-            variant="h6"
-            fontWeight="bold"
-            color="secondary.light"
-            px={3}
-            py={2}
-          >
-            Більше
-          </Typography>
-        </Button>
-      </Stack>
+      <Button variant="contained" sx={{ width: 1 }}>
+        <Typography variant="h6" fontWeight="bold">
+          Скинути
+        </Typography>
+      </Button>
     </StyledForm>
   );
 };
