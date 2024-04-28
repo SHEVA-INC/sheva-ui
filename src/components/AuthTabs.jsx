@@ -45,7 +45,7 @@ const AuthTabs = ({ active }) => {
               </Typography>
             }
             value="login"
-            sx={{ borderBottom: 1, borderColor: "secondary.light" }}
+            sx={{ borderBottom: 1, borderColor: "secondary.light", p: 0 }}
           />
           <Tab
             label={
@@ -54,7 +54,7 @@ const AuthTabs = ({ active }) => {
               </Typography>
             }
             value="register"
-            sx={{ borderBottom: 1, borderColor: "secondary.light" }}
+            sx={{ borderBottom: 1, borderColor: "secondary.light", p: 0 }}
           />
         </Tabs>
       </AppBar>
