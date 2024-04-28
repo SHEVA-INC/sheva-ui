@@ -13,7 +13,7 @@ const NotFoundBlock = () => {
   };
 
   return (
-    <Stack alignItems="center" gap={5}>
+    <Stack alignItems="center" gap={5} maxWidth="sm">
       <img
         src={ErrorImg}
         alt="Error"
