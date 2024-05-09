@@ -1,7 +1,7 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import SHEVA from "../../src/assets/SHEVA.svg";
-import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
   IconButton,
   Link,
@@ -31,6 +31,8 @@ import useHeaderHeight from "../custom-hooks/useHeaderHeight";
 import { useState } from "react";
 import MenuIcon from "../icons/MenuIcon";
 import SignOutIcon from "../icons/SignOutIcon";
+import { HashLink } from "react-router-hash-link";
+import useScrollToHash from "../custom-hooks/useScrollToHash";
 
 const mainRoutes = [
   { routeId: 0, routeName: "Каталог", linkTo: CATALOG_ROUTE },
@@ -84,30 +86,10 @@ const routesForDrawer = [
 ];
 
 const Header = () => {
-  const location = useLocation();
-  const activePath = location.pathname;
-
-  const navigate = useNavigate();
-
+  const { hash } = useLocation();
   const headerHeight = useHeaderHeight();
 
-  const handleTabClick = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - headerHeight,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const handleTabLinkClick = (route) => {
-    if (activePath !== HOME_ROUTE) {
-      navigate(HOME_ROUTE);
-    } else {
-      handleTabClick(route?.id);
-    }
-  };
+  useScrollToHash(hash, headerHeight);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -208,14 +190,13 @@ const Header = () => {
             {mainRoutes.map((route) => (
               <Link
                 key={route.routeId}
-                to={route.linkTo}
-                component={RouterLink}
+                to={route.id ? `${route.linkTo}#${route.id}` : route.linkTo}
+                component={route.id ? HashLink : RouterLink}
                 underline="none"
                 color={"primary.contrastText"}
                 sx={{
                   backgroundColor: "primary.main",
                 }}
-                onClick={() => handleTabLinkClick(route)}
               >
                 <Typography variant="h6" textAlign="center" fontWeight="bold">
                   {route.routeName}
