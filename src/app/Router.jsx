@@ -12,9 +12,9 @@ import {
   RESET_PASSWORD_ROUTE,
   SHOPPING_CART_ROUTE,
   SIGN_IN_ROUTE,
+  SIGN_OUT_ROUTE,
   SIGN_UP_ROUTE,
 } from "./Routes";
-
 import FullWidthLayout from "../layouts/FullWidthLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import HomeRoute from "../routes/HomeRoute";
@@ -28,46 +28,81 @@ import SignInAndSignUpRoute from "../routes/SignInAndSignUpRoute";
 import ForgotPasswordRoute from "../routes/ForgotPasswordRoute";
 import ResetPasswordRoute from "../routes/ResetPasswordRoute";
 import NotFoundRoute from "../routes/NotFoundRoute";
-import ErrorLayout from "../layouts/ErrorLayout";
+import SignOutRoute from "../routes/SignOutRoute";
+import useAuth from "../auth/useAuth";
+import RequireAuth from "../auth/RequireAuth";
 
 const Router = () => {
+  const { authorized } = useAuth();
+
   return (
     <Routes>
-      <Route>
-        <Route path={MAIN_ROUTE} element={<FullWidthLayout />}>
-          <Route index element={<Navigate to={HOME_ROUTE} replace />} />
-          <Route path={HOME_ROUTE} element={<HomeRoute />} />
-          <Route path={CATALOG_ROUTE} element={<CatalogRoute />} />
-          <Route path={DETAILED_SHOES_ROUTE} element={<DetailedShoesRoute />} />
-          <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
+      {!authorized() ? (
+        <Route>
+          <Route path={MAIN_ROUTE} element={<FullWidthLayout />}>
+            <Route index element={<Navigate to={HOME_ROUTE} replace />} />
+            <Route path={HOME_ROUTE} element={<HomeRoute />} />
+            <Route path={CATALOG_ROUTE} element={<CatalogRoute />} />
+            <Route
+              path={DETAILED_SHOES_ROUTE}
+              element={<DetailedShoesRoute />}
+            />
+            <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
+          </Route>
 
-          <Route path={SHOPPING_CART_ROUTE} element={<ShoppingCartRoute />} />
-          <Route path={LIKED_ROUTE} element={<LikedRoute />} />
-          <Route path={PROFILE_ROUTE} element={<ProfileRoute />} />
-        </Route>
-        <Route path={MAIN_ROUTE} element={<AuthLayout />}>
-          <Route index element={<Navigate to={SIGN_IN_ROUTE} replace />} />
-          <Route
-            path={SIGN_IN_ROUTE}
-            element={<SignInAndSignUpRoute active="login" />}
-          />
-          <Route
-            path={SIGN_UP_ROUTE}
-            element={<SignInAndSignUpRoute active="register" />}
-          />
-          <Route
-            path={FORGOT_PASSWORD_ROUTE}
-            element={<ForgotPasswordRoute />}
-          />
-          <Route path={RESET_PASSWORD_ROUTE} element={<ResetPasswordRoute />} />
-        </Route>
-        <Route path={MAIN_ROUTE} element={<ErrorLayout />}>
-          <Route path={NOT_FOUND_ROUTE} element={<NotFoundRoute />} />
-          <Route path="*" element={<Navigate to={NOT_FOUND_ROUTE} replace />} />
+          <Route path={MAIN_ROUTE} element={<AuthLayout />}>
+            <Route index element={<Navigate to={SIGN_IN_ROUTE} replace />} />
+            <Route
+              path={SIGN_IN_ROUTE}
+              element={<SignInAndSignUpRoute active="login" />}
+            />
+            <Route
+              path={SIGN_UP_ROUTE}
+              element={<SignInAndSignUpRoute active="register" />}
+            />
+            <Route
+              path={FORGOT_PASSWORD_ROUTE}
+              element={<ForgotPasswordRoute />}
+            />
+            <Route
+              path={RESET_PASSWORD_ROUTE}
+              element={<ResetPasswordRoute />}
+            />
+          </Route>
 
-          <Route path="*" element={<NotFoundRoute />} />
+          <Route
+            path={SIGN_OUT_ROUTE}
+            element={<Navigate to={SIGN_IN_ROUTE} replace />}
+          />
+          <Route path="*" element={<Navigate to={SIGN_IN_ROUTE} replace />} />
         </Route>
-      </Route>
+      ) : (
+        <Route element={<RequireAuth authRoute={SIGN_IN_ROUTE} />}>
+          <Route path={MAIN_ROUTE} element={<FullWidthLayout />}>
+            <Route index element={<Navigate to={HOME_ROUTE} replace />} />
+            <Route path={HOME_ROUTE} element={<HomeRoute />} />
+            <Route path={CATALOG_ROUTE} element={<CatalogRoute />} />
+            <Route
+              path={DETAILED_SHOES_ROUTE}
+              element={<DetailedShoesRoute />}
+            />
+            <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
+
+            <Route path={SHOPPING_CART_ROUTE} element={<ShoppingCartRoute />} />
+            <Route path={LIKED_ROUTE} element={<LikedRoute />} />
+            <Route path={PROFILE_ROUTE} element={<ProfileRoute />} />
+
+            <Route path={SIGN_OUT_ROUTE} element={<SignOutRoute />} />
+
+            <Route path={NOT_FOUND_ROUTE} element={<NotFoundRoute />} />
+            <Route
+              path="*"
+              element={<Navigate to={NOT_FOUND_ROUTE} replace />}
+            />
+            <Route path="*" element={<NotFoundRoute />} />
+          </Route>
+        </Route>
+      )}
     </Routes>
   );
 };
