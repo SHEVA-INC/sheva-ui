@@ -1,7 +1,7 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import ShoesCarousel from "../components/shoes-slider/ShoesCarousel";
-import ShoesCarouselData from "../components/shoes-slider/ShoesCarouselData";
+import ShoesCarousel from "../components/shoes-carousel/ShoesCarousel";
+import ShoesCarouselData from "../components/shoes-carousel/ShoesCarouselData";
 import GradientShoesBlock from "../components/GradientShoesBlock";
 import NumbersBlock from "../components/NumbersBlock";
 import ShoesSmallList from "../components/shoes-small/ShoesSmallList";
