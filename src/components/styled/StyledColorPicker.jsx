@@ -20,19 +20,28 @@ const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
             :{" "}
             {selectedColor
               ? ShoesColors[selectedColor]
-              : setSelectedColor(colors[0])}
+              : setSelectedColor(colors)}
           </span>
         )}
       </Typography>
       <Stack flexDirection="row" gap={1} flexWrap="wrap">
-        {colors.map((color) => (
-          <StyledColorButton
-            key={color}
-            color={color}
-            selectedColor={selectedColor}
-            onClick={(e) => handleColorChange(color, e)}
-          />
-        ))}
+        {Array.isArray(colors)
+          ? colors.map((color) => (
+              <StyledColorButton
+                key={color}
+                color={color}
+                selectedColor={selectedColor}
+                onClick={(e) => handleColorChange(color, e)}
+              />
+            ))
+          : [colors].map((color) => (
+              <StyledColorButton
+                key={color}
+                color={color}
+                selectedColor={colors}
+                onClick={(e) => handleColorChange(color, e)}
+              />
+            ))}
       </Stack>
     </Stack>
   );

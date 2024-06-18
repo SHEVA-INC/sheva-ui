@@ -9,36 +9,30 @@ import {
 import LikeIcon from "../../icons/shopping/LikeIcon";
 import StyledColorPicker from "../styled/StyledColorPicker";
 import StyledFormControlWithSelect from "../styled/StyledFormControlWithSelect";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { DETAILED_SHOES_ROUTE } from "../../app/Routes";
+import { useNavigate } from "react-router-dom";
 
 const ShoesItem = ({
+  id,
   name,
-  description,
-  colors,
+  color,
   price,
   sizes,
   images,
   mainImage,
-  liked,
+  isLiked,
+  onLikeClick,
 }) => {
-  const [isLiked, setIsLiked] = useState(liked);
-
-  const handleLikeClick = (e) => {
-    e.stopPropagation();
-    setIsLiked(!isLiked);
-  };
-
   const navigate = useNavigate();
 
-  const handleShoesItemClick = (shoesName) => {
-    const formattedName = shoesName.replace(/\s+/g, "-").toLowerCase();
-    navigate(`${DETAILED_SHOES_ROUTE.replace(":shoesName", formattedName)}`);
+  const handleShoesItemClick = (shoesId) => {
+    navigate(`${DETAILED_SHOES_ROUTE.replace(":shoesId", shoesId)}`);
   };
 
   return (
     <Stack
+      id={id}
+      onClick={() => handleShoesItemClick(id)}
       flexDirection={{ xs: "column", sm: "row" }}
       justifyContent="space-between"
       gap={9}
@@ -46,7 +40,6 @@ const ShoesItem = ({
       border={1}
       borderColor="secondary.light"
       p={3}
-      onClick={() => handleShoesItemClick(name)}
     >
       <Stack
         flexDirection={{ xs: "column", lg: "row" }}
@@ -62,7 +55,6 @@ const ShoesItem = ({
           maxWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "420px" }}
           height="max-content"
         />
-
         <Stack
           flexDirection={{ xs: "row", lg: "column" }}
           alignItems="center"
@@ -72,9 +64,9 @@ const ShoesItem = ({
           {images.slice(0, 3).map((image) => (
             <Box
               component="img"
-              key={image}
-              src={image}
-              alt={image}
+              key={image.image}
+              src={image.image}
+              alt={image.image}
               width={{ xs: "calc(100%/3)", sm: "100px" }}
               height="max-content"
             />
@@ -92,23 +84,22 @@ const ShoesItem = ({
           <Typography variant="h5" fontWeight="bold">
             {name}
           </Typography>
-          <Typography variant="h6">{description}</Typography>
         </Stack>
 
-        <StyledColorPicker colors={colors} showColorsName={true} gap={1} />
+        <StyledColorPicker colors={color} showColorsName={true} gap={1} />
 
         <StyledFormControlWithSelect
           title="Розмір"
           selectId="size-select"
-          defaultValue={sizes[0].value}
+          defaultValue={sizes[0].size}
           formControlSize="small"
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
           {sizes.map((size) => (
-            <MenuItem key={size.id} value={size.value}>
-              {size.value}
+            <MenuItem key={size.size} value={size.size}>
+              {size.size}
             </MenuItem>
           ))}
         </StyledFormControlWithSelect>
@@ -129,7 +120,12 @@ const ShoesItem = ({
             <Typography variant="h5" fontWeight="bold">
               {price}
             </Typography>
-            <IconButton onClick={handleLikeClick}>
+            <IconButton
+              onClick={(e) => {
+                e.stopPropagation();
+                onLikeClick();
+              }}
+            >
               {!isLiked ? (
                 <LikeIcon color="black" />
               ) : (
@@ -137,6 +133,7 @@ const ShoesItem = ({
               )}
             </IconButton>
           </Stack>
+
           <Button
             variant="contained"
             color="secondary"
