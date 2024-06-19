@@ -3,6 +3,7 @@ import StyledRating from "../styled/StyledRating";
 import dayjs from "dayjs";
 import DeleteIcon from "../../icons/DeleteIcon";
 import useAuth from "../../auth/useAuth";
+import { useEffect, useState } from "react";
 
 const ReviewItem = ({
   id,
@@ -15,13 +16,20 @@ const ReviewItem = ({
   onDelete,
 }) => {
   const { userId } = useAuth();
+
+  const [showDeleteButton, setShowDeleteButton] = useState(usrId === userId);
+
+  useEffect(() => {
+    setShowDeleteButton(true);
+  }, [userId]);
+
   return (
     <Stack id={id} borderTop={1} borderBottom={1} width={1} py={6}>
       <Stack flexDirection="row" alignSelf="flex-end" gap={3}>
         <Typography minWidth="fit-content" variant="body2">
           {dayjs(date).format("DD MMMM YYYY")}
         </Typography>
-        {usrId === userId && (
+        {showDeleteButton && (
           <DeleteIcon color="black" fontSize="small" onClick={onDelete} />
         )}
       </Stack>

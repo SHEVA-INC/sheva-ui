@@ -33,7 +33,6 @@ const HomeRoute = () => {
     const getReviewsList = async () => {
       try {
         const response = await reviewService.fetchReviews();
-        console.log(response);
         setReviewsList(response);
         setIsReviewDeleted(false);
         setIsReviewAdded(false);
@@ -41,7 +40,6 @@ const HomeRoute = () => {
         console.error("Error fetching shoes list:", error);
       }
     };
-    console.log(isReviewDeleted);
 
     getReviewsList();
   }, [isReviewDeleted, isReviewAdded]);
