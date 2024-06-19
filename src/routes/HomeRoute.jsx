@@ -5,16 +5,47 @@ import ShoesCarouselData from "../components/shoes-carousel/ShoesCarouselData";
 import GradientShoesBlock from "../components/GradientShoesBlock";
 import NumbersBlock from "../components/NumbersBlock";
 import ShoesSmallList from "../components/shoes-small/ShoesSmallList";
-import ReviewsCarousel from "../components/reviews/ReviewsCarousel";
-import ReviewsCarouselData from "../components/reviews/ReviewsCarouselData";
 import HomeMainBlock from "../components/HomeMainBlock";
 import { Link } from "react-router-dom";
 import { CATALOG_ROUTE } from "../app/Routes";
 import StyledStackForRoutes from "../components/styled/StyledStackForRoutes";
 import ShoesAdItem from "../components/ShoesAdItem";
 import ShoesAd from "../assets/shoes-ad/shoes-ad.png";
+import ReviewsList from "../components/reviews/ReviewsList";
+import reviewService from "../services/ReviewService";
+import { useEffect, useState } from "react";
+import AddReviewForm from "../forms/AddReviewForm";
+import StyledTitle from "../components/styled/StyledTitle";
+import useAuth from "../auth/useAuth";
 
 const HomeRoute = () => {
+  const [reviewsList, setReviewsList] = useState([]);
+  const [addReview, setAddReview] = useState(false);
+  const [isReviewDeleted, setIsReviewDeleted] = useState(false);
+  const [isReviewAdded, setIsReviewAdded] = useState(false);
+  const { authorized } = useAuth();
+
+  const handleAddReviewClick = () => {
+    setAddReview(true);
+  };
+
+  useEffect(() => {
+    const getReviewsList = async () => {
+      try {
+        const response = await reviewService.fetchReviews();
+        console.log(response);
+        setReviewsList(response);
+        setIsReviewDeleted(false);
+        setIsReviewAdded(false);
+      } catch (error) {
+        console.error("Error fetching shoes list:", error);
+      }
+    };
+    console.log(isReviewDeleted);
+
+    getReviewsList();
+  }, [isReviewDeleted, isReviewAdded]);
+
   return (
     <Stack width={1} alignItems="center">
       <HomeMainBlock />
@@ -97,11 +128,30 @@ const HomeRoute = () => {
             </Typography>
           </Button>
         </Link>
-        <ReviewsCarousel
-          title="Відгуки"
+        <StyledTitle title="Відгуки" />
+
+        {authorized() && (
+          <>
+            {addReview ? (
+              <AddReviewForm setIsReviewAdded={setIsReviewAdded} />
+            ) : (
+              <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                onClick={handleAddReviewClick}
+              >
+                Додати відгук
+              </Button>
+            )}
+          </>
+        )}
+
+        <ReviewsList
           id="reviews"
           reviewsAmount="3,126"
-          reviewsCarouselData={ReviewsCarouselData}
+          reviewsData={reviewsList}
+          setIsReviewDeleted={setIsReviewDeleted}
         />
       </StyledStackForRoutes>
     </Stack>

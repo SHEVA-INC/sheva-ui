@@ -1,11 +1,11 @@
 import { SvgIcon } from "@mui/material";
 
 const StarIcon = ({ color, fill, fontSize, ...props }) => (
-  <SvgIcon fontSize={fontSize}>
+  <SvgIcon fontSize={fontSize} viewBox="0 0 20 20">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={19}
-      height={19}
+      width={18}
+      height={18}
       fill="none"
       {...props}
     >
