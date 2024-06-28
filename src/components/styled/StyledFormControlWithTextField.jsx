@@ -12,6 +12,9 @@ const StyledFormControlWithTextField = ({
   color = "primary",
   error,
   autoComplete,
+  disabled,
+  multiline,
+  minRows,
 }) => {
   return (
     <FormControl fullWidth sx={{ gap: 2 }}>
@@ -28,6 +31,9 @@ const StyledFormControlWithTextField = ({
         color={color}
         error={error}
         autoComplete={autoComplete}
+        disabled={disabled}
+        multiline={multiline}
+        minRows={minRows}
       />
     </FormControl>
   );

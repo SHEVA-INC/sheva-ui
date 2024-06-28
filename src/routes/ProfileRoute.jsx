@@ -1,7 +1,9 @@
+import { Stack } from "@mui/material";
 import StyledStackForRoutes from "../components/styled/StyledStackForRoutes";
 import StyledStackWithBordersAndTitle from "../components/styled/StyledStackWithBordersAndTitle";
 import ChangePasswordForm from "../forms/ChangePasswordForm";
-import UpdateUserDataForm from "../forms/UpdateUserDataForm";
+import EditUploadUserProfilePictureForm from "../forms/EditUploadUserProfilePictureForm";
+import EditUserDataForm from "../forms/EditUserDataForm";
 
 const ProfileRoute = () => {
   return (
@@ -10,7 +12,10 @@ const ProfileRoute = () => {
       justifyContent="space-between"
     >
       <StyledStackWithBordersAndTitle title="Налаштування" flex={1}>
-        <UpdateUserDataForm />
+        <Stack flexDirection={{ xs: "column", md: "row" }} gap={6} p={6}>
+          <EditUploadUserProfilePictureForm />
+          <EditUserDataForm />
+        </Stack>
       </StyledStackWithBordersAndTitle>
       <StyledStackWithBordersAndTitle
         title="Змінити пароль"

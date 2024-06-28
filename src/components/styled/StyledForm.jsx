@@ -8,6 +8,7 @@ const StyledForm = ({
   px,
   boxShadow = "0 0 10px 10px rgba(0, 0, 0, 0.05)",
   maxWidth,
+  width = 1,
   order,
   borderRadius,
   children,
@@ -16,7 +17,7 @@ const StyledForm = ({
     <Stack
       component={component}
       gap={4}
-      width={1}
+      width={width}
       py={py}
       px={px}
       onSubmit={onSubmit}
