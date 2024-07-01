@@ -22,7 +22,7 @@ const CatalogRoute = () => {
         console.error("Error fetching shoes list:", error);
       }
     };
-    console.log(pageNumber);
+
     getShoesList(pageNumber);
   }, [pageNumber]);
 

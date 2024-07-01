@@ -17,6 +17,7 @@ const ShoesList = ({
           key={shoesItem.id}
           id={shoesItem.id}
           name={shoesItem.name}
+          brand={shoesItem.brand}
           type={shoesItem.type}
           price={shoesItem.price}
           color={shoesItem.color}
