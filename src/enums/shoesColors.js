@@ -1,4 +1,4 @@
-const ShoesColors = {
+const shoesColors = {
   red: "червоний",
   blue: "синій",
   green: "зелений",
@@ -10,4 +10,4 @@ const ShoesColors = {
   another: "інший",
 };
 
-export default ShoesColors;
+export default shoesColors;

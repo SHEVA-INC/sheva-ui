@@ -54,8 +54,6 @@ export function AuthProvider({ children }) {
 
     async signUp(registerCommand) {
       let response = await authService.signUp(registerCommand);
-      // console.log(response);
-      // setState(response.access);
       AuthManager.updateLocalAccessToken(response.access);
       const { userRole } = setState(response.access);
 
@@ -64,8 +62,6 @@ export function AuthProvider({ children }) {
 
     async signIn(loginCommand) {
       let response = await authService.signIn(loginCommand);
-      console.log(response);
-
       AuthManager.updateLocalAccessToken(response.access);
       const { userRole } = setState(response.access);
 
