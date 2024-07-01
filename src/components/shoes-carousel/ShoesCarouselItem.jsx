@@ -1,17 +1,9 @@
-import { IconButton, Stack, Typography } from "@mui/material";
-import LikeIcon from "../../icons/shopping/LikeIcon";
-import { useState } from "react";
-import ShoppingCartIcon from "../../icons/shopping/ShoppingCartIcon";
+import { Stack, Typography } from "@mui/material";
+import upperCaseFirstLetter from "../../utils/upperCaseFirstLetter";
 
-const ShoesCarouselItem = ({ name, description, price, mainImage, liked }) => {
-  const [isLiked, setIsLiked] = useState(liked);
-
-  const handleLikeClick = (e) => {
-    e.stopPropagation();
-    setIsLiked(!isLiked);
-  };
+const ShoesCarouselItem = ({ name, brand, price, mainImage, onClick }) => {
   return (
-    <Stack>
+    <Stack onClick={onClick}>
       <img
         src={mainImage}
         alt={name}
@@ -21,32 +13,19 @@ const ShoesCarouselItem = ({ name, description, price, mainImage, liked }) => {
           objectFit: "cover",
         }}
       />
-      <Stack>
-        <Typography variant="h6" fontWeight="bold">
-          {name}
-        </Typography>
-        <Typography variant="p">{description}</Typography>
-        <Stack
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Typography variant="p" fontWeight="bold">
-            {price}
+      <Stack
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Stack>
+          <Typography variant="h6" fontWeight="bold">
+            {upperCaseFirstLetter(brand)} {name}
           </Typography>
-          <Stack flexDirection="row" gap={2}>
-            <IconButton>
-              <ShoppingCartIcon color="black" fontSize="small" />
-            </IconButton>
-            <IconButton onClick={handleLikeClick}>
-              {!isLiked ? (
-                <LikeIcon color="black" fontSize="small" />
-              ) : (
-                <LikeIcon color="black" fill="black" fontSize="small" />
-              )}
-            </IconButton>
-          </Stack>
         </Stack>
+        <Typography variant="h5" fontWeight="bold">
+          {price}
+        </Typography>
       </Stack>
     </Stack>
   );

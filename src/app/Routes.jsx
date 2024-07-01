@@ -18,3 +18,6 @@ export const ABOUT_US_ROUTE = "/about-us";
 export const SHOPPING_CART_ROUTE = "/shopping-cart";
 export const LIKED_ROUTE = "/liked";
 export const PROFILE_ROUTE = "/profile";
+
+//admin
+export const MANAGE_SHOES_DETAILS_ROUTE = "/manage-boots-details/:shoesId";

@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import StyledColorButton from "./StyledColorButton";
-import ShoesColors from "../../utils/ShoesColors";
+import shoesColors from "../../enums/shoesColors";
 
 const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
   const [selectedColor, setSelectedColor] = useState(null);
@@ -19,7 +19,7 @@ const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
           <span>
             :{" "}
             {selectedColor
-              ? ShoesColors[selectedColor]
+              ? shoesColors[selectedColor]
               : setSelectedColor(colors)}
           </span>
         )}

@@ -28,7 +28,12 @@ const ShoesDetailsImageSlider = ({ images, mainImage, setMainImage }) => {
       <img
         src={mainImage}
         alt="Main"
-        style={{ width: "100%", height: "auto", maxHeight: "400px" }}
+        style={{
+          width: "100%",
+          height: "300px",
+          maxHeight: "400px",
+          objectFit: "cover",
+        }}
         onClick={() => setMainImage(mainImage)}
       />
       <Grid container spacing={1}>
@@ -67,7 +72,8 @@ const ShoesDetailsImageSlider = ({ images, mainImage, setMainImage }) => {
                   alt={`Thumbnail ${index}`}
                   style={{
                     width: "100%",
-                    height: "auto",
+                    height: "90px",
+                    objectFit: "cover",
                     cursor: "pointer",
                     borderBottom:
                       mainImage === image ? "1px solid black" : "none",

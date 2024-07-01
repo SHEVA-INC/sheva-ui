@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 const ShoesItem = ({
   id,
   name,
+  type,
   color,
   price,
   sizes,
@@ -40,6 +41,7 @@ const ShoesItem = ({
       border={1}
       borderColor="secondary.light"
       p={3}
+      width={1}
     >
       <Stack
         flexDirection={{ xs: "column", lg: "row" }}
@@ -53,7 +55,7 @@ const ShoesItem = ({
           width="100%"
           minWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "420px" }}
           maxWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "420px" }}
-          height="max-content"
+          height="300px"
         />
         <Stack
           flexDirection={{ xs: "row", lg: "column" }}
@@ -64,9 +66,9 @@ const ShoesItem = ({
           {images.slice(0, 3).map((image) => (
             <Box
               component="img"
-              key={image.image}
-              src={image.image}
-              alt={image.image}
+              key={image.image_url}
+              src={image.image_url}
+              alt={image.image_url}
               width={{ xs: "calc(100%/3)", sm: "100px" }}
               height="max-content"
             />
@@ -80,11 +82,11 @@ const ShoesItem = ({
         gap={4}
         justifyContent="space-between"
       >
-        <Stack>
-          <Typography variant="h5" fontWeight="bold">
-            {name}
-          </Typography>
-        </Stack>
+        <Typography variant="h5" fontWeight="bold">
+          {name}
+        </Typography>
+
+        <Typography variant="h6">Тип: {type}</Typography>
 
         <StyledColorPicker colors={color} showColorsName={true} gap={1} />
 

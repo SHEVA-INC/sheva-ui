@@ -11,6 +11,7 @@ const StyledFormControlWithSelect = ({
   children,
   gap,
   onClick,
+  register,
 }) => {
   return (
     <FormControl size={formControlSize} sx={{ gap: gap }} fullWidth>
@@ -25,6 +26,7 @@ const StyledFormControlWithSelect = ({
         color="secondary"
         IconComponent={DropDownIcon}
         onClick={onClick}
+        {...register}
       >
         {children}
       </Select>

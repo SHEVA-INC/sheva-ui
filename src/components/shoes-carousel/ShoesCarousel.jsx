@@ -3,6 +3,8 @@ import { Grid, Stack, useMediaQuery, useTheme } from "@mui/material";
 import { useState, useEffect } from "react";
 import StyledCarousel from "../styled/StyledCarousel";
 import StyledTitle from "../styled/StyledTitle";
+import { DETAILED_SHOES_ROUTE } from "../../app/Routes";
+import { useNavigate } from "react-router-dom";
 
 const gridItemSize = {
   xs: 12,
@@ -51,9 +53,19 @@ const ShoesCarousel = ({ title, shoesCarouselData, id }) => {
     return chunks;
   }
 
+  const navigate = useNavigate();
+
+  const handleShoesItemClick = (shoesId) => {
+    navigate(`${DETAILED_SHOES_ROUTE.replace(":shoesId", shoesId)}`);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <Stack gap={6} id={id}>
-      <StyledTitle title="Новинки" />
+      <StyledTitle title={title} />
       <StyledCarousel title={title}>
         {groupArrayByAmountOfItemsPerScreenSize(
           shoesCarouselData,
@@ -71,10 +83,10 @@ const ShoesCarousel = ({ title, shoesCarouselData, id }) => {
                 <ShoesCarouselItem
                   key={shoesItem.id}
                   name={shoesItem.name}
-                  description={shoesItem.description}
-                  mainImage={shoesItem.mainImage}
+                  brand={shoesItem.brand}
                   price={shoesItem.price}
-                  liked={shoesItem.liked}
+                  mainImage={shoesItem.main_image}
+                  onClick={() => handleShoesItemClick(shoesItem.id)}
                 />
               </Grid>
             ))}

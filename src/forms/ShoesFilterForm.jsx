@@ -1,9 +1,9 @@
 import { Button, MenuItem, Typography } from "@mui/material";
 import CategoryCheckboxWithAmountLeft from "../components/CategoryCheckboxWithAmountLeft";
 import StyledColorPicker from "../components/styled/StyledColorPicker";
-import ShoesColors from "../utils/ShoesColors";
 import StyledFormControlWithSelect from "../components/styled/StyledFormControlWithSelect";
 import StyledForm from "../components/styled/StyledForm";
+import shoesColors from "../enums/shoesColors";
 const sizes = [
   { id: 1, value: 38 },
   { id: 2, value: 39 },
@@ -52,7 +52,7 @@ const ShoesFilterForm = ({ order }) => {
       </StyledFormControlWithSelect>
 
       <StyledColorPicker
-        colors={Object.keys(ShoesColors)}
+        colors={Object.keys(shoesColors)}
         title="Колір"
         fontWeight="bold"
         gap={4}

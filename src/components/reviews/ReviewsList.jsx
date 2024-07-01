@@ -1,12 +1,15 @@
-import { Stack, Typography } from "@mui/material";
+import { Pagination, PaginationItem, Stack, Typography } from "@mui/material";
 import ReviewItem from "./ReviewItem";
 import reviewService from "../../services/ReviewService";
 
 const ReviewsList = ({
+  id,
   reviewsAmount,
   reviewsData,
-  id,
   setIsReviewDeleted,
+  totalPages,
+  pageNumber,
+  handlePageNumberChange,
 }) => {
   const handleDeleteReviewClick = async (reviewId) => {
     try {
@@ -33,6 +36,16 @@ const ReviewsList = ({
           onDelete={() => handleDeleteReviewClick(reviewItem.id)}
         />
       ))}
+      {reviewsData.length > 0 && (
+        <Pagination
+          size="large"
+          count={totalPages}
+          page={pageNumber}
+          onChange={handlePageNumberChange}
+          renderItem={(item) => <PaginationItem {...item} />}
+          sx={{ alignSelf: "center" }}
+        />
+      )}
     </Stack>
   );
 };

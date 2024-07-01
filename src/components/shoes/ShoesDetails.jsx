@@ -6,13 +6,17 @@ import StyledTitle from "../styled/StyledTitle";
 import { useEffect, useState } from "react";
 import shoesService from "../../services/ShoesService";
 import upperCaseFirstLetter from "../../utils/upperCaseFirstLetter";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ShoesDetailsImageSlider from "../ShoesDetailsImageSlider";
+import useAuth from "../../auth/useAuth";
+import { MANAGE_SHOES_DETAILS_ROUTE } from "../../app/Routes";
 
 const ShoesDetails = () => {
   const [shoesDetails, setShoesDetails] = useState(null);
   const [mainImage, setMainImage] = useState(null);
   const { shoesId } = useParams();
+  const { userRole } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getShoesDetails = async () => {
@@ -34,112 +38,123 @@ const ShoesDetails = () => {
 
   const allImages = [
     shoesDetails.main_image,
-    ...shoesDetails.images.map((img) => img.image),
+    ...shoesDetails.images.map((img) => img.image_url),
   ];
+
+  const handldeNavigateToManageBootsRoute = (id) => {
+    navigate(MANAGE_SHOES_DETAILS_ROUTE.replace(":shoesId", id));
+  };
 
   return (
     <Stack gap={6}>
-      <Stack
-        flexDirection={{ xs: "column", sm: "row" }}
-        justifyContent="space-between"
-        alignItems="center"
-        gap={8}
-      >
-        <Stack width={{ xs: 1, md: 0.5 }}>
-          <ShoesDetailsImageSlider
-            images={allImages}
-            mainImage={mainImage}
-            setMainImage={setMainImage}
-          />
+      {userRole === "admin" && (
+        <Stack flexDirection="row" alignSelf="flex-end" gap={5}>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => handldeNavigateToManageBootsRoute(shoesId)}
+          >
+            Редагувати
+          </Button>
         </Stack>
+      )}
 
-        <Stack width={{ xs: 1, md: 0.5 }} gap={{ xs: 4, sm: 2, md: 6 }}>
-          <Stack>
+      <>
+        <Stack
+          flexDirection={{ xs: "column", sm: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+          gap={8}
+        >
+          <Stack width={{ xs: 1, md: 0.5 }}>
+            <ShoesDetailsImageSlider
+              images={allImages}
+              mainImage={mainImage}
+              setMainImage={setMainImage}
+            />
+          </Stack>
+
+          <Stack width={{ xs: 1, md: 0.5 }} gap={{ xs: 4, sm: 2, md: 6 }}>
             <Typography variant="h4" fontWeight="bold">
               {upperCaseFirstLetter(shoesDetails.brand)} {shoesDetails.name}
             </Typography>
-          </Stack>
-          <Stack
-            flexDirection="row"
-            justifyContent="space-between"
-            alignItems="center"
-          >
             <Typography variant="h5" fontWeight="bold">
               {shoesDetails.price}
             </Typography>
-          </Stack>
-          <StyledColorPicker
-            colors={shoesDetails.color}
-            showColorsName={true}
-            gap={1}
-          />
-          <StyledFormControlWithSelect
-            title="Розмір"
-            selectId="size-select"
-            defaultValue={shoesDetails.sizes[0].size}
-            formControlSize="small"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            {shoesDetails.sizes.map((size) => (
-              <MenuItem key={size.size} value={size.size}>
-                {size.size}
-              </MenuItem>
-            ))}
-          </StyledFormControlWithSelect>
-          <Stack
-            flexDirection="row"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <ItemCounter value={0} />
-            <Button
-              variant="contained"
-              color="secondary"
+            <Typography variant="h6">Тип: {shoesDetails.type}</Typography>
+            <StyledColorPicker
+              colors={shoesDetails.color}
+              showColorsName={true}
+              gap={1}
+            />
+            <StyledFormControlWithSelect
+              title="Розмір"
+              selectId="size-select"
+              defaultValue={shoesDetails.sizes[0].size}
+              formControlSize="small"
               onClick={(e) => {
                 e.stopPropagation();
               }}
             >
-              <Typography px={3}>В корзину</Typography>
-            </Button>
+              {shoesDetails.sizes.map((size) => (
+                <MenuItem key={size.size} value={size.size}>
+                  {size.size}
+                </MenuItem>
+              ))}
+            </StyledFormControlWithSelect>
+            <Stack
+              flexDirection="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <ItemCounter value={0} />
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <Typography px={3}>В корзину</Typography>
+              </Button>
+            </Stack>
           </Stack>
         </Stack>
-      </Stack>
 
-      <StyledTitle title="Опис" />
-      <Stack
-        flexDirection={{ xs: "column", sm: "row" }}
-        alignItems="center"
-        justifyContent="space-between"
-        width={1}
-      >
-        <Typography variant="h6">{shoesDetails.description}</Typography>
-        <Stack width={{ xs: 1, sm: 0.5 }} gap={10}>
-          <Stack
-            width={0.6}
-            alignSelf={{ xs: "flex-start", sm: "center", md: "flex-start" }}
-          >
-            <Box
-              component="img"
-              src={shoesDetails.images[1].image}
-              alt={shoesDetails.name}
-              height="max-content"
-            />
-          </Stack>
-          <Stack
-            width={0.6}
-            alignSelf={{ xs: "flex-end", sm: "center", md: "flex-end" }}
-          >
-            <Box
-              component="img"
-              src={shoesDetails.images[2].image}
-              alt={shoesDetails.name}
-              height="max-content"
-            />
+        <StyledTitle title="Опис" />
+        <Stack
+          flexDirection={{ xs: "column", sm: "row" }}
+          alignItems="center"
+          justifyContent="space-between"
+          width={1}
+        >
+          <Typography variant="h6">{shoesDetails.description}</Typography>
+          <Stack width={{ xs: 1, sm: 0.5 }} gap={10}>
+            <Stack
+              width={0.6}
+              alignSelf={{ xs: "flex-start", sm: "center", md: "flex-start" }}
+            >
+              <Box
+                component="img"
+                src={shoesDetails.images[1].image_url}
+                alt={shoesDetails.name}
+                height="max-content"
+              />
+            </Stack>
+            <Stack
+              width={0.6}
+              alignSelf={{ xs: "flex-end", sm: "center", md: "flex-end" }}
+            >
+              <Box
+                component="img"
+                src={shoesDetails.images[2].image_url}
+                alt={shoesDetails.name}
+                height="max-content"
+              />
+            </Stack>
           </Stack>
         </Stack>
-      </Stack>
+      </>
     </Stack>
   );
 };

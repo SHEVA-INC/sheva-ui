@@ -7,6 +7,7 @@ import {
   HOME_ROUTE,
   LIKED_ROUTE,
   MAIN_ROUTE,
+  MANAGE_SHOES_DETAILS_ROUTE,
   NOT_FOUND_ROUTE,
   PROFILE_ROUTE,
   RESET_PASSWORD_ROUTE,
@@ -31,9 +32,10 @@ import NotFoundRoute from "../routes/NotFoundRoute";
 import SignOutRoute from "../routes/SignOutRoute";
 import useAuth from "../auth/useAuth";
 import RequireAuth from "../auth/RequireAuth";
+import ManageShoesRoute from "../routes/ManageShoesRoute";
 
 const Router = () => {
-  const { authorized } = useAuth();
+  const { authorized, userRole } = useAuth();
 
   return (
     <Routes>
@@ -92,6 +94,12 @@ const Router = () => {
             <Route path={LIKED_ROUTE} element={<LikedRoute />} />
             <Route path={PROFILE_ROUTE} element={<ProfileRoute />} />
 
+            {userRole === "admin" && (
+              <Route
+                path={MANAGE_SHOES_DETAILS_ROUTE}
+                element={<ManageShoesRoute />}
+              />
+            )}
             <Route path={SIGN_OUT_ROUTE} element={<SignOutRoute />} />
 
             <Route path={NOT_FOUND_ROUTE} element={<NotFoundRoute />} />

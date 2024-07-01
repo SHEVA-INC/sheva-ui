@@ -1,7 +1,6 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import ShoesCarousel from "../components/shoes-carousel/ShoesCarousel";
-import ShoesCarouselData from "../components/shoes-carousel/ShoesCarouselData";
 import GradientShoesBlock from "../components/GradientShoesBlock";
 import NumbersBlock from "../components/NumbersBlock";
 import ShoesSmallList from "../components/shoes-small/ShoesSmallList";
@@ -17,23 +16,26 @@ import { useEffect, useState } from "react";
 import AddReviewForm from "../forms/AddReviewForm";
 import StyledTitle from "../components/styled/StyledTitle";
 import useAuth from "../auth/useAuth";
+import shoesService from "../services/ShoesService";
 
 const HomeRoute = () => {
   const [reviewsList, setReviewsList] = useState([]);
   const [addReview, setAddReview] = useState(false);
   const [isReviewDeleted, setIsReviewDeleted] = useState(false);
   const [isReviewAdded, setIsReviewAdded] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
   const { authorized } = useAuth();
 
-  const handleAddReviewClick = () => {
-    setAddReview(true);
-  };
-
   useEffect(() => {
-    const getReviewsList = async () => {
+    const getReviewsList = async (pageNum) => {
       try {
-        const response = await reviewService.fetchReviews();
-        setReviewsList(response);
+        const response = await reviewService.fetchReviews(pageNum);
+        setReviewsList(response.results);
+        setTotalPages(response.total_pages);
+        setPageNumber(response.current_page);
+
         setIsReviewDeleted(false);
         setIsReviewAdded(false);
       } catch (error) {
@@ -41,8 +43,45 @@ const HomeRoute = () => {
       }
     };
 
-    getReviewsList();
-  }, [isReviewDeleted, isReviewAdded]);
+    getReviewsList(pageNumber);
+  }, [isReviewDeleted, isReviewAdded, pageNumber]);
+
+  const handlePageNumberChange = (event, value) => {
+    setPageNumber(value);
+  };
+
+  const handleAddReviewClick = () => {
+    setAddReview(true);
+  };
+
+  const [newShoes, setNewShoes] = useState([]);
+  const [popularShoes, setPopularShoes] = useState([]);
+
+  useEffect(() => {
+    const getNewShoes = async () => {
+      try {
+        const response = await shoesService.fetchNewShoes();
+        setNewShoes(response);
+      } catch (error) {
+        console.error("Error fetching new shoes:", error);
+      }
+    };
+
+    getNewShoes();
+  }, []);
+
+  useEffect(() => {
+    const getPopularShoes = async () => {
+      try {
+        const response = await shoesService.fetchPopularShoes();
+        setPopularShoes(response);
+      } catch (error) {
+        console.error("Error fetching popualar shoes:", error);
+      }
+    };
+
+    getPopularShoes();
+  }, []);
 
   return (
     <Stack width={1} alignItems="center">
@@ -53,7 +92,7 @@ const HomeRoute = () => {
         <ShoesCarousel
           title="Новинки"
           id="new-items"
-          shoesCarouselData={ShoesCarouselData}
+          shoesCarouselData={newShoes}
         />
         <Stack
           flexDirection="column"
@@ -108,8 +147,9 @@ const HomeRoute = () => {
         <ShoesCarousel
           title="Популярне"
           id="popular"
-          shoesCarouselData={ShoesCarouselData}
+          shoesCarouselData={popularShoes}
         />
+
         <Link
           component={RouterLink}
           to={CATALOG_ROUTE}
@@ -126,30 +166,32 @@ const HomeRoute = () => {
             </Typography>
           </Button>
         </Link>
-        <StyledTitle title="Відгуки" />
-
-        {authorized() && (
-          <>
-            {addReview ? (
-              <AddReviewForm setIsReviewAdded={setIsReviewAdded} />
-            ) : (
-              <Button
-                variant="contained"
-                size="large"
-                color="primary"
-                onClick={handleAddReviewClick}
-              >
-                Додати відгук
-              </Button>
-            )}
-          </>
-        )}
-
+        <Stack id="reviews" gap={6}>
+          <StyledTitle title="Відгуки" />
+          {authorized() && (
+            <>
+              {addReview ? (
+                <AddReviewForm setIsReviewAdded={setIsReviewAdded} />
+              ) : (
+                <Button
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                  onClick={handleAddReviewClick}
+                >
+                  Додати відгук
+                </Button>
+              )}
+            </>
+          )}
+        </Stack>
         <ReviewsList
-          id="reviews"
           reviewsAmount="3,126"
           reviewsData={reviewsList}
           setIsReviewDeleted={setIsReviewDeleted}
+          totalPages={totalPages}
+          pageNumber={pageNumber}
+          handlePageNumberChange={handlePageNumberChange}
         />
       </StyledStackForRoutes>
     </Stack>
