@@ -2,6 +2,8 @@ import { Stack } from "@mui/material";
 
 const StyledForm = ({
   component = "form",
+  flexDirection = "column",
+  justifyContent,
   alignItems = "flex-end",
   onSubmit,
   py,
@@ -16,6 +18,8 @@ const StyledForm = ({
   return (
     <Stack
       component={component}
+      flexDirection={flexDirection}
+      justifyContent={justifyContent}
       gap={4}
       width={width}
       py={py}

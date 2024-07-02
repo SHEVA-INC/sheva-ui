@@ -1,7 +1,6 @@
 import { Button, MenuItem, Stack, Typography, Box } from "@mui/material";
 import StyledColorPicker from "../styled/StyledColorPicker";
 import StyledFormControlWithSelect from "../styled/StyledFormControlWithSelect";
-import ItemCounter from "../ItemCounter";
 import StyledTitle from "../styled/StyledTitle";
 import { useEffect, useState } from "react";
 import shoesService from "../../services/ShoesService";
@@ -10,10 +9,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import ShoesDetailsImageSlider from "../ShoesDetailsImageSlider";
 import useAuth from "../../auth/useAuth";
 import { MANAGE_SHOES_DETAILS_ROUTE } from "../../app/Routes";
+import AddShoesToShoppingCartForm from "../../forms/AddShoesToShoppingCartForm";
+import shoppingCartService from "../../services/ShoppingCartService";
+import { useForm } from "react-hook-form";
 
 const ShoesDetails = () => {
   const [shoesDetails, setShoesDetails] = useState(null);
   const [mainImage, setMainImage] = useState(null);
+  const [countValue, setCountValue] = useState(1);
+
   const { shoesId } = useParams();
   const { userRole } = useAuth();
   const navigate = useNavigate();
@@ -32,6 +36,10 @@ const ShoesDetails = () => {
     getShoesDetails();
   }, [shoesId]);
 
+  const { register, handleSubmit } = useForm({
+    mode: "all",
+  });
+
   if (!shoesDetails) {
     return <Typography>Loading...</Typography>;
   }
@@ -40,6 +48,20 @@ const ShoesDetails = () => {
     shoesDetails.main_image,
     ...shoesDetails.images.map((img) => img.image_url),
   ];
+
+  const onSubmit = async (data) => {
+    const cartParams = {
+      product_id: shoesDetails.id,
+      quantity: countValue,
+      ...data,
+    };
+
+    try {
+      await shoppingCartService.addShoesToShoppingCart(cartParams);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handldeNavigateToManageBootsRoute = (id) => {
     navigate(MANAGE_SHOES_DETAILS_ROUTE.replace(":shoesId", id));
@@ -95,6 +117,14 @@ const ShoesDetails = () => {
               onClick={(e) => {
                 e.stopPropagation();
               }}
+              register={{
+                ...register("size", {
+                  required: {
+                    value: true,
+                    message: "Field is required!",
+                  },
+                }),
+              }}
             >
               {shoesDetails.sizes.map((size) => (
                 <MenuItem key={size.size} value={size.size}>
@@ -102,22 +132,11 @@ const ShoesDetails = () => {
                 </MenuItem>
               ))}
             </StyledFormControlWithSelect>
-            <Stack
-              flexDirection="row"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <ItemCounter value={0} />
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-              >
-                <Typography px={3}>В корзину</Typography>
-              </Button>
-            </Stack>
+            <AddShoesToShoppingCartForm
+              countValue={countValue}
+              setCountValue={setCountValue}
+              onSubmit={handleSubmit(onSubmit)}
+            />
           </Stack>
         </Stack>
 

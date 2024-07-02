@@ -1,17 +1,14 @@
 import { Button, Stack, Typography } from "@mui/material";
-import { useState } from "react";
 
-const ItemCounter = ({ value, size }) => {
-  const [count, setCount] = useState(value);
-
+const ItemCounter = ({ countValue, setCountValue, size }) => {
   const decrement = (e) => {
     e.stopPropagation();
-    setCount((c) => c - 1);
+    setCountValue((c) => c - 1);
   };
 
   const increment = (e) => {
     e.stopPropagation();
-    setCount((c) => c + 1);
+    setCountValue((c) => c + 1);
   };
 
   return (
@@ -21,7 +18,7 @@ const ItemCounter = ({ value, size }) => {
         variant="outlined"
         color="secondary"
         size={size}
-        disabled={count === 0}
+        disabled={countValue === 0}
         sx={{
           minWidth: "28px",
           minHeight: "28px",
@@ -31,7 +28,7 @@ const ItemCounter = ({ value, size }) => {
         -
       </Button>
       <Typography variant="h6" fontWeight="bold">
-        {count}
+        {countValue}
       </Typography>
       <Button
         onClick={increment}
