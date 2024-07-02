@@ -11,21 +11,29 @@ import shoesService from "../services/ShoesService";
 const LikedRoute = () => {
   const [likedShoesList, setLikedShoesList] = useState([]);
   const [likedItems, handleLikeClick] = useLikedShoes([]);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    const fetchLikedShoes = async (liked) => {
+    const fetchLikedShoes = async (pageNum, liked) => {
       try {
-        const response = await shoesService.fetchLikedShoes({
+        const response = await shoesService.fetchLikedShoes(pageNum, {
           ids: liked,
         });
-        setLikedShoesList(response);
+        setLikedShoesList(response.results);
+        setTotalPages(response.total_pages);
+        setPageNumber(response.current_page);
       } catch (error) {
         console.error("Error fetching liked shoes:", error);
       }
     };
 
-    fetchLikedShoes(likedItems);
-  }, [likedItems]);
+    fetchLikedShoes(pageNumber, likedItems);
+  }, [pageNumber, likedItems]);
+
+  const handlePageNumberChange = (event, value) => {
+    setPageNumber(value);
+  };
 
   return (
     <StyledStackForRoutes>
@@ -62,6 +70,10 @@ const LikedRoute = () => {
             shoesList={likedShoesList}
             likedItems={likedItems}
             handleLikeClick={handleLikeClick}
+            totalPages={totalPages}
+            pageNumber={pageNumber}
+            handlePageNumberChange={handlePageNumberChange}
+            width="calc(100% - 364px)"
           />
         )}
       </Stack>

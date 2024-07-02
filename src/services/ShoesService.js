@@ -34,8 +34,9 @@ class ShoesService {
     ).data;
   }
 
-  async fetchLikedShoes(data) {
-    return (await axiosInstance.post("boots/liked/", data)).data;
+  async fetchLikedShoes(pageNum, data) {
+    return (await axiosInstance.post(`boots/liked/?page=${pageNum}`, data))
+      .data;
   }
 
   async fetchNewShoes() {

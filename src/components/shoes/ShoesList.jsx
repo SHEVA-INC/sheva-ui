@@ -9,6 +9,7 @@ const ShoesList = ({
   totalPages,
   pageNumber,
   handlePageNumberChange,
+  width,
 }) => {
   return (
     <Stack gap={5} flex={1} order={order} alignItems="center">
@@ -26,6 +27,7 @@ const ShoesList = ({
           mainImage={shoesItem.main_image}
           isLiked={likedItems.includes(shoesItem.id)}
           onLikeClick={() => handleLikeClick(shoesItem.id)}
+          width={width}
         />
       ))}
       {shoesList.length > 0 && (

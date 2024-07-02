@@ -1,11 +1,4 @@
-import {
-  Button,
-  IconButton,
-  MenuItem,
-  Stack,
-  Typography,
-  Box,
-} from "@mui/material";
+import { IconButton, MenuItem, Stack, Typography, Box } from "@mui/material";
 import LikeIcon from "../../icons/shopping/LikeIcon";
 import StyledColorPicker from "../styled/StyledColorPicker";
 import StyledFormControlWithSelect from "../styled/StyledFormControlWithSelect";
@@ -25,6 +18,7 @@ const ShoesItem = ({
   mainImage,
   isLiked,
   onLikeClick,
+  width = 1,
 }) => {
   const navigate = useNavigate();
 
@@ -38,12 +32,12 @@ const ShoesItem = ({
       onClick={() => handleShoesItemClick(id)}
       flexDirection={{ xs: "column", sm: "row" }}
       justifyContent="space-between"
-      gap={9}
+      gap={8}
       borderRadius={(theme) => theme.shape.containerBorderRadius}
       border={1}
       borderColor="secondary.light"
       p={3}
-      width={1}
+      width={width}
     >
       <Stack
         flexDirection={{ xs: "column", lg: "row" }}
@@ -55,8 +49,8 @@ const ShoesItem = ({
           src={mainImage}
           alt={name}
           width="100%"
-          minWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "420px" }}
-          maxWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "420px" }}
+          minWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "380px" }}
+          maxWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "380px" }}
           height="300px"
         />
         <Stack
@@ -81,7 +75,7 @@ const ShoesItem = ({
       <Stack
         maxWidth={{ xs: "100%", md: "420px" }}
         flex={1}
-        gap={4}
+        gap={2}
         justifyContent="space-between"
       >
         <Typography variant="h5" fontWeight="bold">
@@ -137,17 +131,6 @@ const ShoesItem = ({
               )}
             </IconButton>
           </Stack>
-
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            sx={{ width: { xs: "inherit", md: "100%" } }}
-          >
-            <Typography px={3}>В корзину</Typography>
-          </Button>
         </Stack>
       </Stack>
     </Stack>
