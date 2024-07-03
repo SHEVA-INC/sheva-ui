@@ -10,8 +10,8 @@ class ShoppingCartService {
     ).data;
   }
 
-  async getShoppingCart() {
-    return (await axiosInstance.get("cart/view_cart")).data;
+  async getShoppingCart(pageNum) {
+    return (await axiosInstance.get(`cart/view_cart?page=${pageNum}`)).data;
   }
 }
 

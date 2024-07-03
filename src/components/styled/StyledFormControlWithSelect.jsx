@@ -12,10 +12,12 @@ const StyledFormControlWithSelect = ({
   gap,
   onClick,
   register,
+  variant = "h6",
+  fontWeight = "bold",
 }) => {
   return (
     <FormControl size={formControlSize} sx={{ gap: gap }} fullWidth>
-      <Typography variant="h6" fontWeight="bold" htmlFor={selectId}>
+      <Typography variant={variant} fontWeight={fontWeight} htmlFor={selectId}>
         {title}
       </Typography>
       <Select

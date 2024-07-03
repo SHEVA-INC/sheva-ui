@@ -10,7 +10,7 @@ import shoesService from "../services/ShoesService";
 
 const LikedRoute = () => {
   const [likedShoesList, setLikedShoesList] = useState([]);
-  const [likedItems, handleLikeClick] = useLikedShoes([]);
+  const [likedItems, handleLikeClick] = useLikedShoes();
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 

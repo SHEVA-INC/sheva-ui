@@ -58,8 +58,13 @@ const EditUploadMainImageForm = ({ shoesId }) => {
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)} boxShadow="none">
-      <Stack flexDirection="row" alignSelf="flex-start" alignItems="center">
-        <Typography>Головне фото</Typography>
+      <Stack flexDirection="column" alignSelf="flex-start">
+        <Typography variant="h6" fontWeight="bold">
+          Головне фото
+        </Typography>
+        <Button onClick={() => setIsEditMainPhotoOpen(true)}>
+          Редагувати Фото
+        </Button>
         <StyledFileDropzone
           accept="image/*"
           open={isEditMainPhotoOpen}
@@ -77,11 +82,8 @@ const EditUploadMainImageForm = ({ shoesId }) => {
               : mainImageUrl
           }
           alt="Main shoe"
-          sx={{ height: 100, width: "auto" }}
+          sx={{ width: 300, height: "auto" }}
         />
-        <Button onClick={() => setIsEditMainPhotoOpen(true)}>
-          Редагувати Фото
-        </Button>
       </Stack>
       <Button
         variant="contained"

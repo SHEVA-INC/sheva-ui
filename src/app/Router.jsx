@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import {
   ABOUT_US_ROUTE,
+  ADD_SHOES_ROUTE,
   CATALOG_ROUTE,
   DETAILED_SHOES_ROUTE,
   FORGOT_PASSWORD_ROUTE,
@@ -33,6 +34,7 @@ import SignOutRoute from "../routes/SignOutRoute";
 import useAuth from "../auth/useAuth";
 import RequireAuth from "../auth/RequireAuth";
 import ManageShoesRoute from "../routes/ManageShoesRoute";
+import AddShoesRoute from "../routes/AddShoesRoute";
 
 const Router = () => {
   const { authorized, userRole } = useAuth();
@@ -95,11 +97,15 @@ const Router = () => {
             <Route path={PROFILE_ROUTE} element={<ProfileRoute />} />
 
             {userRole === "admin" && (
+              <Route path={ADD_SHOES_ROUTE} element={<AddShoesRoute />} />
+            )}
+            {userRole === "admin" && (
               <Route
                 path={MANAGE_SHOES_DETAILS_ROUTE}
                 element={<ManageShoesRoute />}
               />
             )}
+
             <Route path={SIGN_OUT_ROUTE} element={<SignOutRoute />} />
 
             <Route path={NOT_FOUND_ROUTE} element={<NotFoundRoute />} />

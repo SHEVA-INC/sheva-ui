@@ -60,8 +60,13 @@ const EditUploadImagesForm = ({ shoesId }) => {
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)} boxShadow="none">
-      <Stack flexDirection="row" alignSelf="flex-start" alignItems="center">
-        <Typography>Фото</Typography>
+      <Stack flexDirection="column" alignSelf="flex-start">
+        <Typography variant="h6" fontWeight="bold">
+          Фото
+        </Typography>
+        <Button onClick={() => setIsEditPhotosOpen(true)}>
+          Редагувати Фото
+        </Button>
         <StyledFilesDropzone
           accept="image/*"
           open={isEditPhotosOpen}
@@ -69,9 +74,9 @@ const EditUploadImagesForm = ({ shoesId }) => {
           onFileChange={handleImagesChange}
           uploadedFiles={uploadedImages}
           setUploadedFiles={setUploadedImages}
-          register={register}
+          register={{ ...register("uploaded_images") }}
         />
-        <Stack direction="row" spacing={2}>
+        <Stack direction="column" spacing={2}>
           {imagesUrl.map((url, idx) => (
             <Box
               key={idx}
@@ -82,13 +87,10 @@ const EditUploadImagesForm = ({ shoesId }) => {
                   : url
               }
               alt={`Shoe image ${idx + 1}`}
-              sx={{ height: 100, width: "auto" }}
+              sx={{ width: 300, height: "auto" }}
             />
           ))}
         </Stack>
-        <Button onClick={() => setIsEditPhotosOpen(true)}>
-          Редагувати Фото
-        </Button>
       </Stack>
       <Button
         variant="contained"

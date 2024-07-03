@@ -51,7 +51,7 @@ const StyledFilesDropzone = ({
             textAlign: "center",
           }}
         >
-          <input {...getInputProps()} {...register("uploaded_images")} />
+          <input {...getInputProps()} {...register} />
           <Typography variant="body1">
             {uploadedFiles && uploadedFiles.length > 0 ? (
               <span>
@@ -62,7 +62,7 @@ const StyledFilesDropzone = ({
               </span>
             ) : (
               <Link to={linkTo} component={RouterLink}>
-                Choose a photo
+                Choose photos
               </Link>
             )}
           </Typography>
@@ -70,7 +70,7 @@ const StyledFilesDropzone = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleSave} disabled={!uploadedFiles.length}>
+        <Button onClick={handleSave} disabled={!uploadedFiles.length === 0}>
           Save
         </Button>
       </DialogActions>

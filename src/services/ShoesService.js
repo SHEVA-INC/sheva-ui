@@ -9,6 +9,14 @@ class ShoesService {
     return (await axiosInstance.get(`boots/list${shoesId}`)).data;
   }
 
+  async createShoes(data) {
+    return (
+      await axiosInstance.post("boots/list", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+    ).data;
+  }
+
   async updateShoesDetails(shoesId, data) {
     return (await axiosInstance.put(`boots/boots/${shoesId}/update/`, data))
       .data;
@@ -28,7 +36,7 @@ class ShoesService {
 
   async updateImages(shoesId, data) {
     return (
-      await axiosInstance.put(`boots/boots/${shoesId}/update-images`, data, {
+      await axiosInstance.put(`boots/boots/${shoesId}/update-images/`, data, {
         headers: { "Content-Type": "multipart/form-data" },
       })
     ).data;

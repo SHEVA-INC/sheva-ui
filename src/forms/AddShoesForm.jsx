@@ -1,18 +1,38 @@
-import { useForm } from "react-hook-form";
+import {
+  Box,
+  Button,
+  IconButton,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import StyledForm from "../components/styled/StyledForm";
-import { Button, IconButton, MenuItem, Stack, Typography } from "@mui/material";
-import shoesService from "../services/ShoesService";
-import { useEffect, useState } from "react";
-import StyledFormControlWithTextField from "../components/styled/StyledFormControlWithTextField";
 import StyledFormControlWithSelect from "../components/styled/StyledFormControlWithSelect";
-import shoesTypes from "../enums/shoesTypes";
+import StyledFormControlWithTextField from "../components/styled/StyledFormControlWithTextField";
 import shoesBrands from "../enums/shoesBrands";
+import shoesTypes from "../enums/shoesTypes";
+import { useForm } from "react-hook-form";
 import DeleteIcon from "../icons/DeleteIcon";
+import { useEffect, useState } from "react";
+import shoesService from "../services/ShoesService";
 import shoesColors from "../enums/shoesColors";
+import StyledFileDropzone from "../components/styled/StyledFileDropzone";
+import StyledFilesDropzone from "../components/styled/StyledFilesDropzone";
 
-const EditDetailsShoesDataForm = ({ shoesId }) => {
-  const [shoesDetails, setShoesDetails] = useState(null);
+const AddShoesForm = () => {
   const [sizes, setSizes] = useState([]);
+  const [isEditMainPhotoOpen, setIsEditMainPhotoOpen] = useState(false);
+  const [uploadedMainImage, setUploadedMainImage] = useState(null);
+  const [isEditPhotosOpen, setIsEditPhotosOpen] = useState(false);
+  const [uploadedImages, setUploadedImages] = useState([]);
+
+  const handleEditPhotosClose = () => {
+    setIsEditPhotosOpen(false);
+  };
+
+  const handleImagesChange = (files) => {
+    setUploadedImages(files);
+  };
 
   const handleSizeChange = (index, field, value) => {
     const newSizes = [...sizes];
@@ -30,61 +50,74 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
     setSizes(newSizes);
   };
 
-  useEffect(() => {
-    const getShoesDetails = async () => {
-      try {
-        const response = await shoesService.fetchShoesDetails(shoesId);
-        setShoesDetails(response);
-        setSizes(response.sizes);
-      } catch (error) {
-        console.error("Error fetching shoes details:", error);
-      }
-    };
+  const handleEditMainPhotoClose = () => {
+    setIsEditMainPhotoOpen(false);
+  };
 
-    getShoesDetails();
-  }, [shoesId]);
+  const handleMainImageChange = (file) => {
+    setUploadedMainImage(file);
+  };
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
+    mode: "all",
     values: {
-      name: shoesDetails?.name || "",
-      brand: shoesDetails?.brand || "",
-      type: shoesDetails?.type || "",
-      price: shoesDetails?.price || "",
-      color: shoesDetails?.color || "",
-      description: shoesDetails?.description || "",
+      brand: Object.keys(shoesBrands)[0],
+      type: Object.values(shoesTypes)[0],
+      color: Object.keys(shoesColors)[0],
     },
-    mode: "onBlur",
   });
 
-  const onSubmit = async (data) => {
-    const updatedData = {
-      ...data,
-      sizes: sizes.map((size) => ({
-        size: size.size,
-        stock: size.stock,
-      })),
-    };
+  useEffect(() => {
+    if (uploadedMainImage) {
+      setValue("main_image", uploadedMainImage);
+    }
+  }, [uploadedMainImage, setValue]);
 
-    console.log(updatedData);
+  useEffect(() => {
+    if (uploadedImages.length > 0) {
+      setValue("uploaded_images", uploadedImages);
+    }
+  }, [uploadedImages, setValue]);
+
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("brand", data.brand);
+    formData.append("type", data.type);
+    formData.append("color", data.color);
+    formData.append("price", data.price);
+    formData.append("description", data.description);
+    formData.append("main_image", data.main_image);
+    data.uploaded_images.forEach((file) => {
+      formData.append("uploaded_images", file);
+    });
+    sizes.forEach((size, idx) => {
+      formData.append(`sizes[${idx}]size`, size.size);
+      formData.append(`sizes[${idx}]stock`, size.stock);
+    });
 
     try {
-      const response = await shoesService.updateShoesDetails(
-        shoesId,
-        updatedData,
-      );
-      console.log(response);
+      await shoesService.createShoes(formData);
+      setValue("name", "");
+      setValue("brand", Object.keys(shoesBrands)[0]);
+      setValue("type", Object.values(shoesTypes)[0]);
+      setValue("color", Object.keys(shoesColors)[0]);
+      setValue("price", "");
+      setValue("description", "");
+      setValue("main_image", {});
+      setValue("images", []);
+      setSizes([]);
+      setUploadedMainImage(null);
+      setUploadedImages([]);
     } catch (error) {
-      console.error("Error updating shoes details:", error);
+      console.error("Error creating shoes:", error);
     }
   };
-
-  if (!shoesDetails) {
-    return <Typography>Loading...</Typography>;
-  }
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)} boxShadow="none">
@@ -113,7 +146,7 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
       <StyledFormControlWithSelect
         title="Бренд"
         selectId="brand-select"
-        defaultValue={shoesDetails?.brand}
+        defaultValue={Object.keys(shoesBrands)[0]}
         register={{
           ...register("brand"),
         }}
@@ -127,7 +160,7 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
       <StyledFormControlWithSelect
         title="Тип"
         selectId="type-select"
-        defaultValue={shoesDetails?.type}
+        defaultValue={Object.values(shoesTypes)[0]}
         register={{
           ...register("type"),
         }}
@@ -141,7 +174,7 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
       <StyledFormControlWithSelect
         title="Колір"
         selectId="color-select"
-        defaultValue={shoesDetails?.color}
+        defaultValue={Object.keys(shoesColors)[0]}
         register={{
           ...register("color"),
         }}
@@ -195,6 +228,8 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
             },
           }),
         }}
+        error={!!errors?.description}
+        helperText={errors?.description ? errors.description.message : " "}
       />
       <Stack flexDirection="column" alignSelf="flex-start" spacing={2}>
         <Typography variant="h6" fontWeight="bold">
@@ -223,6 +258,62 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
           Додати Розмір
         </Button>
       </Stack>
+      <Stack flexDirection="column" alignSelf="flex-start">
+        <Typography variant="h6" fontWeight="bold">
+          Головне фото
+        </Typography>
+        <Button onClick={() => setIsEditMainPhotoOpen(true)}>
+          {uploadedMainImage ? "Редагувати фото" : "Додати Фото"}
+        </Button>
+        <StyledFileDropzone
+          accept="image/*"
+          open={isEditMainPhotoOpen}
+          onClose={handleEditMainPhotoClose}
+          onFileChange={handleMainImageChange}
+          uploadedFile={uploadedMainImage}
+          setUploadedFile={setUploadedMainImage}
+          register={{ ...register("main_image") }}
+        />
+        {uploadedMainImage && (
+          <Box
+            component="img"
+            src={
+              uploadedMainImage ? URL.createObjectURL(uploadedMainImage) : {}
+            }
+            alt="Main shoes"
+            sx={{ width: 300, height: "auto" }}
+          />
+        )}
+      </Stack>
+      <Stack flexDirection="column" alignSelf="flex-start">
+        <Typography variant="h6" fontWeight="bold">
+          Фото
+        </Typography>
+        <Button onClick={() => setIsEditPhotosOpen(true)}>
+          {uploadedImages.length > 0 ? "Редагувати фото" : "Додати Фото"}
+        </Button>
+        <StyledFilesDropzone
+          accept="image/*"
+          open={isEditPhotosOpen}
+          onClose={handleEditPhotosClose}
+          onFileChange={handleImagesChange}
+          uploadedFiles={uploadedImages}
+          setUploadedFiles={setUploadedImages}
+          register={{ ...register("uploaded_images") }}
+        />
+        <Stack direction="column" spacing={2}>
+          {uploadedImages.length > 0 &&
+            uploadedImages.map((uploadedImage, idx) => (
+              <Box
+                key={idx}
+                component="img"
+                src={uploadedImage ? URL.createObjectURL(uploadedImage) : {}}
+                alt={`Shoes ${idx + 1}`}
+                sx={{ width: 300, height: "auto" }}
+              />
+            ))}
+        </Stack>
+      </Stack>
       <Button variant="contained" size="large" type="submit">
         <Typography variant="body2" textTransform="uppercase" fontWeight="bold">
           Зберегти
@@ -232,4 +323,4 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
   );
 };
 
-export default EditDetailsShoesDataForm;
+export default AddShoesForm;
