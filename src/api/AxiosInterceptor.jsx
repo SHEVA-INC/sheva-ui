@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import AuthManager from "../auth/TokenService";
 import useAuth from "../auth/useAuth";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 const axiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/",
+  baseURL: baseUrl,
 });
 
 axiosInstance.interceptors.request.use(
