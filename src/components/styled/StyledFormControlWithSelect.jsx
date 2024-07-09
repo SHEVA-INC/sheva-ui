@@ -1,4 +1,10 @@
-import { FormControl, Select, Typography } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  Select,
+  Stack,
+  Typography,
+} from "@mui/material";
 import DropDownIcon from "../../icons/DropDownIcon";
 
 const StyledFormControlWithSelect = ({
@@ -14,24 +20,36 @@ const StyledFormControlWithSelect = ({
   register,
   variant = "h6",
   fontWeight = "bold",
+  disabled,
+  displayEmpty,
+  renderValue,
+  error,
+  helperText,
 }) => {
   return (
     <FormControl size={formControlSize} sx={{ gap: gap }} fullWidth>
       <Typography variant={variant} fontWeight={fontWeight} htmlFor={selectId}>
         {title}
       </Typography>
-      <Select
-        id={selectId}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={onChange}
-        color="secondary"
-        IconComponent={DropDownIcon}
-        onClick={onClick}
-        {...register}
-      >
-        {children}
-      </Select>
+      <Stack gap={0}>
+        <Select
+          id={selectId}
+          value={value}
+          defaultValue={defaultValue}
+          onChange={onChange}
+          color="secondary"
+          IconComponent={DropDownIcon}
+          onClick={onClick}
+          {...register}
+          disabled={disabled}
+          displayEmpty={displayEmpty}
+          renderValue={renderValue}
+          error={error}
+        >
+          {children}
+        </Select>
+        <FormHelperText error={!!error}>{helperText}</FormHelperText>
+      </Stack>
     </FormControl>
   );
 };

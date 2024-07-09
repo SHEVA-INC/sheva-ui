@@ -9,16 +9,16 @@ const EditUserDataForm = () => {
   const [userData, setUserData] = useState({});
   const [isAllowedEditing, setIsAllowedEditing] = useState(false);
 
-  const getUser = async () => {
-    try {
-      const response = await userService.fetchUser();
-      setUserData(response);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-
   useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await userService.fetchUser();
+        setUserData(response);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
     getUser();
   }, []);
 

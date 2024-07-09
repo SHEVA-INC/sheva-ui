@@ -1,12 +1,15 @@
 import { Button, Typography } from "@mui/material";
 import ItemCounter from "../components/ItemCounter";
 import StyledForm from "../components/styled/StyledForm";
+import useShoppingCart from "../custom-hooks/useShoppingCart";
 
 const AddShoesToShoppingCartForm = ({
   countValue,
   setCountValue,
   onSubmit,
 }) => {
+  const { handleItemAdd } = useShoppingCart();
+
   return (
     <StyledForm
       flexDirection="row"
@@ -15,6 +18,7 @@ const AddShoesToShoppingCartForm = ({
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit();
+        handleItemAdd(true);
       }}
     >
       <ItemCounter countValue={countValue} setCountValue={setCountValue} />

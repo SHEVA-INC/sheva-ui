@@ -90,6 +90,14 @@ let theme = createTheme({
         root: { marginLeft: 0, marginRight: 0 },
       },
     },
+    MuiDivider: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          borderColor: theme.palette.secondary.main,
+          borderStyle: "dashed",
+        }),
+      },
+    },
   },
 });
 

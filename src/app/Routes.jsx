@@ -15,9 +15,11 @@ export const CATALOG_ROUTE = "/catalog";
 export const DETAILED_SHOES_ROUTE = "/catalog/:shoesId";
 export const ABOUT_US_ROUTE = "/about-us";
 
-export const SHOPPING_CART_ROUTE = "/shopping-cart";
 export const LIKED_ROUTE = "/liked";
 export const PROFILE_ROUTE = "/profile";
+
+export const SHOPPING_CART_ROUTE = "/shopping-cart";
+export const CHECKOUT_ROUTE = "/checkout";
 
 //admin
 export const ADD_SHOES_ROUTE = "/add-shoes-route";

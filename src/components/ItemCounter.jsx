@@ -18,7 +18,7 @@ const ItemCounter = ({ countValue, setCountValue, size }) => {
         variant="outlined"
         color="secondary"
         size={size}
-        disabled={countValue === 0}
+        disabled={countValue === 1}
         sx={{
           minWidth: "28px",
           minHeight: "28px",

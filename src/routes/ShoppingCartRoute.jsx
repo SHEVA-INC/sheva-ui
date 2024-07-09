@@ -1,49 +1,27 @@
 import { Link, Stack, Typography } from "@mui/material";
-import ShoesList from "../components/shoes/ShoesList";
 import StyledTitle from "../components/styled/StyledTitle";
 import StyledStackForRoutes from "../components/styled/StyledStackForRoutes";
-import useLikedShoes from "../custom-hooks/useLikedShoes";
 import { Link as RouterLink } from "react-router-dom";
 import { CATALOG_ROUTE } from "../app/Routes";
-import { useEffect, useState } from "react";
-import shoppingCartService from "../services/ShoppingCartService";
+import ShoppingCartTotal from "../components/ShoppingCartTotal";
+import OrderList from "../components/order/OrderList";
+import useShoppingCart from "../custom-hooks/useShoppingCart";
 
 const ShoppingCartRoute = () => {
-  const [shoppingCartList, setShoppingCartList] = useState(null);
-  const [likedItems, handleLikeClick] = useLikedShoes();
-  const [pageNumber, setPageNumber] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-
-  useEffect(() => {
-    const getCart = async (pageNum) => {
-      try {
-        const response = await shoppingCartService.getShoppingCart(pageNum);
-        console.log(response.results.results);
-        setShoppingCartList(response.results.results);
-        setTotalPages(response.total_pages);
-        setPageNumber(response.current_page);
-      } catch (error) {
-        console.error("Error fetching liked shoes:", error);
-      }
-    };
-
-    getCart(pageNumber);
-  }, [pageNumber]);
-
-  const handlePageNumberChange = (event, value) => {
-    setPageNumber(value);
-  };
+  const {
+    shoppingCartList,
+    totalPages,
+    pageNumber,
+    totalPrice,
+    handlePageNumberChange,
+    handleItemRemove,
+  } = useShoppingCart();
 
   return (
     <StyledStackForRoutes>
-      <StyledTitle title="Вподобане" />
-      <Stack
-        flexDirection={{ xs: "column", md: "row" }}
-        justifyContent="space-between"
-        gap={6}
-        flex={1}
-      >
-        {shoppingCartList.length === 0 ? (
+      <StyledTitle title="Корзина" />
+      <Stack flexDirection={{ xs: "column", md: "row" }} gap={6} flex={1}>
+        {shoppingCartList?.length === 0 ? (
           <Stack
             width={1}
             minHeight={1}
@@ -64,16 +42,21 @@ const ShoppingCartRoute = () => {
             </Link>
           </Stack>
         ) : (
-          <ShoesList
-            order={{ xs: 2, md: 1 }}
-            shoesList={shoppingCartList}
-            likedItems={likedItems}
-            handleLikeClick={handleLikeClick}
-            totalPages={totalPages}
-            pageNumber={pageNumber}
-            handlePageNumberChange={handlePageNumberChange}
-            width="calc(100% - 364px)"
-          />
+          <Stack flexDirection="row" gap={6} width={1}>
+            <OrderList
+              width={0.7}
+              orders={shoppingCartList}
+              totalPages={totalPages}
+              pageNumber={pageNumber}
+              handlePageNumberChange={handlePageNumberChange}
+              handleItemRemove={handleItemRemove}
+            />
+            <ShoppingCartTotal
+              width={0.3}
+              shoppingCartList={shoppingCartList}
+              totalPrice={totalPrice}
+            />
+          </Stack>
         )}
       </Stack>
     </StyledStackForRoutes>

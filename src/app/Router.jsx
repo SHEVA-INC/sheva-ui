@@ -3,6 +3,7 @@ import {
   ABOUT_US_ROUTE,
   ADD_SHOES_ROUTE,
   CATALOG_ROUTE,
+  CHECKOUT_ROUTE,
   DETAILED_SHOES_ROUTE,
   FORGOT_PASSWORD_ROUTE,
   HOME_ROUTE,
@@ -35,6 +36,7 @@ import useAuth from "../auth/useAuth";
 import RequireAuth from "../auth/RequireAuth";
 import ManageShoesRoute from "../routes/ManageShoesRoute";
 import AddShoesRoute from "../routes/AddShoesRoute";
+import CheckoutRoute from "../routes/CheckoutRoute";
 
 const Router = () => {
   const { authorized, userRole } = useAuth();
@@ -105,6 +107,8 @@ const Router = () => {
                 element={<ManageShoesRoute />}
               />
             )}
+
+            <Route path={CHECKOUT_ROUTE} element={<CheckoutRoute />} />
 
             <Route path={SIGN_OUT_ROUTE} element={<SignOutRoute />} />
 
