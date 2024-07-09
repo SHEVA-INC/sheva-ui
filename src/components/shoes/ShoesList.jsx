@@ -10,6 +10,7 @@ const ShoesList = ({
   pageNumber,
   handlePageNumberChange,
   width,
+  setSelectedColor,
 }) => {
   return (
     <Stack gap={5} flex={1} order={order} alignItems="center">
@@ -23,13 +24,12 @@ const ShoesList = ({
           price={shoesItem.price}
           color={shoesItem.color}
           sizes={shoesItem?.sizes}
-          quantity={shoesItem?.quantity}
           images={shoesItem.uploaded_images}
           mainImage={shoesItem.main_image}
           isLiked={likedItems.includes(shoesItem.id)}
           onLikeClick={() => handleLikeClick(shoesItem.id)}
           width={width}
-          selectedSize={shoesItem.size}
+          setSelectedColor={setSelectedColor}
         />
       ))}
       {shoesList.length > 0 && (

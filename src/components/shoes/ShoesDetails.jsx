@@ -106,13 +106,15 @@ const ShoesDetails = () => {
             <Typography variant="h6">Тип: {shoesDetails.type}</Typography>
             <StyledColorPicker
               colors={shoesDetails.color}
+              selectedColor={shoesDetails.color}
               showColorsName={true}
               gap={1}
+              disabled={true}
             />
             <StyledFormControlWithSelect
               title="Розмір"
               selectId="size-select"
-              defaultValue={shoesDetails.sizes[0].size}
+              value={shoesDetails.sizes[0].size}
               formControlSize="small"
               onClick={(e) => {
                 e.stopPropagation();

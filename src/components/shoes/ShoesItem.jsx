@@ -14,13 +14,12 @@ const ShoesItem = ({
   color,
   price,
   sizes,
-  quantity,
   images,
   mainImage,
   isLiked,
   onLikeClick,
   width = 1,
-  selectedSize,
+  setSelectedColor,
 }) => {
   const navigate = useNavigate();
 
@@ -86,41 +85,30 @@ const ShoesItem = ({
 
         <Typography variant="h6">Тип: {type}</Typography>
 
-        <StyledColorPicker colors={color} showColorsName={true} gap={1} />
+        <StyledColorPicker
+          colors={color}
+          selectedColor={color}
+          setSelectedColor={setSelectedColor}
+          showColorsName={true}
+          gap={1}
+          disabled={true}
+        />
 
-        {selectedSize ? (
-          <StyledFormControlWithSelect
-            title="Розмір"
-            selectId="selected-size"
-            defaultValue={selectedSize}
-            formControlSize="small"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            disabled={true}
-          >
-            <MenuItem key={selectedSize} value={selectedSize}>
-              {selectedSize}
+        <StyledFormControlWithSelect
+          title="Розмір"
+          selectId="size-select-boots"
+          value={sizes[0].size}
+          formControlSize="small"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          {sizes?.map((size) => (
+            <MenuItem key={size.size} value={size.size}>
+              {size.size}
             </MenuItem>
-          </StyledFormControlWithSelect>
-        ) : (
-          <StyledFormControlWithSelect
-            title="Розмір"
-            selectId="size-select"
-            defaultValue={sizes && sizes[0].size}
-            formControlSize="small"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            {sizes &&
-              sizes.map((size) => (
-                <MenuItem key={size.size} value={size.size}>
-                  {size.size}
-                </MenuItem>
-              ))}
-          </StyledFormControlWithSelect>
-        )}
+          ))}
+        </StyledFormControlWithSelect>
 
         <Stack
           flexDirection={{ xs: "row", md: "column" }}
@@ -152,11 +140,6 @@ const ShoesItem = ({
             </IconButton>
           </Stack>
         </Stack>
-        {quantity && (
-          <Typography variant="h6" fontWeight="bold">
-            Кількість: {quantity}
-          </Typography>
-        )}
       </Stack>
     </Stack>
   );

@@ -1,16 +1,18 @@
 import { Button, MenuItem, Typography } from "@mui/material";
-import CategoryCheckboxWithAmountLeft from "../components/CategoryCheckboxWithAmountLeft";
 import StyledColorPicker from "../components/styled/StyledColorPicker";
 import StyledFormControlWithSelect from "../components/styled/StyledFormControlWithSelect";
 import StyledForm from "../components/styled/StyledForm";
 import shoesColors from "../enums/shoesColors";
-const sizes = [
-  { id: 1, value: 38 },
-  { id: 2, value: 39 },
-  { id: 3, value: 40 },
-];
+import shoesSizes from "../enums/shoesSizes";
+import shoesTypes from "../enums/shoesTypes";
 
-const ShoesFilterForm = ({ order }) => {
+const ShoesFilterForm = ({
+  order,
+  registerType,
+  registerSize,
+  selectedColor,
+  setSelectedColor,
+}) => {
   return (
     <StyledForm
       px={9}
@@ -19,34 +21,42 @@ const ShoesFilterForm = ({ order }) => {
       order={order}
       maxWidth="340px"
       boxShadow="0 0 10px 10px rgba(0, 0, 0, 0.03)"
-      borderRadius={(theme) => theme.shape.containerBorderRadius * 3}
+      borderRadius={(theme) => theme.shape.containerBorderRadius}
     >
-      <CategoryCheckboxWithAmountLeft
-        title="Категорія"
-        categories={[
-          { label: "Дорослим", amountLeft: 28 },
-          { label: "Дітям", amountLeft: 307 },
-        ]}
-      />
-
-      <CategoryCheckboxWithAmountLeft
-        title="Категорія"
-        categories={[
-          { label: "Сороконіжки", amountLeft: 28 },
-          { label: "Бутси", amountLeft: 307 },
-        ]}
-      />
+      <StyledFormControlWithSelect
+        title="Тип"
+        selectId="filter-type-select"
+        formControlSize="small"
+        gap={4}
+        register={registerType}
+        defaultValue=""
+        displayEmpty={true}
+      >
+        <MenuItem disabled value="">
+          Виберіть тип
+        </MenuItem>
+        {Object.values(shoesTypes).map((type) => (
+          <MenuItem key={type} value={type}>
+            {type}
+          </MenuItem>
+        ))}
+      </StyledFormControlWithSelect>
 
       <StyledFormControlWithSelect
         title="Розмір"
-        selectId="size-select"
-        defaultValue={sizes[0].value}
+        selectId="filter-size-select"
         formControlSize="small"
         gap={4}
+        register={registerSize}
+        defaultValue=""
+        displayEmpty={true}
       >
-        {sizes.map((size) => (
-          <MenuItem key={size.id} value={size.value}>
-            {size.value}
+        <MenuItem disabled value="">
+          Виберіть розмір
+        </MenuItem>
+        {shoesSizes.map((size) => (
+          <MenuItem key={size} value={size}>
+            {size}
           </MenuItem>
         ))}
       </StyledFormControlWithSelect>
@@ -56,6 +66,8 @@ const ShoesFilterForm = ({ order }) => {
         title="Колір"
         fontWeight="bold"
         gap={4}
+        selectedColor={selectedColor}
+        setSelectedColor={setSelectedColor}
       />
 
       <Button variant="contained" sx={{ width: 1 }}>

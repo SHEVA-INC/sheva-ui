@@ -1,7 +1,7 @@
 import { Box, Button, Tooltip } from "@mui/material";
 import shoesColors from "../../enums/shoesColors";
 
-const StyledColorButton = ({ color, selectedColor, onClick }) => {
+const StyledColorButton = ({ color, selectedColor, onClick, disabled }) => {
   let borderColor;
   if (color === selectedColor) {
     if (selectedColor === "white" || selectedColor === "another") {
@@ -38,6 +38,7 @@ const StyledColorButton = ({ color, selectedColor, onClick }) => {
             flex: 1,
           }}
           onClick={onClick}
+          disabled={disabled}
         />
       </Box>
     </Tooltip>

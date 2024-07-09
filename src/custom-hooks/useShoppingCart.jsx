@@ -24,8 +24,8 @@ export const ShoppingCartProvider = ({ children }) => {
       }
     };
 
-    getCartList(pageNumber);
-    getCartList(pageNumber);
+    // getCartList(pageNumber);
+    // getCartList(pageNumber);
   }, [pageNumber, isItemRemoved, isAddedToCart]);
 
   const handlePageNumberChange = (event, value) => {

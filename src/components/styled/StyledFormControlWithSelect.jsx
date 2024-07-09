@@ -45,6 +45,7 @@ const StyledFormControlWithSelect = ({
           displayEmpty={displayEmpty}
           renderValue={renderValue}
           error={error}
+          placeholder="Обрати"
         >
           {children}
         </Select>

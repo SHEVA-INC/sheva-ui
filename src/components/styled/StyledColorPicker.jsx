@@ -1,11 +1,16 @@
 import { Stack, Typography } from "@mui/material";
-import { useState } from "react";
 import StyledColorButton from "./StyledColorButton";
 import shoesColors from "../../enums/shoesColors";
 
-const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
-  const [selectedColor, setSelectedColor] = useState(null);
-
+const StyledColorPicker = ({
+  colors,
+  showColorsName,
+  fontWeight,
+  gap,
+  selectedColor,
+  setSelectedColor,
+  disabled,
+}) => {
   const handleColorChange = (col, e) => {
     e.stopPropagation();
     setSelectedColor(col);
@@ -17,10 +22,7 @@ const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
         Колір
         {showColorsName && (
           <span>
-            :{" "}
-            {selectedColor
-              ? shoesColors[selectedColor]
-              : setSelectedColor(colors)}
+            : {selectedColor ? shoesColors[selectedColor] : selectedColor}
           </span>
         )}
       </Typography>
@@ -32,6 +34,7 @@ const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
                 color={color}
                 selectedColor={selectedColor}
                 onClick={(e) => handleColorChange(color, e)}
+                disabled={disabled}
               />
             ))
           : [colors].map((color) => (
@@ -40,6 +43,7 @@ const StyledColorPicker = ({ colors, showColorsName, fontWeight, gap }) => {
                 color={color}
                 selectedColor={colors}
                 onClick={(e) => handleColorChange(color, e)}
+                disabled={disabled}
               />
             ))}
       </Stack>

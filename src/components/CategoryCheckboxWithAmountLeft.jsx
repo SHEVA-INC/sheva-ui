@@ -1,7 +1,7 @@
 import { FormControlLabel, FormGroup, Stack, Typography } from "@mui/material";
 import StyledCheckbox from "./styled/StyledCheckbox";
 
-const CategoryCheckboxWithAmountLeft = ({ title, categories }) => {
+const CategoryCheckboxWithAmountLeft = ({ title, categories, register }) => {
   return (
     <FormGroup sx={{ width: 1 }}>
       <Typography variant="h6" fontWeight="bold" mb={2}>
@@ -15,7 +15,7 @@ const CategoryCheckboxWithAmountLeft = ({ title, categories }) => {
           justifyContent="space-between"
         >
           <FormControlLabel
-            control={<StyledCheckbox fill="#F3F6F9" />}
+            control={<StyledCheckbox fill="#F3F6F9" register={register} />}
             label={
               <Typography fontWeight="bold" variant="body1">
                 {categorie.label}
