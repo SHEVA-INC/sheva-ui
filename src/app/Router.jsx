@@ -1,4 +1,9 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import { CircularProgress } from "@mui/material";
+
+import FullWidthLayout from "../layouts/FullWidthLayout";
+import AuthLayout from "../layouts/AuthLayout";
 import {
   ABOUT_US_ROUTE,
   ADD_SHOES_ROUTE,
@@ -18,110 +23,116 @@ import {
   SIGN_OUT_ROUTE,
   SIGN_UP_ROUTE,
 } from "./Routes";
-import FullWidthLayout from "../layouts/FullWidthLayout";
-import AuthLayout from "../layouts/AuthLayout";
-import HomeRoute from "../routes/HomeRoute";
-import CatalogRoute from "../routes/CatalogRoute";
-import AboutUsRoute from "../routes/AboutUsRoute";
-import LikedRoute from "../routes/LikedRoute";
-import ProfileRoute from "../routes/ProfileRoute";
-import ShoppingCartRoute from "../routes/ShoppingCartRoute";
-import DetailedShoesRoute from "../routes/DetailedShoesRoute";
-import SignInAndSignUpRoute from "../routes/SignInAndSignUpRoute";
-import ForgotPasswordRoute from "../routes/ForgotPasswordRoute";
-import ResetPasswordRoute from "../routes/ResetPasswordRoute";
-import NotFoundRoute from "../routes/NotFoundRoute";
-import SignOutRoute from "../routes/SignOutRoute";
 import useAuth from "../auth/useAuth";
 import RequireAuth from "../auth/RequireAuth";
-import ManageShoesRoute from "../routes/ManageShoesRoute";
-import AddShoesRoute from "../routes/AddShoesRoute";
-import CheckoutRoute from "../routes/CheckoutRoute";
+
+const HomeRoute = lazy(() => import("../routes/HomeRoute"));
+const CatalogRoute = lazy(() => import("../routes/CatalogRoute"));
+const AboutUsRoute = lazy(() => import("../routes/AboutUsRoute"));
+const LikedRoute = lazy(() => import("../routes/LikedRoute"));
+const ProfileRoute = lazy(() => import("../routes/ProfileRoute"));
+const ShoppingCartRoute = lazy(() => import("../routes/ShoppingCartRoute"));
+const DetailedShoesRoute = lazy(() => import("../routes/DetailedShoesRoute"));
+const SignInAndSignUpRoute = lazy(
+  () => import("../routes/SignInAndSignUpRoute"),
+);
+const ForgotPasswordRoute = lazy(() => import("../routes/ForgotPasswordRoute"));
+const ResetPasswordRoute = lazy(() => import("../routes/ResetPasswordRoute"));
+const NotFoundRoute = lazy(() => import("../routes/NotFoundRoute"));
+const SignOutRoute = lazy(() => import("../routes/SignOutRoute"));
+const ManageShoesRoute = lazy(() => import("../routes/ManageShoesRoute"));
+const AddShoesRoute = lazy(() => import("../routes/AddShoesRoute"));
+const CheckoutRoute = lazy(() => import("../routes/CheckoutRoute"));
 
 const Router = () => {
   const { authorized, userRole } = useAuth();
 
   return (
-    <Routes>
-      {!authorized() ? (
-        <Route>
-          <Route path={MAIN_ROUTE} element={<FullWidthLayout />}>
-            <Route index element={<Navigate to={HOME_ROUTE} replace />} />
-            <Route path={HOME_ROUTE} element={<HomeRoute />} />
-            <Route path={CATALOG_ROUTE} element={<CatalogRoute />} />
-            <Route
-              path={DETAILED_SHOES_ROUTE}
-              element={<DetailedShoesRoute />}
-            />
-            <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
-          </Route>
-
-          <Route path={MAIN_ROUTE} element={<AuthLayout />}>
-            <Route index element={<Navigate to={SIGN_IN_ROUTE} replace />} />
-            <Route
-              path={SIGN_IN_ROUTE}
-              element={<SignInAndSignUpRoute active="login" />}
-            />
-            <Route
-              path={SIGN_UP_ROUTE}
-              element={<SignInAndSignUpRoute active="register" />}
-            />
-            <Route
-              path={FORGOT_PASSWORD_ROUTE}
-              element={<ForgotPasswordRoute />}
-            />
-            <Route
-              path={RESET_PASSWORD_ROUTE}
-              element={<ResetPasswordRoute />}
-            />
-          </Route>
-
-          <Route
-            path={SIGN_OUT_ROUTE}
-            element={<Navigate to={SIGN_IN_ROUTE} replace />}
-          />
-          <Route path="*" element={<Navigate to={SIGN_IN_ROUTE} replace />} />
-        </Route>
-      ) : (
-        <Route element={<RequireAuth authRoute={SIGN_IN_ROUTE} />}>
-          <Route path={MAIN_ROUTE} element={<FullWidthLayout />}>
-            <Route index element={<Navigate to={HOME_ROUTE} replace />} />
-            <Route path={HOME_ROUTE} element={<HomeRoute />} />
-            <Route path={CATALOG_ROUTE} element={<CatalogRoute />} />
-            <Route
-              path={DETAILED_SHOES_ROUTE}
-              element={<DetailedShoesRoute />}
-            />
-            <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
-
-            <Route path={SHOPPING_CART_ROUTE} element={<ShoppingCartRoute />} />
-            <Route path={LIKED_ROUTE} element={<LikedRoute />} />
-            <Route path={PROFILE_ROUTE} element={<ProfileRoute />} />
-
-            {userRole === "admin" && (
-              <Route path={ADD_SHOES_ROUTE} element={<AddShoesRoute />} />
-            )}
-            {userRole === "admin" && (
+    <Suspense fallback={<CircularProgress />}>
+      <Routes>
+        {!authorized() ? (
+          <Route>
+            <Route path={MAIN_ROUTE} element={<FullWidthLayout />}>
+              <Route index element={<Navigate to={HOME_ROUTE} replace />} />
+              <Route path={HOME_ROUTE} element={<HomeRoute />} />
+              <Route path={CATALOG_ROUTE} element={<CatalogRoute />} />
               <Route
-                path={MANAGE_SHOES_DETAILS_ROUTE}
-                element={<ManageShoesRoute />}
+                path={DETAILED_SHOES_ROUTE}
+                element={<DetailedShoesRoute />}
               />
-            )}
+              <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
+            </Route>
 
-            <Route path={CHECKOUT_ROUTE} element={<CheckoutRoute />} />
+            <Route path={MAIN_ROUTE} element={<AuthLayout />}>
+              <Route index element={<Navigate to={SIGN_IN_ROUTE} replace />} />
+              <Route
+                path={SIGN_IN_ROUTE}
+                element={<SignInAndSignUpRoute active="login" />}
+              />
+              <Route
+                path={SIGN_UP_ROUTE}
+                element={<SignInAndSignUpRoute active="register" />}
+              />
+              <Route
+                path={FORGOT_PASSWORD_ROUTE}
+                element={<ForgotPasswordRoute />}
+              />
+              <Route
+                path={RESET_PASSWORD_ROUTE}
+                element={<ResetPasswordRoute />}
+              />
+            </Route>
 
-            <Route path={SIGN_OUT_ROUTE} element={<SignOutRoute />} />
-
-            <Route path={NOT_FOUND_ROUTE} element={<NotFoundRoute />} />
             <Route
-              path="*"
-              element={<Navigate to={NOT_FOUND_ROUTE} replace />}
+              path={SIGN_OUT_ROUTE}
+              element={<Navigate to={SIGN_IN_ROUTE} replace />}
             />
-            <Route path="*" element={<NotFoundRoute />} />
+            <Route path="*" element={<Navigate to={SIGN_IN_ROUTE} replace />} />
           </Route>
-        </Route>
-      )}
-    </Routes>
+        ) : (
+          <Route element={<RequireAuth authRoute={SIGN_IN_ROUTE} />}>
+            <Route path={MAIN_ROUTE} element={<FullWidthLayout />}>
+              <Route index element={<Navigate to={HOME_ROUTE} replace />} />
+              <Route path={HOME_ROUTE} element={<HomeRoute />} />
+              <Route path={CATALOG_ROUTE} element={<CatalogRoute />} />
+              <Route
+                path={DETAILED_SHOES_ROUTE}
+                element={<DetailedShoesRoute />}
+              />
+              <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
+
+              <Route
+                path={SHOPPING_CART_ROUTE}
+                element={<ShoppingCartRoute />}
+              />
+              <Route path={LIKED_ROUTE} element={<LikedRoute />} />
+              <Route path={PROFILE_ROUTE} element={<ProfileRoute />} />
+
+              {userRole === "admin" && (
+                <Route path={ADD_SHOES_ROUTE} element={<AddShoesRoute />} />
+              )}
+              {userRole === "admin" && (
+                <Route
+                  path={MANAGE_SHOES_DETAILS_ROUTE}
+                  element={<ManageShoesRoute />}
+                />
+              )}
+
+              <Route path={CHECKOUT_ROUTE} element={<CheckoutRoute />} />
+
+              <Route path={SIGN_OUT_ROUTE} element={<SignOutRoute />} />
+
+              <Route path={NOT_FOUND_ROUTE} element={<NotFoundRoute />} />
+              <Route
+                path="*"
+                element={<Navigate to={NOT_FOUND_ROUTE} replace />}
+              />
+              <Route path="*" element={<NotFoundRoute />} />
+            </Route>
+          </Route>
+        )}
+      </Routes>
+    </Suspense>
   );
 };
 
