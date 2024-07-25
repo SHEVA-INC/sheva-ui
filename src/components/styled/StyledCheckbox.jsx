@@ -1,12 +1,12 @@
 import { Checkbox } from "@mui/material";
 import CheckboxBlankIcon from "../../icons/CheckboxBlankIcon";
 
-const StyledCheckbox = ({ fill, register }) => {
+const StyledCheckbox = ({ register }) => {
   return (
     <Checkbox
       {...register}
       size="small"
-      icon={<CheckboxBlankIcon fill={fill} />}
+      icon={<CheckboxBlankIcon fill="#F3F6F9" />}
     />
   );
 };

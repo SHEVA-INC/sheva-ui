@@ -132,7 +132,7 @@ const SignUpForm = () => {
         error={!!errors?.password}
       />
       <FormControlLabel
-        control={<StyledCheckbox fill="#F3F6F9" />}
+        control={<StyledCheckbox />}
         label={
           <Typography>
             Ви погоджуєтеся з{" "}

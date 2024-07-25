@@ -15,7 +15,7 @@ const CategoryCheckboxWithAmountLeft = ({ title, categories, register }) => {
           justifyContent="space-between"
         >
           <FormControlLabel
-            control={<StyledCheckbox fill="#F3F6F9" register={register} />}
+            control={<StyledCheckbox register={register} />}
             label={
               <Typography fontWeight="bold" variant="body1">
                 {categorie.label}

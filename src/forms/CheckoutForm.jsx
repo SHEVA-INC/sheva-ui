@@ -102,7 +102,7 @@ const CheckoutForm = ({ width }) => {
   useEffect(() => {
     if (city) {
       console.log(city);
-      const getCities = async (ref) => {
+      const getWarehouses = async (ref) => {
         try {
           const response = await novaPostService.getWarehouses(ref);
           setWarehouses(response.data);
@@ -112,7 +112,7 @@ const CheckoutForm = ({ width }) => {
         }
       };
 
-      getCities(city);
+      getWarehouses(city);
     }
   }, [city]);
 
@@ -429,7 +429,7 @@ const CheckoutForm = ({ width }) => {
         </Typography>
         <Stack>
           <FormControlLabel
-            control={<StyledCheckbox fill="#F3F6F9" />}
+            control={<StyledCheckbox />}
             label={
               <Typography fontWeight="bold" variant="body1">
                 Оплатити зараз
@@ -437,7 +437,7 @@ const CheckoutForm = ({ width }) => {
             }
           />
           <FormControlLabel
-            control={<StyledCheckbox fill="#F3F6F9" />}
+            control={<StyledCheckbox />}
             label={
               <Typography fontWeight="bold" variant="body1">
                 Оплатити при отриманні
