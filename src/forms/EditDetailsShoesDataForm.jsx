@@ -1,6 +1,13 @@
 import { useForm } from "react-hook-form";
 import StyledForm from "../components/styled/StyledForm";
-import { Button, IconButton, MenuItem, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  FormControlLabel,
+  IconButton,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import shoesService from "../services/ShoesService";
 import { useEffect, useState } from "react";
 import StyledFormControlWithTextField from "../components/styled/StyledFormControlWithTextField";
@@ -9,6 +16,7 @@ import shoesTypes from "../enums/shoesTypes";
 import shoesBrands from "../enums/shoesBrands";
 import DeleteIcon from "../icons/DeleteIcon";
 import shoesColors from "../enums/shoesColors";
+import StyledCheckbox from "../components/styled/StyledCheckbox";
 
 const EditDetailsShoesDataForm = ({ shoesId }) => {
   const [shoesDetails, setShoesDetails] = useState(null);
@@ -87,7 +95,11 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)} boxShadow="none">
+    <StyledForm
+      onSubmit={handleSubmit(onSubmit)}
+      boxShadow="none"
+      alignItems="flex-start"
+    >
       <StyledFormControlWithTextField
         title="Назва"
         htmlFor="name"
@@ -223,7 +235,32 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
           Додати Розмір
         </Button>
       </Stack>
-      <Button variant="contained" size="large" type="submit">
+
+      <Stack>
+        <FormControlLabel
+          control={<StyledCheckbox register={{ ...register("new") }} />}
+          label={
+            <Typography fontWeight="bold" variant="body1">
+              Нове
+            </Typography>
+          }
+        />
+        <FormControlLabel
+          control={<StyledCheckbox register={{ ...register("popular") }} />}
+          label={
+            <Typography fontWeight="bold" variant="body1">
+              Популярне
+            </Typography>
+          }
+        />
+      </Stack>
+
+      <Button
+        variant="contained"
+        size="large"
+        type="submit"
+        sx={{ alignSelf: "flex-start" }}
+      >
         <Typography variant="body2" textTransform="uppercase" fontWeight="bold">
           Зберегти
         </Typography>
