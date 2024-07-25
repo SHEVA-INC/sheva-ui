@@ -1,22 +1,30 @@
 import { SvgIcon } from "@mui/material";
 
-const ArrowIcon = ({ color, fontSize, opacity, padding, ...props }) => (
+const ArrowIcon = ({
+  color = "#51379B",
+  fontSize,
+  opacity,
+  padding,
+  ...props
+}) => (
   <SvgIcon
     fontSize={fontSize}
-    viewBox="0 0 20 20"
+    viewBox="0 0 24 24"
     sx={{ opacity: opacity, p: padding }}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={20}
-      height={20}
+      width={24}
+      height={24}
       fill="none"
       {...props}
     >
       <path
         stroke={color}
-        strokeWidth={1.2}
-        d="M3.125 10h13.75M11.25 4.375 16.875 10l-5.625 5.625"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M3.75 12h16.5M13.5 5.25 20.25 12l-6.75 6.75"
       />
     </svg>
   </SvgIcon>

@@ -1,6 +1,7 @@
-import { Pagination, PaginationItem, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import ReviewItem from "./ReviewItem";
 import reviewService from "../../services/ReviewService";
+import StyledPagination from "../styled/StyledPagination";
 
 const ReviewsList = ({
   id,
@@ -37,12 +38,10 @@ const ReviewsList = ({
         />
       ))}
       {reviewsData.length > 0 && (
-        <Pagination
-          size="large"
-          count={totalPages}
-          page={pageNumber}
-          onChange={handlePageNumberChange}
-          renderItem={(item) => <PaginationItem {...item} />}
+        <StyledPagination
+          totalPages={totalPages}
+          pageNumber={pageNumber}
+          onPageNumberChange={handlePageNumberChange}
           sx={{ alignSelf: "center" }}
         />
       )}

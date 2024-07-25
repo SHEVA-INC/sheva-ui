@@ -1,5 +1,6 @@
-import { Pagination, PaginationItem, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import ShoesItem from "./ShoesItem";
+import StyledPagination from "../styled/StyledPagination";
 
 const ShoesList = ({
   order,
@@ -33,12 +34,10 @@ const ShoesList = ({
         />
       ))}
       {shoesList.length > 0 && (
-        <Pagination
-          size="large"
-          count={totalPages}
-          page={pageNumber}
-          onChange={handlePageNumberChange}
-          renderItem={(item) => <PaginationItem {...item} />}
+        <StyledPagination
+          totalPages={totalPages}
+          pageNumber={pageNumber}
+          onPageNumberChange={handlePageNumberChange}
         />
       )}
     </Stack>
