@@ -1,4 +1,7 @@
 import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
+import "@qpokychuk/gilroy/index.css";
+import "@qpokychuk/gilroy/normal.css";
+import "@qpokychuk/gilroy/italic.css";
 
 let theme = createTheme({
   palette: {
@@ -14,7 +17,7 @@ let theme = createTheme({
     thirdly: { main: "#ffffff" },
   },
   typography: {
-    fontFamily: "Gilroy-Regular",
+    fontFamily: "Gilroy",
   },
   spacing: 4,
   shape: {
