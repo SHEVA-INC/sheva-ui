@@ -1,14 +1,6 @@
 import { Stack, Typography, Box } from "@mui/material";
 import ShoesImageMain from "../assets/shoes/shoes-image-1.png";
-import DoubleCheckIcon from "../icons/DoubleCheckIcon";
 import StyledTitle from "../components/styled/StyledTitle";
-
-const items = [
-  "Corem ipsum dolor sit amet",
-  "Worem ipsum dolor sit amet",
-  "Gorem ipsum dolor sit amet",
-  "Borem ipsum dolor sit amet",
-];
 
 const GetToKnowBlock = () => {
   return (
@@ -18,18 +10,15 @@ const GetToKnowBlock = () => {
       alignItems="center"
     >
       <Stack gap={6}>
-        <StyledTitle title="YOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT." />
+        <StyledTitle title="Sheva-shop: Ваш надійний партнер у світі спортивного взуття" />
         <Typography>
-          Forem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-          turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec
-          fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus
-          elit sed risus. Maecenas eget condimentum velit, sit amet feugiat
-          lectus. Class aptent taciti sociosqu ad litora torquent per conubia
-          nostra, per inceptos himenaeos. Praesent auctor purus luctus enim
-          egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
-          Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
-          lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
-          elementum tellus.
+          Ласкаво просимо на наш сайт! Ми молода команда, яка з 2023 року працює
+          у сфері продажу футбольного взуття. Наша місія — забезпечити доступ до
+          сучасних моделей реплік відомих брендів, таких як Найк, Адідас та
+          Пума. У нас ви знайдете широкий вибір взуття, що відповідає останнім
+          трендам і вимогам якості. Приєднуйтесь до нашої спільноти любителів
+          футболу та знайдіть ідеальну пару футбольного взуття для своїх
+          спортивних досягнень та стилю!
         </Typography>
         <Stack
           flexDirection="row"
@@ -38,14 +27,6 @@ const GetToKnowBlock = () => {
           width={1}
           gap={2}
         >
-          <Stack gap={3}>
-            {items.map((item, idx) => (
-              <Stack key={idx} flexDirection="row" gap={2} alignItems="center">
-                <DoubleCheckIcon />
-                <Typography>{item}</Typography>
-              </Stack>
-            ))}
-          </Stack>
           <Box
             component="img"
             src={ShoesImageMain}

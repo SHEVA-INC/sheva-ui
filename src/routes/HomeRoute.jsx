@@ -1,11 +1,10 @@
 import { Button, Stack, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ShoesCarousel from "../components/shoes-carousel/ShoesCarousel";
 import GradientShoesBlock from "../components/GradientShoesBlock";
 import NumbersBlock from "../components/NumbersBlock";
 import ShoesSmallList from "../components/shoes-small/ShoesSmallList";
 import HomeMainBlock from "../components/HomeMainBlock";
-import { Link } from "react-router-dom";
 import { CATALOG_ROUTE } from "../app/Routes";
 import StyledStackForRoutes from "../components/styled/StyledStackForRoutes";
 import ShoesAdItem from "../components/ShoesAdItem";
@@ -17,6 +16,9 @@ import AddReviewForm from "../forms/AddReviewForm";
 import StyledTitle from "../components/styled/StyledTitle";
 import useAuth from "../auth/useAuth";
 import shoesService from "../services/ShoesService";
+import ShoesSmallData1 from "../components/shoes-small/ShoesSmallData1";
+import ShoesSmallData2 from "../components/shoes-small/ShoesSmallData2";
+import ShoesSmallData3 from "../components/shoes-small/ShoesSmallData3";
 
 const HomeRoute = () => {
   const [reviewsList, setReviewsList] = useState([]);
@@ -35,9 +37,6 @@ const HomeRoute = () => {
         setReviewsList(response.results);
         setTotalPages(response.total_pages);
         setPageNumber(response.current_page);
-
-        setIsReviewDeleted(false);
-        setIsReviewAdded(false);
       } catch (error) {
         console.error("Error fetching shoes list:", error);
       }
@@ -83,6 +82,12 @@ const HomeRoute = () => {
     getPopularShoes();
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleNavigateToCatalogRouteClick = () => {
+    navigate(CATALOG_ROUTE);
+  };
+
   return (
     <Stack width={1} alignItems="center">
       <HomeMainBlock />
@@ -124,25 +129,36 @@ const HomeRoute = () => {
             gap={6}
             alignItems="center"
           >
-            <ShoesSmallList title="Flash sale today" />
+            <ShoesSmallList
+              title="Flash sale today"
+              shoesSmallData={ShoesSmallData1}
+            />{" "}
             <ShoesAdItem
               name="Nike Air Max"
               text="Get Amazing & Great Nike Shoes"
               image={ShoesAd}
               display={{ xs: "flex", md: "none" }}
             />
-            <ShoesSmallList title="Best sellers" />
+            <ShoesSmallList
+              title="Best sellers"
+              shoesSmallData={ShoesSmallData2}
+            />
             <ShoesAdItem
               name="Nike Air Max"
               text="Get Amazing & Great Nike Shoes"
               image={ShoesAd}
               display={{ xs: "flex", md: "none" }}
             />
-            <ShoesSmallList title="Top Rated" />
+            <ShoesSmallList
+              title="Top Rated"
+              shoesSmallData={ShoesSmallData3}
+            />
           </Stack>
         </Stack>
       </StyledStackForRoutes>
+
       <GradientShoesBlock />
+
       <StyledStackForRoutes>
         <ShoesCarousel
           title="Популярне"
@@ -150,49 +166,48 @@ const HomeRoute = () => {
           shoesCarouselData={popularShoes}
         />
 
-        <Link
-          component={RouterLink}
-          to={CATALOG_ROUTE}
-          style={{ alignSelf: "center" }}
+        <Button
+          variant="contained"
+          size="large"
+          color="secondary"
+          sx={{ textTransform: "uppercase", alignSelf: "center" }}
+          onClick={handleNavigateToCatalogRouteClick}
         >
-          <Button
-            variant="contained"
-            size="large"
-            color="secondary"
-            sx={{ textTransform: "uppercase" }}
-          >
-            <Typography fontWeight="bold" variant="h5" p={1}>
-              Перейти до каталогу
-            </Typography>
-          </Button>
-        </Link>
-        <Stack id="reviews" gap={6}>
-          <StyledTitle title="Відгуки" />
-          {authorized() && (
-            <>
-              {addReview ? (
-                <AddReviewForm setIsReviewAdded={setIsReviewAdded} />
-              ) : (
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="primary"
-                  onClick={handleAddReviewClick}
-                >
-                  Додати відгук
-                </Button>
+          <Typography fontWeight="bold" variant="h5" p={1}>
+            Перейти до каталогу
+          </Typography>
+        </Button>
+        {reviewsList?.length > 0 && (
+          <>
+            <Stack id="reviews" gap={6}>
+              <StyledTitle title="Відгуки" />
+              {authorized() && (
+                <>
+                  {addReview ? (
+                    <AddReviewForm setIsReviewAdded={setIsReviewAdded} />
+                  ) : (
+                    <Button
+                      variant="contained"
+                      size="large"
+                      color="primary"
+                      onClick={handleAddReviewClick}
+                    >
+                      Додати відгук
+                    </Button>
+                  )}
+                </>
               )}
-            </>
-          )}
-        </Stack>
-        <ReviewsList
-          reviewsAmount="3,126"
-          reviewsData={reviewsList}
-          setIsReviewDeleted={setIsReviewDeleted}
-          totalPages={totalPages}
-          pageNumber={pageNumber}
-          handlePageNumberChange={handlePageNumberChange}
-        />
+            </Stack>
+            <ReviewsList
+              reviewsAmount="3,126"
+              reviewsData={reviewsList}
+              setIsReviewDeleted={setIsReviewDeleted}
+              totalPages={totalPages}
+              pageNumber={pageNumber}
+              handlePageNumberChange={handlePageNumberChange}
+            />
+          </>
+        )}
       </StyledStackForRoutes>
     </Stack>
   );

@@ -11,13 +11,13 @@ import EmailIcon from "../icons/contacts/EmailIcon";
 const socials = [
   {
     socialName: "Tik Tok",
-    linkTo: "#",
+    linkTo: "https://www.tiktok.com/@sheva24_7?_t=8oHnekqNboE&_r=1",
     icon: <TikTokIcon color="white" fontSize="medium" />,
     socialId: 0,
   },
   {
     socialName: "Instagram",
-    linkTo: "#",
+    linkTo: "https://www.instagram.com/sheva.lviv",
     icon: <InstagramIcon color="white" fontSize="medium" />,
     socialId: 1,
   },
@@ -29,7 +29,7 @@ const socials = [
   },
   {
     socialName: "Prom",
-    linkTo: "#",
+    linkTo: "https://sheva.prom.ua/ua/",
     icon: <PromIcon color="white" fontSize="medium" />,
     socialId: 3,
   },
@@ -37,13 +37,13 @@ const socials = [
 
 const contacts = [
   {
-    contactInfo: "+(380) 68 346 12 13",
-    contactInfoAdditional: "+(380) 68 346 12 13",
+    contactInfo: "380 93 757 57 94",
+    contactInfoAdditional: "380 93 095 34 52",
     icon: <PhoneIcon color="white" fontSize="medium" />,
     contactId: 0,
   },
   {
-    contactInfo: "sheva.boots@gmail.com",
+    contactInfo: "sheva.shop.new@gmail.com",
     icon: <EmailIcon color="white" fontSize="medium" />,
     contactId: 1,
   },

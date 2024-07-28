@@ -199,8 +199,8 @@ const HomeMainBlock = () => {
                   Lorem ipsum dolor
                 </Typography>
                 <Typography variant="caption" color="primary.contrastText">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                  vulputate libero et velit interdum.
+                  Ці бутси створені для тих, хто прагне досконалості на полі.
+                  Відчуйте легкість, маневреність і впевненість у кожному русі.
                 </Typography>
               </Stack>
             </Stack>
@@ -210,10 +210,9 @@ const HomeMainBlock = () => {
               alignItems={{ xs: "center", md: "flex-start" }}
             >
               <Typography color="primary.contrastText" variant="p">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.
-                Class aptent taciti sociosqu ad litora torquent per conubia
-                nostra, per inceptos himenaeos.
+                Забезпечте собі перевагу на полі з бутсами Nike Air Zoom
+                Mercurial Vapor 15 FG. Розроблені для максимальної швидкості та
+                маневреності, вони допоможуть вам перевершити всіх суперників.
               </Typography>
               <Button
                 variant="contained"

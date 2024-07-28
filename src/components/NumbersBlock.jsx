@@ -3,18 +3,18 @@ import { Stack, Typography } from "@mui/material";
 const numbers = [
   {
     id: 1,
-    number: 1068,
+    number: "4000+",
     text: "Задоволених покупців!",
   },
   {
     id: 2,
-    number: 1068,
-    text: "Задоволених покупців!",
+    number: "500+",
+    text: "Відгуків!",
   },
   {
     id: 3,
-    number: 1068,
-    text: "Задоволених покупців!",
+    number: "1500+",
+    text: "Пар в наявності!",
   },
 ];
 
@@ -35,7 +35,7 @@ const NumbersBlock = () => {
         py={{ xs: 2, md: 22 }}
       >
         {numbers.map((numberItem) => (
-          <Stack key={numberItem.id}>
+          <Stack key={numberItem.id} alignItems="center">
             <Typography color="thirdly.main" fontWeight="bold" variant="h1">
               {numberItem.number}
             </Typography>
