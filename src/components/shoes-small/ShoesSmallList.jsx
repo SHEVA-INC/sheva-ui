@@ -13,7 +13,6 @@ const ShoesSmallList = ({ title }) => {
           imageSrc={shoesSmallItem.image}
           name={shoesSmallItem.name}
           description={shoesSmallItem.description}
-          price={shoesSmallItem.price}
         />
       ))}
     </Stack>

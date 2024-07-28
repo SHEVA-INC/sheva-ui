@@ -30,8 +30,8 @@ const ShoesDetailsImageSlider = ({ images, mainImage, setMainImage }) => {
         alt="Main"
         style={{
           width: "100%",
-          height: "300px",
-          maxHeight: "400px",
+          // height: "300px",
+          // maxHeight: "400px",
           objectFit: "cover",
         }}
         onClick={() => setMainImage(mainImage)}

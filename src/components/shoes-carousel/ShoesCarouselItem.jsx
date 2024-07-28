@@ -9,7 +9,6 @@ const ShoesCarouselItem = ({ name, brand, price, mainImage, onClick }) => {
         alt={name}
         style={{
           width: "100%",
-          height: "400px",
           objectFit: "cover",
         }}
       />
@@ -17,15 +16,14 @@ const ShoesCarouselItem = ({ name, brand, price, mainImage, onClick }) => {
         flexDirection="row"
         justifyContent="space-between"
         alignItems="center"
+        gap={5}
       >
         <Stack>
-          <Typography variant="h6" fontWeight="bold">
+          <Typography variant="h6">
             {upperCaseFirstLetter(brand)} {name}
           </Typography>
         </Stack>
-        <Typography variant="h5" fontWeight="bold">
-          {price}
-        </Typography>
+        <Typography variant="h6">{price}</Typography>
       </Stack>
     </Stack>
   );

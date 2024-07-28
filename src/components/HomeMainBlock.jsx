@@ -16,7 +16,7 @@ const HomeMainBlock = () => {
     <Box
       position="relative"
       width="100%"
-      height={`calc(100vh - ${headerHeight}px)`}
+      height={`calc(100lvh - ${headerHeight}px)`}
       display="flex"
     >
       <Stack
@@ -87,7 +87,7 @@ const HomeMainBlock = () => {
         <Typography
           color="primary.contrastText"
           textAlign="center"
-          variant="body2"
+          variant="caption"
         >
           Mercurial Vapor XV Elite FG
         </Typography>
@@ -130,6 +130,7 @@ const HomeMainBlock = () => {
                 textAlign="start"
                 color="primary.contrastText"
                 variant="h6"
+                display={{ xs: "none", md: "block" }}
               >
                 Nike Air Zoom
               </Typography>
@@ -146,7 +147,6 @@ const HomeMainBlock = () => {
                 src={MainShoesLanding}
                 alt="Main Shoes"
                 maxWidth="50%"
-                height="max-content"
               />
             </Stack>
             <Stack zIndex={7} position="absolute" width={1} maxWidth="lg">
@@ -155,6 +155,7 @@ const HomeMainBlock = () => {
                 textAlign="end"
                 color="primary.contrastText"
                 variant="h6"
+                display={{ xs: "none", md: "block" }}
               >
                 Mercurial Vapor XV Elite FG
               </Typography>
@@ -188,7 +189,6 @@ const HomeMainBlock = () => {
                 src={NikeAirZoom}
                 alt="Nike air zoom"
                 width={0.4}
-                height="max-content"
               />
               <Stack gap={2}>
                 <Typography
@@ -198,7 +198,7 @@ const HomeMainBlock = () => {
                 >
                   Lorem ipsum dolor
                 </Typography>
-                <Typography variant="body2" color="primary.contrastText">
+                <Typography variant="caption" color="primary.contrastText">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
                   vulputate libero et velit interdum.
                 </Typography>

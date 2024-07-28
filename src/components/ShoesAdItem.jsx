@@ -19,13 +19,7 @@ const ShoesAdItem = ({ name, text, image, display }) => {
         </Typography>
         <Typography color="#0BB783">{text}</Typography>
       </Stack>
-      <Box
-        component="img"
-        src={image}
-        alt={name}
-        height="max-content"
-        width={0.4}
-      />
+      <Box component="img" src={image} alt={name} width={0.4} />
     </Stack>
   );
 };
