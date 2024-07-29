@@ -15,13 +15,15 @@ const ReviewItem = ({
   date,
   onDelete,
 }) => {
-  const { userId } = useAuth();
+  const { userId, userRole } = useAuth();
 
-  const [showDeleteButton, setShowDeleteButton] = useState(usrId === userId);
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
 
   useEffect(() => {
-    setShowDeleteButton(true);
-  }, [userId]);
+    if (userId === usrId || userRole === "admin") {
+      setShowDeleteButton(true);
+    }
+  }, [usrId, userId, userRole]);
 
   return (
     <Stack id={id} borderTop={1} borderBottom={1} width={1} py={6}>
