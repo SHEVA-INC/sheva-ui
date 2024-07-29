@@ -177,27 +177,25 @@ const HomeRoute = () => {
             Перейти до каталогу
           </Typography>
         </Button>
-        {reviewsList?.length > 0 && (
-          <>
-            <Stack id="reviews" gap={6}>
-              <StyledTitle title="Відгуки" />
-              {authorized() && (
-                <>
-                  {addReview ? (
-                    <AddReviewForm setIsReviewAdded={setIsReviewAdded} />
-                  ) : (
-                    <Button
-                      variant="contained"
-                      size="large"
-                      color="primary"
-                      onClick={handleAddReviewClick}
-                    >
-                      Додати відгук
-                    </Button>
-                  )}
-                </>
+        <Stack id="reviews" gap={6}>
+          <StyledTitle title="Відгуки" />
+          {authorized() && (
+            <>
+              {addReview ? (
+                <AddReviewForm setIsReviewAdded={setIsReviewAdded} />
+              ) : (
+                <Button
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                  onClick={handleAddReviewClick}
+                >
+                  Додати відгук
+                </Button>
               )}
-            </Stack>
+            </>
+          )}
+          {reviewsList?.length > 0 && (
             <ReviewsList
               reviewsAmount="3,126"
               reviewsData={reviewsList}
@@ -206,8 +204,8 @@ const HomeRoute = () => {
               pageNumber={pageNumber}
               handlePageNumberChange={handlePageNumberChange}
             />
-          </>
-        )}
+          )}
+        </Stack>
       </StyledStackForRoutes>
     </Stack>
   );
