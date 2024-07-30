@@ -114,7 +114,7 @@ const ShoesDetails = () => {
             <StyledFormControlWithSelect
               title="Розмір"
               selectId="size-select"
-              value={shoesDetails.sizes[0].size}
+              defaultValue={shoesDetails.sizes[0].size}
               formControlSize="small"
               onClick={(e) => {
                 e.stopPropagation();
