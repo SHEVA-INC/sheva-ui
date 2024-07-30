@@ -1,15 +1,15 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import shoppingCartService from "../services/ShoppingCartService";
+import useAuth from "../auth/useAuth";
 
-const shoppingCartContext = createContext();
-
-export const ShoppingCartProvider = ({ children }) => {
+const useShoppingCart = () => {
   const [shoppingCartList, setShoppingCartList] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isItemRemoved, setIsItemRemoved] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const { authorized } = useAuth();
 
   useEffect(() => {
     const getCartList = async (pageNum) => {
@@ -20,13 +20,12 @@ export const ShoppingCartProvider = ({ children }) => {
         setPageNumber(response.results.current_page);
         setTotalPrice(response.results.total_price);
       } catch (error) {
-        console.error("Error fetching shoes list:", error);
+        console.error("Error fetching cart list:", error);
       }
     };
 
-    // getCartList(pageNumber);
-    getCartList(pageNumber);
-  }, [pageNumber, isItemRemoved, isAddedToCart]);
+    if (authorized()) getCartList(pageNumber);
+  }, [authorized, pageNumber, isItemRemoved, isAddedToCart]);
 
   const handlePageNumberChange = (event, value) => {
     setPageNumber(value);
@@ -40,23 +39,15 @@ export const ShoppingCartProvider = ({ children }) => {
     setIsAddedToCart((prev) => !prev);
   };
 
-  return (
-    <shoppingCartContext.Provider
-      value={{
-        shoppingCartList,
-        totalPages,
-        pageNumber,
-        totalPrice,
-        handlePageNumberChange,
-        handleItemRemove,
-        handleItemAdd,
-      }}
-    >
-      {children}
-    </shoppingCartContext.Provider>
-  );
+  return {
+    shoppingCartList,
+    totalPages,
+    pageNumber,
+    totalPrice,
+    handlePageNumberChange,
+    handleItemRemove,
+    handleItemAdd,
+  };
 };
 
-export default function useShoppingCart() {
-  return useContext(shoppingCartContext);
-}
+export default useShoppingCart;
