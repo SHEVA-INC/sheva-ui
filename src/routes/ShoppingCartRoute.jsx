@@ -21,7 +21,23 @@ const ShoppingCartRoute = () => {
     <StyledStackForRoutes>
       <StyledTitle title="Корзина" />
       <Stack flexDirection={{ xs: "column", md: "row" }} gap={6} flex={1}>
-        {shoppingCartList?.length === 0 ? (
+        {shoppingCartList?.length > 0 ? (
+          <Stack flexDirection="row" gap={6} width={1}>
+            <OrderList
+              width={0.7}
+              orders={shoppingCartList}
+              totalPages={totalPages}
+              pageNumber={pageNumber}
+              handlePageNumberChange={handlePageNumberChange}
+              handleItemRemove={handleItemRemove}
+            />
+            <ShoppingCartTotal
+              width={0.3}
+              shoppingCartList={shoppingCartList}
+              totalPrice={totalPrice}
+            />
+          </Stack>
+        ) : (
           <Stack
             width={1}
             minHeight={1}
@@ -40,22 +56,6 @@ const ShoppingCartRoute = () => {
             >
               Каталог
             </Link>
-          </Stack>
-        ) : (
-          <Stack flexDirection="row" gap={6} width={1}>
-            <OrderList
-              width={0.7}
-              orders={shoppingCartList}
-              totalPages={totalPages}
-              pageNumber={pageNumber}
-              handlePageNumberChange={handlePageNumberChange}
-              handleItemRemove={handleItemRemove}
-            />
-            <ShoppingCartTotal
-              width={0.3}
-              shoppingCartList={shoppingCartList}
-              totalPrice={totalPrice}
-            />
           </Stack>
         )}
       </Stack>
