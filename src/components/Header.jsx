@@ -1,20 +1,27 @@
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import SHEVA from "../../src/assets/SHEVA.svg";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { useState } from "react";
 import {
+  AppBar,
+  Toolbar,
   IconButton,
   Link,
   Menu,
   MenuItem,
   Stack,
   Typography,
-  List,
-  ListItem,
-  ListItemButton,
   Drawer,
   Box,
+  Button,
 } from "@mui/material";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import ShoppingCartIcon from "../icons/shopping/ShoppingCartIcon";
+import LikeIcon from "../icons/shopping/LikeIcon";
+import PersonIcon from "../icons/shopping/PersonIcon";
+import MenuIcon from "../icons/MenuIcon";
+import SignOutIcon from "../icons/SignOutIcon";
+import useHeaderHeight from "../custom-hooks/useHeaderHeight";
+import useScrollToHash from "../custom-hooks/useScrollToHash";
+import SHEVA from "../../src/assets/SHEVA.svg";
 import {
   ABOUT_US_ROUTE,
   CATALOG_ROUTE,
@@ -22,19 +29,12 @@ import {
   LIKED_ROUTE,
   PROFILE_ROUTE,
   SHOPPING_CART_ROUTE,
+  SIGN_IN_ROUTE,
   SIGN_OUT_ROUTE,
 } from "../app/Routes";
-import ShoppingCartIcon from "../icons/shopping/ShoppingCartIcon";
-import LikeIcon from "../icons/shopping/LikeIcon";
-import PersonIcon from "../icons/shopping/PersonIcon";
-import useHeaderHeight from "../custom-hooks/useHeaderHeight";
-import { useState } from "react";
-import MenuIcon from "../icons/MenuIcon";
-import SignOutIcon from "../icons/SignOutIcon";
-import { HashLink } from "react-router-hash-link";
-import useScrollToHash from "../custom-hooks/useScrollToHash";
+import useAuth from "../auth/useAuth";
 
-const mainRoutes = [
+const defaultRoutes = [
   { routeId: 0, routeName: "Каталог", linkTo: CATALOG_ROUTE },
   { routeId: 1, routeName: "Новинки", linkTo: HOME_ROUTE, id: "new-items" },
   { routeId: 2, routeName: "Популярне", linkTo: HOME_ROUTE, id: "popular" },
@@ -42,16 +42,18 @@ const mainRoutes = [
   { routeId: 4, routeName: "Про нас", linkTo: ABOUT_US_ROUTE },
 ];
 
-const iconRoutes = [
+const authenticatedRoutes = [
   {
     routeId: 5,
-    icon: <ShoppingCartIcon color="white" fontSize="medium" />,
-    linkTo: SHOPPING_CART_ROUTE,
+    routeName: "Вподобане",
+    icon: <LikeIcon color="white" fontSize="medium" />,
+    linkTo: LIKED_ROUTE,
   },
   {
     routeId: 6,
-    icon: <LikeIcon color="white" fontSize="medium" />,
-    linkTo: LIKED_ROUTE,
+    routeName: "Корзина",
+    icon: <ShoppingCartIcon color="white" fontSize="medium" />,
+    linkTo: SHOPPING_CART_ROUTE,
   },
   {
     routeId: 7,
@@ -60,38 +62,30 @@ const iconRoutes = [
   },
 ];
 
+const filteredAuthenticatedRoutesForDrawer = authenticatedRoutes.filter(
+  (route) => route.linkTo !== "#",
+);
+
 const settingsRoutes = [
-  { routeId: 11, routeName: "Налаштування", linkTo: PROFILE_ROUTE },
+  { routeId: 8, routeName: "Налаштування", linkTo: PROFILE_ROUTE },
   {
-    routeId: 12,
+    routeId: 9,
     routeName: "Вийти",
     linkTo: SIGN_OUT_ROUTE,
     icon: <SignOutIcon color="black" fontSize="medium" />,
   },
 ];
 
-const routesForDrawer = [
-  ...mainRoutes,
-  {
-    routeId: 8,
-    routeName: "Корзина",
-    linkTo: SHOPPING_CART_ROUTE,
-  },
-  {
-    routeId: 9,
-    routeName: "Вподобане",
-    linkTo: LIKED_ROUTE,
-  },
-  ...settingsRoutes,
-];
-
 const Header = () => {
   const { hash } = useLocation();
   const headerHeight = useHeaderHeight();
-
   useScrollToHash(hash, headerHeight);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const { authorized } = useAuth();
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -101,41 +95,101 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
-  const [mobileOpen, setMobileOpen] = useState(false);
-
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const drawer = (
-    <Stack onClick={handleDrawerToggle}>
-      <List sx={{ py: 5 }}>
-        {routesForDrawer.map((route) => (
-          <ListItem key={route.routeId} disablePadding>
-            <ListItemButton sx={{ p: 3 }}>
-              <Link
-                to={route.linkTo}
-                component={RouterLink}
-                underline="none"
-                px={6}
-                py={1}
-                minWidth={1}
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="flex-end"
-                gap={4}
-              >
-                {route.icon}
+  const handleNavigateToSignInRoute = () => {
+    navigate(SIGN_IN_ROUTE);
+  };
 
-                <Typography variant="h6" fontWeight="bold">
-                  {route.routeName}
-                </Typography>
-              </Link>
-            </ListItemButton>
-          </ListItem>
+  const handleLinkClick = (event, route) => {
+    event.preventDefault();
+
+    setTimeout(() => {
+      navigate(route);
+      setMobileOpen(false);
+    }, 100);
+  };
+
+  const drawer = (
+    <Stack>
+      <Stack>
+        {defaultRoutes.map((route) => (
+          <Stack key={route.routeId}>
+            <Link
+              component={route.id ? HashLink : RouterLink}
+              underline="none"
+              px={6}
+              py={4}
+              minWidth={1}
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="flex-end"
+              gap={4}
+              onClick={(e) =>
+                handleLinkClick(
+                  e,
+                  route.id ? `${route.linkTo}#${route.id}` : route.linkTo,
+                )
+              }
+            >
+              {route.icon}
+              <Typography variant="h6" fontWeight="bold">
+                {route.routeName}
+              </Typography>
+            </Link>
+          </Stack>
         ))}
-      </List>
+        {authorized() &&
+          [...filteredAuthenticatedRoutesForDrawer, ...settingsRoutes].map(
+            (route) => (
+              <Stack key={route.routeId}>
+                <Link
+                  component={RouterLink}
+                  to={route.linkTo}
+                  underline="none"
+                  px={6}
+                  py={4}
+                  minWidth={1}
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  justifyContent="flex-end"
+                  gap={4}
+                  onClick={(e) => handleLinkClick(e, route.linkTo)}
+                >
+                  <Typography variant="h6" fontWeight="bold">
+                    {route.routeName}
+                  </Typography>
+                </Link>
+              </Stack>
+            ),
+          )}
+        {!authorized() && (
+          <Stack disablePadding>
+            <Link
+              component={RouterLink}
+              to={SIGN_IN_ROUTE}
+              underline="none"
+              px={6}
+              py={4}
+              minWidth={1}
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="flex-end"
+              gap={4}
+              onClick={(e) => handleLinkClick(e, SIGN_IN_ROUTE)}
+            >
+              <Typography variant="h6" fontWeight="bold">
+                Увійти
+              </Typography>
+            </Link>
+          </Stack>
+        )}
+      </Stack>
     </Stack>
   );
 
@@ -187,7 +241,7 @@ const Header = () => {
             flex={1}
             display={{ xs: "none", md: "flex" }}
           >
-            {mainRoutes.map((route) => (
+            {defaultRoutes.map((route) => (
               <Link
                 key={route.routeId}
                 to={route.id ? `${route.linkTo}#${route.id}` : route.linkTo}
@@ -210,19 +264,38 @@ const Header = () => {
             gap={4}
             display={{ xs: "none", md: "flex" }}
           >
-            {iconRoutes.map((iconRoute) => (
-              <Link
-                key={iconRoute.routeId}
-                component={RouterLink}
-                to={iconRoute.linkTo}
+            {!authorized() ? (
+              <Button
+                variant="outlined"
+                color="thirdly"
+                onClick={handleNavigateToSignInRoute}
               >
-                <IconButton
-                  onClick={iconRoute.routeId === 7 ? handleOpenUserMenu : null}
-                >
-                  {iconRoute.icon}
-                </IconButton>
-              </Link>
-            ))}
+                <Typography variant="h6" color="thirdly">
+                  Увійти
+                </Typography>
+              </Button>
+            ) : (
+              <>
+                {authenticatedRoutes.map((authenticatedRoute) => (
+                  <Link
+                    key={authenticatedRoute.routeId}
+                    component={RouterLink}
+                    to={authenticatedRoute.linkTo}
+                  >
+                    <IconButton
+                      onClick={
+                        authenticatedRoute.linkTo === "#"
+                          ? handleOpenUserMenu
+                          : handleDrawerToggle
+                      }
+                    >
+                      {authenticatedRoute.icon}
+                    </IconButton>
+                  </Link>
+                ))}
+              </>
+            )}
+
             <Menu
               sx={{ mt: "35px" }}
               id="menu-appbar"
