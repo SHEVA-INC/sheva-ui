@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Stack } from "@mui/material";
 
 import FullWidthLayout from "../layouts/FullWidthLayout";
 import AuthLayout from "../layouts/AuthLayout";
@@ -48,7 +48,13 @@ const Router = () => {
   const { authorized, userRole } = useAuth();
 
   return (
-    <Suspense fallback={<CircularProgress />}>
+    <Suspense
+      fallback={
+        <Stack height="100vh" justifyContent="center" alignItems="center">
+          <CircularProgress size="8rem" />
+        </Stack>
+      }
+    >
       <Routes>
         {!authorized() ? (
           <Route>
