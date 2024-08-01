@@ -1,6 +1,6 @@
 import { Button, Stack, Typography } from "@mui/material";
 
-const ItemCounter = ({ countValue, setCountValue, size }) => {
+const ItemCounter = ({ countValue, setCountValue, size, disabled }) => {
   const decrement = (e) => {
     e.stopPropagation();
     setCountValue((c) => c - 1);
@@ -18,7 +18,7 @@ const ItemCounter = ({ countValue, setCountValue, size }) => {
         variant="outlined"
         color="secondary"
         size={size}
-        disabled={countValue === 1}
+        disabled={countValue === 1 || disabled}
         sx={{
           minWidth: "28px",
           minHeight: "28px",
@@ -40,6 +40,7 @@ const ItemCounter = ({ countValue, setCountValue, size }) => {
           minHeight: "28px",
           p: "0px",
         }}
+        disabled={disabled}
       >
         +
       </Button>

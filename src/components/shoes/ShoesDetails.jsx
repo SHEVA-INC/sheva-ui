@@ -12,6 +12,7 @@ import { MANAGE_SHOES_DETAILS_ROUTE } from "../../app/Routes";
 import AddShoesToShoppingCartForm from "../../forms/AddShoesToShoppingCartForm";
 import shoppingCartService from "../../services/ShoppingCartService";
 import { useForm } from "react-hook-form";
+import useShoppingCart from "../../custom-hooks/useShoppingCart";
 
 const ShoesDetails = () => {
   const [shoesDetails, setShoesDetails] = useState(null);
@@ -22,23 +23,42 @@ const ShoesDetails = () => {
   const { userRole } = useAuth();
   const navigate = useNavigate();
 
+  const { register, handleSubmit, watch, setValue } = useForm({
+    mode: "all",
+    defaultValues: {
+      size: "",
+    },
+  });
+
   useEffect(() => {
     const getShoesDetails = async () => {
       try {
         const response = await shoesService.fetchShoesDetails(shoesId);
         setShoesDetails(response);
         setMainImage(response.main_image);
+
+        if (response.sizes && response.sizes.length > 0) {
+          setValue("size", response.sizes[0].size);
+        }
       } catch (error) {
         console.error("Error fetching shoes details:", error);
       }
     };
 
     getShoesDetails();
-  }, [shoesId]);
+  }, [shoesId, setValue]);
 
-  const { register, handleSubmit } = useForm({
-    mode: "all",
-  });
+  const selectedSize = watch("size");
+
+  const { shoppingCartList } = useShoppingCart();
+
+  const isInCart = () => {
+    return shoppingCartList.some(
+      (item) => item?.id === shoesDetails?.id && item?.size == selectedSize,
+    );
+  };
+
+  let isItemInCart = isInCart();
 
   if (!shoesDetails) {
     return <Typography>Loading...</Typography>;
@@ -57,13 +77,15 @@ const ShoesDetails = () => {
     };
 
     try {
-      await shoppingCartService.addShoesToShoppingCart(cartParams);
+      if (!isItemInCart) {
+        await shoppingCartService.addShoesToShoppingCart(cartParams);
+      }
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handldeNavigateToManageBootsRoute = (id) => {
+  const handleNavigateToManageBootsRoute = (id) => {
     navigate(MANAGE_SHOES_DETAILS_ROUTE.replace(":shoesId", id));
   };
 
@@ -74,7 +96,7 @@ const ShoesDetails = () => {
           <Button
             variant="contained"
             size="large"
-            onClick={() => handldeNavigateToManageBootsRoute(shoesId)}
+            onClick={() => handleNavigateToManageBootsRoute(shoesId)}
           >
             Редагувати
           </Button>
@@ -138,6 +160,7 @@ const ShoesDetails = () => {
               countValue={countValue}
               setCountValue={setCountValue}
               onSubmit={handleSubmit(onSubmit)}
+              disabled={isItemInCart}
             />
           </Stack>
         </Stack>

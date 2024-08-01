@@ -7,6 +7,7 @@ const AddShoesToShoppingCartForm = ({
   countValue,
   setCountValue,
   onSubmit,
+  disabled,
 }) => {
   const { handleItemAdd } = useShoppingCart();
 
@@ -21,7 +22,11 @@ const AddShoesToShoppingCartForm = ({
         handleItemAdd(true);
       }}
     >
-      <ItemCounter countValue={countValue} setCountValue={setCountValue} />
+      <ItemCounter
+        countValue={countValue}
+        setCountValue={setCountValue}
+        disabled={disabled}
+      />
       <Button
         variant="contained"
         color="secondary"
@@ -29,8 +34,9 @@ const AddShoesToShoppingCartForm = ({
           e.stopPropagation();
         }}
         type="submit"
+        disabled={disabled}
       >
-        <Typography px={3}>В корзину</Typography>
+        <Typography px={3}>{disabled ? "Додано" : "В корзину"} </Typography>
       </Button>
     </StyledForm>
   );
