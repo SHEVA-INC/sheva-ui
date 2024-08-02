@@ -168,7 +168,7 @@ const Header = () => {
             ),
           )}
         {!authorized() && (
-          <Stack disablePadding>
+          <Stack>
             <Link
               component={RouterLink}
               to={SIGN_IN_ROUTE}
