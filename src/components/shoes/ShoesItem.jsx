@@ -5,6 +5,7 @@ import StyledFormControlWithSelect from "../styled/StyledFormControlWithSelect";
 import { DETAILED_SHOES_ROUTE } from "../../app/Routes";
 import { useNavigate } from "react-router-dom";
 import upperCaseFirstLetter from "../../utils/upperCaseFirstLetter";
+import { useForm } from "react-hook-form";
 
 const ShoesItem = ({
   id,
@@ -26,6 +27,15 @@ const ShoesItem = ({
   const handleShoesItemClick = (shoesId) => {
     navigate(`${DETAILED_SHOES_ROUTE.replace(":shoesId", shoesId)}`);
   };
+
+  const { register, watch } = useForm({
+    mode: "all",
+    values: {
+      size: sizes[0]?.size || "",
+    },
+  });
+
+  const selectedSize = watch("size");
 
   return (
     <Stack
@@ -52,7 +62,7 @@ const ShoesItem = ({
           width="100%"
           minWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "380px" }}
           maxWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "380px" }}
-          height="fit-content"
+          sx={{ aspectRatio: "4.5 / 3", objectFit: "cover" }}
         />
         <Stack
           flexDirection={{ xs: "row", lg: "column" }}
@@ -74,7 +84,7 @@ const ShoesItem = ({
       </Stack>
 
       <Stack
-        maxWidth={{ xs: "100%", md: "420px" }}
+        maxWidth={{ xs: "100%", md: "440px" }}
         flex={1}
         gap={2}
         justifyContent="space-between"
@@ -97,15 +107,16 @@ const ShoesItem = ({
         <StyledFormControlWithSelect
           title="Розмір"
           selectId="size-select-boots"
-          defaultValue={sizes[0].size}
+          value={selectedSize}
           formControlSize="small"
           onClick={(e) => {
             e.stopPropagation();
           }}
+          register={{ ...register("size") }}
         >
           {sizes?.map((size) => (
-            <MenuItem key={size.size} value={size.size}>
-              {size.size}
+            <MenuItem key={size?.size} value={size?.size}>
+              {size?.size}
             </MenuItem>
           ))}
         </StyledFormControlWithSelect>
