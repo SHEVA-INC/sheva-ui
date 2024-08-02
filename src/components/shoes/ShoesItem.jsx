@@ -20,6 +20,7 @@ const ShoesItem = ({
   isLiked,
   onLikeClick,
   width = 1,
+  maxWidth,
   setSelectedColor,
 }) => {
   const navigate = useNavigate();
@@ -49,11 +50,13 @@ const ShoesItem = ({
       borderColor="secondary.light"
       p={3}
       width={width}
+      maxWidth={maxWidth}
     >
       <Stack
         flexDirection={{ xs: "column", lg: "row" }}
         alignItems="center"
         justifyContent="center"
+        gap={2}
       >
         <Box
           component="img"
@@ -67,8 +70,9 @@ const ShoesItem = ({
         <Stack
           flexDirection={{ xs: "row", lg: "column" }}
           alignItems="center"
-          justifyContent="center"
           flex={1}
+          justifyContent="center"
+          gap={{ xs: 0, lg: 4 }}
         >
           {images.slice(0, 3).map((image) => (
             <Box
@@ -77,7 +81,7 @@ const ShoesItem = ({
               src={image.image_url}
               alt={image.image_url}
               width={{ xs: "calc(100%/3)", sm: "100px" }}
-              height="fit-content"
+              sx={{ aspectRatio: "4.5 / 3", objectFit: "cover" }}
             />
           ))}
         </Stack>

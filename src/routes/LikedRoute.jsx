@@ -66,14 +66,14 @@ const LikedRoute = () => {
           </Stack>
         ) : (
           <ShoesList
-            order={{ xs: 2, md: 1 }}
             shoesList={likedShoesList}
             likedItems={likedItems}
             handleLikeClick={handleLikeClick}
             totalPages={totalPages}
             pageNumber={pageNumber}
             handlePageNumberChange={handlePageNumberChange}
-            width="calc(100% - 364px)"
+            width={1}
+            maxWidth={812}
           />
         )}
       </Stack>

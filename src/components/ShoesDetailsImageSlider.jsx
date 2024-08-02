@@ -24,14 +24,13 @@ const ShoesDetailsImageSlider = ({ images, mainImage, setMainImage }) => {
   );
 
   return (
-    <Stack spacing={2}>
+    <Stack gap={2}>
       <img
         src={mainImage}
         alt="Main"
         style={{
           width: "100%",
-          // height: "300px",
-          // maxHeight: "400px",
+          aspectRatio: 4.5 / 3,
           objectFit: "cover",
         }}
         onClick={() => setMainImage(mainImage)}
@@ -64,15 +63,15 @@ const ShoesDetailsImageSlider = ({ images, mainImage, setMainImage }) => {
               fontSize="small"
             />
           </StyledRoundIconButton>
-          <Grid container spacing={1}>
-            {visibleThumbnails.map((image, index) => (
-              <Grid item key={index} xs={3}>
+          <Grid container>
+            {visibleThumbnails.map((image) => (
+              <Grid item key={image} xs={3}>
                 <img
                   src={image}
-                  alt={`Thumbnail ${index}`}
+                  alt={`Thumbnail ${image}`}
                   style={{
                     width: "100%",
-                    height: "90px",
+                    aspectRatio: 4.5 / 3,
                     objectFit: "cover",
                     cursor: "pointer",
                     borderBottom:

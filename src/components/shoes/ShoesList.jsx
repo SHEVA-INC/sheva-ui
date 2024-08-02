@@ -12,6 +12,7 @@ const ShoesList = ({
   handlePageNumberChange,
   width,
   setSelectedColor,
+  maxWidth,
 }) => {
   return (
     <Stack gap={5} flex={1} order={order} alignItems="center">
@@ -30,6 +31,7 @@ const ShoesList = ({
           isLiked={likedItems.includes(shoesItem.id)}
           onLikeClick={() => handleLikeClick(shoesItem.id)}
           width={width}
+          maxWidth={maxWidth}
           setSelectedColor={setSelectedColor}
         />
       ))}

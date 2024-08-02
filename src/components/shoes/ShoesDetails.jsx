@@ -105,7 +105,7 @@ const ShoesDetails = () => {
 
       <>
         <Stack
-          flexDirection={{ xs: "column", sm: "row" }}
+          flexDirection={{ xs: "column", md: "row" }}
           justifyContent="space-between"
           alignItems="center"
           gap={8}
@@ -171,11 +171,12 @@ const ShoesDetails = () => {
           alignItems="center"
           justifyContent="space-between"
           width={1}
+          gap={8}
         >
           <Typography variant="h6">{shoesDetails.description}</Typography>
           <Stack width={{ xs: 1, sm: 0.5 }} gap={10}>
             <Stack
-              width={0.6}
+              width={0.5}
               alignSelf={{ xs: "flex-start", sm: "center", md: "flex-start" }}
             >
               <Box
@@ -186,7 +187,7 @@ const ShoesDetails = () => {
               />
             </Stack>
             <Stack
-              width={0.6}
+              width={0.5}
               alignSelf={{ xs: "flex-end", sm: "center", md: "flex-end" }}
             >
               <Box
