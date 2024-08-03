@@ -7,13 +7,13 @@ import AxiosInterceptor from "../api/AxiosInterceptor";
 const App = () => {
   return (
     <MuiTheme>
-      <AxiosInterceptor>
-        <AuthProvider>
+      <AuthProvider>
+        <AxiosInterceptor>
           <BrowserRouter>
             <Router />
           </BrowserRouter>
-        </AuthProvider>
-      </AxiosInterceptor>
+        </AxiosInterceptor>
+      </AuthProvider>
     </MuiTheme>
   );
 };

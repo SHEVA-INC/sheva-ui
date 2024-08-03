@@ -1,7 +1,7 @@
+import { createContext, useContext, useState } from "react";
 import AuthManager from "./TokenService";
 import { jwtDecode } from "jwt-decode";
 import authService from "../services/AuthService";
-import { createContext, useContext, useState } from "react";
 
 const authContext = createContext({
   userId: null,
@@ -39,8 +39,7 @@ export function AuthProvider({ children }) {
   const setState = (accessToken) => {
     const tokenPayload = getJwtPayload(accessToken);
     setUserRole(tokenPayload.userRole);
-    setUserId(tokenPayload.userEmail);
-
+    setUserId(tokenPayload.userId);
     return tokenPayload;
   };
 
@@ -53,16 +52,18 @@ export function AuthProvider({ children }) {
     },
 
     async signUp(registerCommand) {
-      let response = await authService.signUp(registerCommand);
+      const response = await authService.signUp(registerCommand);
       AuthManager.updateLocalAccessToken(response.access);
+      AuthManager.updateLocalRefreshToken(response.refresh);
       const { userRole } = setState(response.access);
 
       return userRole;
     },
 
     async signIn(loginCommand) {
-      let response = await authService.signIn(loginCommand);
+      const response = await authService.signIn(loginCommand);
       AuthManager.updateLocalAccessToken(response.access);
+      AuthManager.updateLocalRefreshToken(response.refresh);
       const { userRole } = setState(response.access);
 
       return userRole;
@@ -71,6 +72,20 @@ export function AuthProvider({ children }) {
     updateAccessToken(userToken) {
       AuthManager.updateLocalAccessToken(userToken);
       setState(userToken);
+    },
+
+    async refresh() {
+      try {
+        const response = await authService.refreshToken({
+          refresh: AuthManager.getLocalRefreshToken(),
+        });
+        AuthManager.updateLocalAccessToken(response.access);
+        setState(response.access);
+      } catch (error) {
+        if (error?.response?.data?.code === "token_not_valid") {
+          auth.signOut();
+        }
+      }
     },
 
     async signOut() {

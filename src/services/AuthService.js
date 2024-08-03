@@ -8,6 +8,10 @@ class AuthService {
   async signUp(data) {
     return (await axiosInstance.post("user/register", data)).data;
   }
+
+  async refreshToken(data) {
+    return (await axiosInstance.post("user/token/refresh", data)).data;
+  }
 }
 
 const authService = new AuthService();

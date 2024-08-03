@@ -13,10 +13,12 @@ axiosInstance.interceptors.request.use(
   async (config) => {
     if (
       config.url.endsWith("user/login") ||
-      config.url.endsWith("user/register")
-    )
+      config.url.endsWith("user/register") ||
+      config.url.endsWith("user/token/refresh")
+    ) {
+      console.log(config);
       return config;
-
+    }
     let token;
     try {
       token = await AuthManager.getAccessToken();
@@ -42,7 +44,7 @@ const AxiosInterceptor = ({ children }) => {
     };
 
     const responseOnRejectedInterceptor = async (err) => {
-      if (err?.response?.status === 401 || 403) {
+      if (err?.response?.status === 401) {
         await signOut();
       }
       return Promise.reject(err);
@@ -54,6 +56,7 @@ const AxiosInterceptor = ({ children }) => {
     );
 
     setIsSet(true);
+
     return () => {
       axiosInstance.interceptors.response.eject(responseInterceptor);
     };
