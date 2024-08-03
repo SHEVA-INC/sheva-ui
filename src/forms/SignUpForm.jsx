@@ -1,20 +1,13 @@
-import {
-  Button,
-  Divider,
-  FormControlLabel,
-  Link,
-  Typography,
-} from "@mui/material";
+import { Button, Link, Typography } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import StyledForm from "../components/styled/StyledForm";
 import StyledFormControlWithTextField from "../components/styled/StyledFormControlWithTextField";
 import ArrowIcon from "../icons/ArrowIcon";
-import GoogleIcon from "../icons/GoogleIcon";
 import StyledFormControlWithTextFieldForPassword from "../components/styled/StyledFormControlWithTextFieldForPassword";
-import StyledCheckbox from "../components/styled/StyledCheckbox";
 import useAuth from "../auth/useAuth";
 import { HOME_ROUTE } from "../app/Routes";
 import { useForm } from "react-hook-form";
+import StyledFormControlWithCheckbox from "../components/styled/StyledFormControlWithCheckbox";
 
 const SignUpForm = () => {
   const {
@@ -22,6 +15,7 @@ const SignUpForm = () => {
     handleSubmit,
     setError,
     formState: { errors },
+    watch,
   } = useForm({ mode: "all" });
 
   const navigate = useNavigate();
@@ -50,6 +44,8 @@ const SignUpForm = () => {
     }
   };
 
+  const agree = watch("agree");
+
   return (
     <StyledForm
       px={6}
@@ -61,6 +57,8 @@ const SignUpForm = () => {
       <StyledFormControlWithTextField
         title="Ім'я"
         htmlFor="username"
+        variant="p"
+        fontWeight="regular"
         register={{
           ...register("username", {
             required: {
@@ -83,6 +81,8 @@ const SignUpForm = () => {
       <StyledFormControlWithTextField
         title="Пошта"
         htmlFor="email"
+        variant="p"
+        fontWeight="regular"
         register={{
           ...register("email", {
             required: {
@@ -131,8 +131,8 @@ const SignUpForm = () => {
         helperText={errors?.password ? errors.password.message : " "}
         error={!!errors?.password}
       />
-      <FormControlLabel
-        control={<StyledCheckbox />}
+      <StyledFormControlWithCheckbox
+        register={{ ...register("agree") }}
         label={
           <Typography>
             Ви погоджуєтеся з{" "}
@@ -158,6 +158,7 @@ const SignUpForm = () => {
         }
       />
       <Button
+        disabled={!agree}
         variant="contained"
         type="submit"
         sx={{
@@ -170,28 +171,6 @@ const SignUpForm = () => {
       >
         <Typography variant="p" textTransform="uppercase" fontWeight="bold">
           Зареєструватися
-        </Typography>
-      </Button>
-      <Divider sx={{ width: 1 }}>
-        <Typography color="#475156">або</Typography>
-      </Divider>
-      <Button
-        variant="outlined"
-        size="large"
-        color="secondary"
-        disableRipple
-        sx={{
-          width: "100%",
-          borderColor: (theme) => theme.palette.secondary.light,
-          borderRadius: (theme) => theme.shape.containerBorderRadius,
-          justifyContent: "space-between",
-          px: 5,
-          py: 3,
-        }}
-        startIcon={<GoogleIcon fontSize="small" padding={0.4} />}
-      >
-        <Typography color="#475156" flex={1}>
-          Sign up with Google
         </Typography>
       </Button>
     </StyledForm>

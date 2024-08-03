@@ -1,10 +1,9 @@
-import { Button, Divider, Link, Typography } from "@mui/material";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import StyledForm from "../components/styled/StyledForm";
 import StyledFormControlWithTextField from "../components/styled/StyledFormControlWithTextField";
-import { FORGOT_PASSWORD_ROUTE, HOME_ROUTE } from "../app/Routes";
+import { HOME_ROUTE } from "../app/Routes";
 import ArrowIcon from "../icons/ArrowIcon";
-import GoogleIcon from "../icons/GoogleIcon";
 import StyledFormControlWithTextFieldForPassword from "../components/styled/StyledFormControlWithTextFieldForPassword";
 import useAuth from "../auth/useAuth";
 import { useForm } from "react-hook-form";
@@ -48,6 +47,8 @@ const SignInForm = () => {
       <StyledFormControlWithTextField
         title="Ім'я"
         htmlFor="username"
+        variant="p"
+        fontWeight="regular"
         register={{
           ...register("username", {
             required: {
@@ -96,14 +97,6 @@ const SignInForm = () => {
         helperText={errors?.password ? errors.password.message : " "}
         error={!!errors?.password}
       />
-      <Link
-        to={FORGOT_PASSWORD_ROUTE}
-        component={RouterLink}
-        underline="none"
-        color="info.light"
-      >
-        <Typography>Забули пароль?</Typography>
-      </Link>
       <Button
         variant="contained"
         type="submit"
@@ -117,28 +110,6 @@ const SignInForm = () => {
       >
         <Typography variant="p" textTransform="uppercase" fontWeight="bold">
           Увійти
-        </Typography>
-      </Button>
-      <Divider sx={{ width: 1 }}>
-        <Typography color="#475156">або</Typography>
-      </Divider>
-      <Button
-        variant="outlined"
-        size="large"
-        color="secondary"
-        disableRipple
-        sx={{
-          width: "100%",
-          borderColor: (theme) => theme.palette.secondary.light,
-          borderRadius: (theme) => theme.shape.containerBorderRadius,
-          justifyContent: "space-between",
-          px: 5,
-          py: 3,
-        }}
-        startIcon={<GoogleIcon fontSize="small" padding={0.4} />}
-      >
-        <Typography color="#475156" flex={1}>
-          Login with Google
         </Typography>
       </Button>
     </StyledForm>

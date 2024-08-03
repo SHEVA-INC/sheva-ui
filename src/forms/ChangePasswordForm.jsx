@@ -3,6 +3,7 @@ import StyledForm from "../components/styled/StyledForm";
 import StyledFormControlWithTextFieldForPassword from "../components/styled/StyledFormControlWithTextFieldForPassword";
 import { useForm } from "react-hook-form";
 import userService from "../services/UserService";
+import StyledFormControlWithTextField from "../components/styled/StyledFormControlWithTextField";
 
 const ChangePasswordForm = () => {
   const {
@@ -42,8 +43,35 @@ const ChangePasswordForm = () => {
       borderRadius={0}
       onSubmit={handleSubmit(onSubmit)}
     >
+      <StyledFormControlWithTextField
+        display="none"
+        autoComplete="username"
+        title="Ім'я"
+        htmlFor="username"
+        variant="p"
+        fontWeight="regular"
+        register={{
+          ...register("username", {
+            required: {
+              value: true,
+              message: "Field is required!",
+            },
+            minLength: {
+              value: 2,
+              message: "Min length is 2 symbols!",
+            },
+            maxLength: {
+              value: 100,
+              message: "Max length is 100 symbols!",
+            },
+          }),
+        }}
+        helperText={errors?.username ? errors.username.message : " "}
+        error={!!errors?.username}
+      />
       <StyledFormControlWithTextFieldForPassword
         title="Поточний пароль"
+        autoComplete="current-password"
         htmlFor="currentPassword"
         register={{
           ...register("currentPassword", {
@@ -74,6 +102,7 @@ const ChangePasswordForm = () => {
       />
       <StyledFormControlWithTextFieldForPassword
         title="Новий пароль"
+        autoComplete="new-password"
         htmlFor="newPassword"
         register={{
           ...register("newPassword", {

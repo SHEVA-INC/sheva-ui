@@ -49,7 +49,7 @@ const StyledFormControlWithSelect = ({
         >
           {children}
         </Select>
-        <FormHelperText error={!!error}>{helperText}</FormHelperText>
+        <FormHelperText error={error}>{helperText}</FormHelperText>
       </Stack>
     </FormControl>
   );

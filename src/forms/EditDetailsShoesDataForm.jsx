@@ -1,13 +1,6 @@
 import { useForm } from "react-hook-form";
 import StyledForm from "../components/styled/StyledForm";
-import {
-  Button,
-  FormControlLabel,
-  IconButton,
-  MenuItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, IconButton, MenuItem, Stack, Typography } from "@mui/material";
 import shoesService from "../services/ShoesService";
 import { useEffect, useState } from "react";
 import StyledFormControlWithTextField from "../components/styled/StyledFormControlWithTextField";
@@ -16,7 +9,7 @@ import shoesTypes from "../enums/shoesTypes";
 import shoesBrands from "../enums/shoesBrands";
 import DeleteIcon from "../icons/DeleteIcon";
 import shoesColors from "../enums/shoesColors";
-import StyledCheckbox from "../components/styled/StyledCheckbox";
+import StyledFormControlWithCheckbox from "../components/styled/StyledFormControlWithCheckbox";
 
 const EditDetailsShoesDataForm = ({ shoesId }) => {
   const [shoesDetails, setShoesDetails] = useState(null);
@@ -237,16 +230,16 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
       </Stack>
 
       <Stack>
-        <FormControlLabel
-          control={<StyledCheckbox register={{ ...register("new") }} />}
+        <StyledFormControlWithCheckbox
+          register={{ ...register("new") }}
           label={
             <Typography fontWeight="bold" variant="body1">
               Нове
             </Typography>
           }
         />
-        <FormControlLabel
-          control={<StyledCheckbox register={{ ...register("popular") }} />}
+        <StyledFormControlWithCheckbox
+          register={{ ...register("popular") }}
           label={
             <Typography fontWeight="bold" variant="body1">
               Популярне

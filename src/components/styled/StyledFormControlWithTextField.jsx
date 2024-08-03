@@ -17,9 +17,16 @@ const StyledFormControlWithTextField = ({
   minRows,
   variant = "h6",
   fontWeight = "bold",
+  display,
 }) => {
   return (
-    <FormControl fullWidth sx={{ gap: 2 }}>
+    <FormControl
+      fullWidth
+      sx={{
+        gap: 2,
+        display: display,
+      }}
+    >
       <Typography htmlFor={htmlFor} variant={variant} fontWeight={fontWeight}>
         {title}
       </Typography>
