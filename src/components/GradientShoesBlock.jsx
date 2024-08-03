@@ -1,8 +1,12 @@
 import { Button, Stack, Typography, Box } from "@mui/material";
 import ArrowIcon from "../icons/ArrowIcon";
 import ShoesImage from "../assets/transparent-bcg-shoes/nike-air-zoom.png";
+import { useNavigate } from "react-router-dom";
+import { CATALOG_ROUTE } from "../app/Routes";
 
 const GradientShoesBlock = () => {
+  const navigate = useNavigate();
+
   return (
     <Stack
       width={1}
@@ -52,6 +56,7 @@ const GradientShoesBlock = () => {
             color="thirdly"
             onClick={(e) => {
               e.stopPropagation();
+              navigate(CATALOG_ROUTE);
             }}
             endIcon={<ArrowIcon color="black" fontSize="large" padding={1} />}
           >

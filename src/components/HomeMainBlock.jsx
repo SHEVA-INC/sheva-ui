@@ -8,9 +8,12 @@ import ShoesAdPng from "../assets/shoes-ad/shoes-ad.png";
 import NikeAirZoom from "../assets/transparent-bcg-shoes/nike-air-zoom.png";
 import ArrowIcon from "../icons/ArrowIcon";
 import useHeaderHeight from "../custom-hooks/useHeaderHeight";
+import { CATALOG_ROUTE } from "../app/Routes";
+import { useNavigate } from "react-router-dom";
 
 const HomeMainBlock = () => {
   const headerHeight = useHeaderHeight();
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -220,6 +223,7 @@ const HomeMainBlock = () => {
                 color="thirdly"
                 onClick={(e) => {
                   e.stopPropagation();
+                  navigate(CATALOG_ROUTE);
                 }}
                 endIcon={<ArrowIcon color="black" padding={1} />}
                 sx={{ display: "flex", alignItems: "center" }}

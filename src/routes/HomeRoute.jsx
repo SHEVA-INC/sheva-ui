@@ -84,10 +84,6 @@ const HomeRoute = () => {
 
   const navigate = useNavigate();
 
-  const handleNavigateToCatalogRouteClick = () => {
-    navigate(CATALOG_ROUTE);
-  };
-
   return (
     <Stack width={1} alignItems="center">
       <HomeMainBlock />
@@ -130,9 +126,9 @@ const HomeRoute = () => {
             alignItems="center"
           >
             <ShoesSmallList
-              title="Flash sale today"
+              title="Сьогоднішній розпродаж"
               shoesSmallData={ShoesSmallData1}
-            />{" "}
+            />
             <ShoesAdItem
               name="Nike Air Max"
               text="Get Amazing & Great Nike Shoes"
@@ -140,7 +136,7 @@ const HomeRoute = () => {
               display={{ xs: "flex", md: "none" }}
             />
             <ShoesSmallList
-              title="Best sellers"
+              title="Бестселери"
               shoesSmallData={ShoesSmallData2}
             />
             <ShoesAdItem
@@ -150,7 +146,7 @@ const HomeRoute = () => {
               display={{ xs: "flex", md: "none" }}
             />
             <ShoesSmallList
-              title="Top Rated"
+              title="Найкращі рейтинги"
               shoesSmallData={ShoesSmallData3}
             />
           </Stack>
@@ -171,7 +167,7 @@ const HomeRoute = () => {
           size="large"
           color="secondary"
           sx={{ textTransform: "uppercase", alignSelf: "center" }}
-          onClick={handleNavigateToCatalogRouteClick}
+          onClick={() => navigate(CATALOG_ROUTE)}
         >
           <Typography fontWeight="bold" variant="h5" p={1}>
             Перейти до каталогу

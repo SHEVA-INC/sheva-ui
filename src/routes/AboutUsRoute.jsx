@@ -20,11 +20,14 @@ const AboutUsRoute = () => {
         alignItems="center"
       >
         <ShoesSmallList
-          title="Flash sale today"
+          title="Сьогоднішній розпродаж"
           shoesSmallData={ShoesSmallData1}
         />
-        <ShoesSmallList title="Best sellers" shoesSmallData={ShoesSmallData2} />
-        <ShoesSmallList title="Top Rated" shoesSmallData={ShoesSmallData3} />
+        <ShoesSmallList title="Бестселери" shoesSmallData={ShoesSmallData2} />
+        <ShoesSmallList
+          title="Найкращі рейтинги"
+          shoesSmallData={ShoesSmallData3}
+        />
       </StyledStackForRoutes>
     </Stack>
   );

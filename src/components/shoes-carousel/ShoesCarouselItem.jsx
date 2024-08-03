@@ -9,6 +9,7 @@ const ShoesCarouselItem = ({ name, brand, price, mainImage, onClick }) => {
         alt={name}
         style={{
           width: "100%",
+          aspectRatio: 4.5 / 3,
           objectFit: "cover",
         }}
       />

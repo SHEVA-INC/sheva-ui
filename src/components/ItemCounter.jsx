@@ -19,11 +19,7 @@ const ItemCounter = ({ countValue, setCountValue, size, disabled }) => {
         color="secondary"
         size={size}
         disabled={countValue === 1 || disabled}
-        sx={{
-          minWidth: "28px",
-          minHeight: "28px",
-          p: "0px",
-        }}
+        sx={{ minWidth: "33px", width: 1, height: "33px" }}
       >
         -
       </Button>
@@ -35,12 +31,8 @@ const ItemCounter = ({ countValue, setCountValue, size, disabled }) => {
         variant="contained"
         size={size}
         color="secondary"
-        sx={{
-          minWidth: "28px",
-          minHeight: "28px",
-          p: "0px",
-        }}
         disabled={disabled}
+        sx={{ minWidth: "33px", width: 1, height: "33px" }}
       >
         +
       </Button>
