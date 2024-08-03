@@ -1,5 +1,11 @@
 import ShoesCarouselItem from "./ShoesCarouselItem";
-import { Grid, Stack, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Grid,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useState, useEffect } from "react";
 import StyledCarousel from "../styled/StyledCarousel";
 import StyledTitle from "../styled/StyledTitle";
@@ -66,33 +72,37 @@ const ShoesCarousel = ({ title, shoesCarouselData, id }) => {
   return (
     <Stack gap={6} id={id}>
       <StyledTitle title={title} />
-      <StyledCarousel title={title}>
-        {groupArrayByAmountOfItemsPerScreenSize(
-          shoesCarouselData,
-          screenSize,
-        ).map((shoesItems, idx) => (
-          <Grid container spacing={6} key={idx}>
-            {shoesItems.map((shoesItem) => (
-              <Grid
-                item
-                xs={gridItemSize.xs}
-                sm={gridItemSize.sm}
-                md={gridItemSize.md}
-                key={shoesItem.id}
-              >
-                <ShoesCarouselItem
+      {shoesCarouselData.length === 0 ? (
+        <Typography>Взуття не знайдено.</Typography>
+      ) : (
+        <StyledCarousel title={title}>
+          {groupArrayByAmountOfItemsPerScreenSize(
+            shoesCarouselData,
+            screenSize,
+          ).map((shoesItems, idx) => (
+            <Grid container spacing={6} key={idx}>
+              {shoesItems.map((shoesItem) => (
+                <Grid
+                  item
+                  xs={gridItemSize.xs}
+                  sm={gridItemSize.sm}
+                  md={gridItemSize.md}
                   key={shoesItem.id}
-                  name={shoesItem.name}
-                  brand={shoesItem.brand}
-                  price={shoesItem.price}
-                  mainImage={shoesItem.main_image}
-                  onClick={() => handleShoesItemClick(shoesItem.id)}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        ))}
-      </StyledCarousel>
+                >
+                  <ShoesCarouselItem
+                    key={shoesItem.id}
+                    name={shoesItem.name}
+                    brand={shoesItem.brand}
+                    price={shoesItem.price}
+                    mainImage={shoesItem.main_image}
+                    onClick={() => handleShoesItemClick(shoesItem.id)}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          ))}
+        </StyledCarousel>
+      )}
     </Stack>
   );
 };
