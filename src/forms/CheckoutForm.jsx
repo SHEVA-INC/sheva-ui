@@ -4,16 +4,10 @@ import StyledFormControlWithTextField from "../components/styled/StyledFormContr
 import userService from "../services/UserService";
 import { useForm } from "react-hook-form";
 import orderService from "../services/OrderService";
-import {
-  Button,
-  FormControlLabel,
-  MenuItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, MenuItem, Stack, Typography } from "@mui/material";
 import novaPostService from "../services/NovaPostService";
 import StyledFormControlWithSelect from "../components/styled/StyledFormControlWithSelect";
-import StyledCheckbox from "../components/styled/StyledCheckbox";
+import StyledFormControlWithCheckbox from "../components/styled/StyledFormControlWithCheckbox";
 
 const CheckoutForm = ({ width }) => {
   const [userData, setUserData] = useState({});
@@ -428,22 +422,27 @@ const CheckoutForm = ({ width }) => {
           Спосіб оплати
         </Typography>
         <Stack>
-          <FormControlLabel
-            control={<StyledCheckbox />}
-            label={
-              <Typography fontWeight="bold" variant="body1">
-                Оплатити зараз
-              </Typography>
-            }
+          <StyledFormControlWithCheckbox
+            label="Оплатити зараз"
+            disabled={true}
           />
-          <FormControlLabel
-            control={<StyledCheckbox />}
-            label={
-              <Typography fontWeight="bold" variant="body1">
-                Оплатити при отриманні
-              </Typography>
-            }
+          <StyledFormControlWithCheckbox
+            label="Оплатити при отриманні"
+            defaultChecked={true}
+            register={{
+              ...register("afterPayment", {
+                required: {
+                  value: true,
+                  message: "Field is required!",
+                },
+              }),
+            }}
           />
+          {errors?.afterPayment && (
+            <Typography color="error" variant="caption">
+              {errors?.afterPayment?.message || ""}
+            </Typography>
+          )}
         </Stack>
       </Stack>
 
