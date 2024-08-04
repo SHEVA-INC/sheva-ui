@@ -42,7 +42,6 @@ const EditUploadImagesForm = ({ shoesId }) => {
     if (uploadedImages.length > 0) {
       setValue("uploaded_images", uploadedImages);
     }
-    console.log(uploadedImages);
   }, [uploadedImages, setValue]);
 
   const onSubmit = async (data) => {
@@ -68,7 +67,6 @@ const EditUploadImagesForm = ({ shoesId }) => {
           Редагувати Фото
         </Button>
         <StyledFilesDropzone
-          accept="image/*"
           open={isEditPhotosOpen}
           onClose={handleEditPhotosClose}
           onFileChange={handleImagesChange}

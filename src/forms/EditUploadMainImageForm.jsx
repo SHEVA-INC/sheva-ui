@@ -66,7 +66,6 @@ const EditUploadMainImageForm = ({ shoesId }) => {
           Редагувати Фото
         </Button>
         <StyledFileDropzone
-          accept="image/*"
           open={isEditMainPhotoOpen}
           onClose={handleEditMainPhotoClose}
           onFileChange={handleMainImageChange}

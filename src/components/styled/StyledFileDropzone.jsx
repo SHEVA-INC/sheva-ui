@@ -9,7 +9,6 @@ import {
   Typography,
   Link,
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
 
 const StyledFileDropzone = ({
   open,
@@ -17,8 +16,6 @@ const StyledFileDropzone = ({
   onFileChange,
   uploadedFile,
   setUploadedFile,
-  accept,
-  linkTo,
   register,
 }) => {
   const onDrop = useCallback(
@@ -31,7 +28,9 @@ const StyledFileDropzone = ({
   );
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: accept,
+    accept: {
+      "image/*": [],
+    },
     onDrop,
     multiple: false,
   });
@@ -55,11 +54,9 @@ const StyledFileDropzone = ({
           <input {...getInputProps()} {...register} />
           <Typography variant="body1">
             {uploadedFile ? (
-              <span>Uploaded: {uploadedFile.name}</span>
+              <span>Завантажено: {uploadedFile.name}</span>
             ) : (
-              <Link to={linkTo} component={RouterLink}>
-                Choose a photo
-              </Link>
+              <Link>Оберіть фото:</Link>
             )}
           </Typography>
         </div>
