@@ -266,7 +266,6 @@ const AddShoesForm = () => {
           {uploadedMainImage ? "Редагувати фото" : "Додати Фото"}
         </Button>
         <StyledFileDropzone
-          accept="image/*"
           open={isEditMainPhotoOpen}
           onClose={handleEditMainPhotoClose}
           onFileChange={handleMainImageChange}
