@@ -91,8 +91,17 @@ const Header = () => {
     setAnchorElUser(event.currentTarget);
   };
 
+  const isMenuOpen = Boolean(anchorElUser);
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleMenuItemClick = async (route) => {
+    handleCloseUserMenu();
+    setTimeout(() => {
+      navigate(route);
+    }, 100);
   };
 
   const handleDrawerToggle = () => {
@@ -286,7 +295,7 @@ const Header = () => {
                       onClick={
                         authenticatedRoute.linkTo === "#"
                           ? handleOpenUserMenu
-                          : handleDrawerToggle
+                          : null
                       }
                     >
                       {authenticatedRoute.icon}
@@ -295,9 +304,8 @@ const Header = () => {
                 ))}
               </>
             )}
-
             <Menu
-              sx={{ mt: "35px" }}
+              sx={{ mt: "34px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -309,32 +317,26 @@ const Header = () => {
                 vertical: "top",
                 horizontal: "right",
               }}
-              open={Boolean(anchorElUser)}
+              open={isMenuOpen}
               onClose={handleCloseUserMenu}
             >
               {settingsRoutes.map((setting) => (
                 <MenuItem
                   key={setting.routeId}
-                  onClick={handleCloseUserMenu}
-                  sx={{ p: 0 }}
+                  onClick={() => {
+                    handleMenuItemClick(setting.linkTo);
+                  }}
+                  sx={{ px: 6, py: 1 }}
                 >
-                  <Link
-                    to={setting.linkTo}
-                    component={RouterLink}
-                    underline="none"
-                    px={6}
-                    py={1}
-                    minWidth={1}
+                  <Typography
+                    variant="caption"
+                    textAlign="center"
+                    fontWeight="bold"
+                    textTransform="uppercase"
+                    color="primary"
                   >
-                    <Typography
-                      variant="caption"
-                      textAlign="center"
-                      fontWeight="bold"
-                      textTransform="uppercase"
-                    >
-                      {setting.routeName}
-                    </Typography>
-                  </Link>
+                    {setting.routeName}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
