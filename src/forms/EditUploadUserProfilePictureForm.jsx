@@ -65,7 +65,6 @@ const EditUploadUserProfilePictureForm = () => {
       alignItems="flex-start"
     >
       <StyledFileDropzone
-        accept="image/*"
         open={isEditPhotoOpen}
         onClose={handleEditMainPhotoClose}
         onFileChange={handleMainImageChange}
