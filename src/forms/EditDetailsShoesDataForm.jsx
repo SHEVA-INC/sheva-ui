@@ -195,11 +195,13 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
               message: "Min length is 100 symbols!",
             },
             maxLength: {
-              value: 500,
-              message: "Max length is 500 symbols!",
+              value: 2000,
+              message: "Max length is 2000 symbols!",
             },
           }),
         }}
+        error={!!errors?.description}
+        helperText={errors?.description ? errors.description.message : " "}
       />
       <Stack flexDirection="column" alignSelf="flex-start" spacing={2}>
         <Typography variant="h6" fontWeight="bold">

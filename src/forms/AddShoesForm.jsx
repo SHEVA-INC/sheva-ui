@@ -223,8 +223,8 @@ const AddShoesForm = () => {
               message: "Min length is 100 symbols!",
             },
             maxLength: {
-              value: 500,
-              message: "Max length is 500 symbols!",
+              value: 2000,
+              message: "Max length is 2000 symbols!",
             },
           }),
         }}
