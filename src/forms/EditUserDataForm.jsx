@@ -68,6 +68,8 @@ const EditUserDataForm = () => {
       <StyledFormControlWithTextField
         title="Юзернейм"
         htmlFor="userName"
+        variant="body1"
+        fontWeight="regular"
         register={{
           ...register("userName", {
             required: {
@@ -91,6 +93,8 @@ const EditUserDataForm = () => {
       <StyledFormControlWithTextField
         title="Ім'я"
         htmlFor="firstName"
+        variant="body1"
+        fontWeight="regular"
         register={{
           ...register("firstName", {
             minLength: {
@@ -110,6 +114,8 @@ const EditUserDataForm = () => {
       <StyledFormControlWithTextField
         title="Прізвище"
         htmlFor="lastName"
+        variant="body1"
+        fontWeight="regular"
         register={{
           ...register("lastName", {
             minLength: {
@@ -129,6 +135,8 @@ const EditUserDataForm = () => {
       <StyledFormControlWithTextField
         title="Пошта"
         htmlFor="email"
+        variant="body1"
+        fontWeight="regular"
         register={{
           ...register("email", {
             required: {
