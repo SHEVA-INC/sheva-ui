@@ -12,7 +12,7 @@ const OrderList = ({
   handleItemRemove,
 }) => {
   return (
-    <Stack gap={2} width={width} alignItems="center">
+    <Stack gap={5} width={width} alignItems="center">
       {orders.map((orderItem) => (
         <OrderItem
           key={orderItem.cart_product_id}
