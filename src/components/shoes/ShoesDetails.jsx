@@ -8,7 +8,7 @@ import upperCaseFirstLetter from "../../utils/upperCaseFirstLetter";
 import { useNavigate, useParams } from "react-router-dom";
 import ShoesDetailsImageSlider from "../ShoesDetailsImageSlider";
 import useAuth from "../../auth/useAuth";
-import { MANAGE_SHOES_DETAILS_ROUTE } from "../../app/Routes";
+import { MANAGE_SHOES_DETAILS_ROUTE, SIGN_IN_ROUTE } from "../../app/Routes";
 import AddShoesToShoppingCartForm from "../../forms/AddShoesToShoppingCartForm";
 import shoppingCartService from "../../services/ShoppingCartService";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,7 @@ const ShoesDetails = () => {
   const [countValue, setCountValue] = useState(1);
 
   const { shoesId } = useParams();
-  const { userRole } = useAuth();
+  const { userRole, authorized } = useAuth();
   const navigate = useNavigate();
 
   const { register, handleSubmit, watch, setValue } = useForm({
@@ -50,7 +50,7 @@ const ShoesDetails = () => {
 
   const selectedSize = watch("size");
 
-  const { shoppingCartList } = useShoppingCart();
+  const { shoppingCartList, isAddedToCart } = useShoppingCart();
 
   const isInCart = () => {
     return shoppingCartList.some(
@@ -58,7 +58,7 @@ const ShoesDetails = () => {
     );
   };
 
-  let isItemInCart = isInCart();
+  let isItemInCart = isInCart() || isAddedToCart;
 
   if (!shoesDetails) {
     return <Typography>Loading...</Typography>;
@@ -156,12 +156,25 @@ const ShoesDetails = () => {
                 </MenuItem>
               ))}
             </StyledFormControlWithSelect>
-            <AddShoesToShoppingCartForm
-              countValue={countValue}
-              setCountValue={setCountValue}
-              onSubmit={handleSubmit(onSubmit)}
-              disabled={isItemInCart}
-            />
+            {authorized() ? (
+              <AddShoesToShoppingCartForm
+                countValue={countValue}
+                setCountValue={setCountValue}
+                onSubmit={handleSubmit(onSubmit)}
+                disabled={isItemInCart}
+              />
+            ) : (
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                  navigate(SIGN_IN_ROUTE);
+                }}
+                sx={{ alignSelf: "flex-end" }}
+              >
+                <Typography px={3}>Додати в корзину</Typography>
+              </Button>
+            )}
           </Stack>
         </Stack>
 
