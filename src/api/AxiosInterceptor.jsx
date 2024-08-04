@@ -16,7 +16,6 @@ axiosInstance.interceptors.request.use(
       config.url.endsWith("user/register") ||
       config.url.endsWith("user/token/refresh")
     ) {
-      console.log(config);
       return config;
     }
     let token;
