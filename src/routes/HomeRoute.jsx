@@ -193,7 +193,7 @@ const HomeRoute = () => {
           )}
           {reviewsList?.length > 0 && (
             <ReviewsList
-              reviewsAmount="3,126"
+              reviewsAmount={reviewsList.length}
               reviewsData={reviewsList}
               setIsReviewDeleted={setIsReviewDeleted}
               totalPages={totalPages}

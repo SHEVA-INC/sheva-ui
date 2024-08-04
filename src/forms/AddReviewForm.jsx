@@ -25,7 +25,7 @@ const AddReviewForm = ({ setIsReviewAdded }) => {
       await reviewService.addReview(data);
       setValue("text", "");
       setValue("rating", 1);
-      setIsReviewAdded(true);
+      setIsReviewAdded((prev) => !prev);
     } catch (err) {
       console.error(err);
     }

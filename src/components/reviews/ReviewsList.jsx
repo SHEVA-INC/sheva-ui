@@ -15,7 +15,7 @@ const ReviewsList = ({
   const handleDeleteReviewClick = async (reviewId) => {
     try {
       await reviewService.deleteReview(reviewId);
-      setIsReviewDeleted(true);
+      setIsReviewDeleted((prev) => !prev);
     } catch (error) {
       console.error("Error fetching shoes list:", error);
     }
