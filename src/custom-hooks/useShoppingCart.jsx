@@ -9,6 +9,7 @@ const useShoppingCart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [isItemRemoved, setIsItemRemoved] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [cartId, setCartId] = useState(null);
   const { authorized } = useAuth();
 
   useEffect(() => {
@@ -19,6 +20,7 @@ const useShoppingCart = () => {
         setTotalPages(response.results.total_pages);
         setPageNumber(response.results.current_page);
         setTotalPrice(response.results.total_price);
+        setCartId(response.results.cart_id);
       } catch (error) {
         console.error("Error fetching cart list:", error);
       }
@@ -31,11 +33,11 @@ const useShoppingCart = () => {
     setPageNumber(value);
   };
 
-  const handleItemRemove = () => {
+  const handleItemRemoveFromCart = () => {
     setIsItemRemoved((prev) => !prev);
   };
 
-  const handleItemAdd = () => {
+  const handleItemAddToCart = () => {
     setIsAddedToCart((prev) => !prev);
   };
 
@@ -44,9 +46,11 @@ const useShoppingCart = () => {
     totalPages,
     pageNumber,
     totalPrice,
+    cartId,
     handlePageNumberChange,
-    handleItemRemove,
-    handleItemAdd,
+    handleItemRemoveFromCart,
+    isAddedToCart,
+    handleItemAddToCart,
   };
 };
 

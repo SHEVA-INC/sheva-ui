@@ -27,7 +27,12 @@ const StyledFormControlWithSelect = ({
   helperText,
 }) => {
   return (
-    <FormControl size={formControlSize} sx={{ gap: gap }} fullWidth>
+    <FormControl
+      size={formControlSize}
+      sx={{ gap: gap }}
+      fullWidth
+      error={error}
+    >
       <Typography variant={variant} fontWeight={fontWeight} htmlFor={selectId}>
         {title}
       </Typography>
@@ -49,7 +54,12 @@ const StyledFormControlWithSelect = ({
         >
           {children}
         </Select>
-        <FormHelperText error={error}>{helperText}</FormHelperText>
+        <FormHelperText
+          error={error}
+          sx={{ visibility: !error ? "hidden" : "unset" }}
+        >
+          {error ? helperText : "helpertext"}
+        </FormHelperText>
       </Stack>
     </FormControl>
   );

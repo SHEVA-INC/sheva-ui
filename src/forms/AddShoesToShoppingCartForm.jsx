@@ -9,17 +9,16 @@ const AddShoesToShoppingCartForm = ({
   onSubmit,
   disabled,
 }) => {
-  const { handleItemAdd } = useShoppingCart();
+  const { handleItemAddToCart } = useShoppingCart();
 
   return (
     <StyledForm
       flexDirection="row"
       justifyContent="space-between"
       boxShadow="none"
-      onSubmit={(e) => {
-        e.preventDefault();
+      onSubmit={() => {
         onSubmit();
-        handleItemAdd(true);
+        handleItemAddToCart(true);
       }}
     >
       <ItemCounter
@@ -30,9 +29,6 @@ const AddShoesToShoppingCartForm = ({
       <Button
         variant="contained"
         color="secondary"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
         type="submit"
         disabled={disabled}
       >

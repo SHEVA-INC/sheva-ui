@@ -3,7 +3,7 @@ import upperCaseFirstLetter from "../../utils/upperCaseFirstLetter";
 import { useNavigate } from "react-router-dom";
 import { DETAILED_SHOES_ROUTE } from "../../app/Routes";
 import DeleteIcon from "../../icons/DeleteIcon";
-import orderService from "../../services/OrderService";
+import shoppingCartService from "../../services/ShoppingCartService";
 
 const OrderItem = ({
   id,
@@ -18,7 +18,10 @@ const OrderItem = ({
   quantity,
   subtotal,
   fontVariant = "h6",
+  fontVariantTitle = "h5",
+  isAllowedToDelete = true,
   handleItemRemove,
+  maxWidth,
 }) => {
   const navigate = useNavigate();
 
@@ -28,7 +31,7 @@ const OrderItem = ({
 
   const handleDeleteOrderItemFromCart = async (e, productId) => {
     e.stopPropagation();
-    await orderService.deleteProductFromOrder(productId);
+    await shoppingCartService.deleteProductFromShoppingCart(productId);
     handleItemRemove(true);
   };
 
@@ -44,28 +47,30 @@ const OrderItem = ({
       borderColor="secondary.light"
       p={3}
       width={1}
-      alignItems="center"
+      alignItems={{ xs: "flex-start", sm: "center" }}
     >
       <Box
         component="img"
         src={mainImage}
         alt={name}
         width="100%"
-        minWidth={{ xs: "100%", sm: "170px", md: "200px", lg: "220px" }}
-        maxWidth={{ xs: "100%", sm: "170px", md: "200px", lg: "220px" }}
+        minWidth={maxWidth}
+        maxWidth={maxWidth}
         height="fit-content"
+        order={{ xs: 2, sm: 1 }}
+        sx={{ aspectRatio: 4.5 / 3 }}
       />
 
       <Stack
-        maxWidth={{ xs: "100%" }}
+        maxWidth="100%"
         flex={1}
         gap={1}
         justifyContent="space-between"
+        order={{ xs: 3, sm: 2 }}
       >
-        <Typography variant="h6" fontWeight="bold">
+        <Typography variant={fontVariantTitle} fontWeight="bold">
           {upperCaseFirstLetter(brand)} {name}
         </Typography>
-
         <Typography variant={fontVariant}>Тип: {type}</Typography>
         <Typography variant={fontVariant}>Колір: {color}</Typography>
         <Typography variant={fontVariant}>Розмір: {size}</Typography>
@@ -73,16 +78,18 @@ const OrderItem = ({
         <Typography variant={fontVariant}>Кількість: {quantity}</Typography>
         <Typography variant={fontVariant}>Вартість: {subtotal}</Typography>
       </Stack>
-      <IconButton
-        onClick={(e) => handleDeleteOrderItemFromCart(e, cartProductId)}
-        sx={{
-          alignSelf: "flex-start",
-          py: 2,
-          justifyContent: "flex-end",
-        }}
-      >
-        <DeleteIcon color="black" fontSize="medium" />
-      </IconButton>
+      {isAllowedToDelete && (
+        <IconButton
+          onClick={(e) => handleDeleteOrderItemFromCart(e, cartProductId)}
+          sx={{
+            p: 2,
+            alignSelf: { xs: "flex-end", sm: "flex-start" },
+            order: { xs: 1, sm: 3 },
+          }}
+        >
+          <DeleteIcon color="black" fontSize="small" />
+        </IconButton>
+      )}
     </Stack>
   );
 };

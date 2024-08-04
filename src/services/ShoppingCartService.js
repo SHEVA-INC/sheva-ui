@@ -13,6 +13,12 @@ class ShoppingCartService {
   async getShoppingCart(pageNum) {
     return (await axiosInstance.get(`cart/view_cart?page=${pageNum}`)).data;
   }
+
+  async deleteProductFromShoppingCart(productId) {
+    return (
+      await axiosInstance.delete(`cart/cart/remove-from-cart/${productId}/`)
+    ).data;
+  }
 }
 
 const shoppingCartService = new ShoppingCartService();

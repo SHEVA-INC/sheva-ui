@@ -7,11 +7,11 @@ import orderService from "../services/OrderService";
 import { Button, MenuItem, Stack, Typography } from "@mui/material";
 import novaPostService from "../services/NovaPostService";
 import StyledFormControlWithSelect from "../components/styled/StyledFormControlWithSelect";
-import StyledFormControlWithCheckbox from "../components/styled/StyledFormControlWithCheckbox";
+import useShoppingCart from "../custom-hooks/useShoppingCart";
+import paymentMethods from "../enums/paymentMethods";
 
-const CheckoutForm = ({ width }) => {
+const CheckoutForm = ({ setIsOrderCreated, setResponseData, width }) => {
   const [userData, setUserData] = useState({});
-  const [isAllowedEditing, setIsAllowedEditing] = useState(false);
   const [areas, setAreas] = useState([]);
   const [isAreaChosen, setIsAreaChosen] = useState(false);
   const [cities, setCities] = useState([]);
@@ -59,10 +59,6 @@ const CheckoutForm = ({ width }) => {
     getUser();
   }, [setValue]);
 
-  const handleEditClick = () => {
-    setIsAllowedEditing((prev) => !prev);
-  };
-
   useEffect(() => {
     const getAreas = async () => {
       try {
@@ -78,7 +74,6 @@ const CheckoutForm = ({ width }) => {
 
   useEffect(() => {
     if (area) {
-      console.log(area);
       const getCities = async (ref) => {
         try {
           const response = await novaPostService.getCities(ref);
@@ -91,11 +86,10 @@ const CheckoutForm = ({ width }) => {
 
       getCities(area);
     }
-  }, [area]);
+  }, [area, setValue]);
 
   useEffect(() => {
     if (city) {
-      console.log(city);
       const getWarehouses = async (ref) => {
         try {
           const response = await novaPostService.getWarehouses(ref);
@@ -108,18 +102,41 @@ const CheckoutForm = ({ width }) => {
 
       getWarehouses(city);
     }
-  }, [city]);
+  }, [city, setValue]);
+
+  const { totalPrice, cartId } = useShoppingCart();
 
   const handleSaveChanges = async (data) => {
+    const selectedArea = areas.find((area) => area.Ref === data.area);
+    const selectedCity = cities.find((city) => city.Ref === data.city);
+    const selectedWarehouse = warehouses.find(
+      (warehouse) => warehouse.Ref === data.warehouse,
+    );
+
+    const orderData = {
+      full_name: `${data.lastName} ${data.firstName} ${data.middleName}`,
+      phone_number: data.phoneNumber,
+      email: data.email,
+      region: selectedArea ? selectedArea.Description : data.area,
+      city_town: selectedCity ? selectedCity.Description : data.city,
+      post_office_number: selectedWarehouse
+        ? selectedWarehouse.Description
+        : data.warehouse,
+      total_price: totalPrice,
+      cart: cartId,
+      payment_method: data.paymentMethod,
+    };
+
     try {
-      await orderService.createOrder(data);
-      setIsAllowedEditing(false);
+      const response = await orderService.createOrder(orderData);
+      if (response && response.id) {
+        setResponseData(response);
+        setIsOrderCreated(true);
+      }
     } catch (err) {
       console.error("Error updating user:", err);
     }
   };
-
-  // if (areas.length === 0) return <Typography>Loading..</Typography>;
 
   return (
     <StyledForm
@@ -165,7 +182,6 @@ const CheckoutForm = ({ width }) => {
             }}
             helperText={errors?.lastName ? errors.lastName.message : " "}
             error={!!errors?.lastName}
-            disabled={!isAllowedEditing}
           />
           <StyledFormControlWithTextField
             title="Ім'я"
@@ -189,7 +205,6 @@ const CheckoutForm = ({ width }) => {
             }}
             helperText={errors?.firstName ? errors.firstName.message : " "}
             error={!!errors?.firstName}
-            disabled={!isAllowedEditing}
           />
           <StyledFormControlWithTextField
             title="По батькові"
@@ -213,7 +228,6 @@ const CheckoutForm = ({ width }) => {
             }}
             helperText={errors?.middleName ? errors.middleName.message : " "}
             error={!!errors?.middleName}
-            disabled={!isAllowedEditing}
           />
           <StyledFormControlWithTextField
             title="Пошта"
@@ -238,7 +252,6 @@ const CheckoutForm = ({ width }) => {
             }}
             helperText={errors?.email ? errors.email.message : " "}
             error={!!errors?.email}
-            disabled={!isAllowedEditing}
           />
           <StyledFormControlWithTextField
             title="Номер телефону"
@@ -262,17 +275,7 @@ const CheckoutForm = ({ width }) => {
             }}
             helperText={errors?.phoneNumber ? errors.phoneNumber.message : " "}
             error={!!errors?.phoneNumber}
-            disabled={!isAllowedEditing}
           />
-          <Button variant="contained" size="large" onClick={handleEditClick}>
-            <Typography
-              variant="body2"
-              textTransform="uppercase"
-              fontWeight="bold"
-            >
-              {isAllowedEditing ? "Зберегти" : "Редагувати"}
-            </Typography>
-          </Button>
         </Stack>
       </Stack>
       <Stack
@@ -299,15 +302,6 @@ const CheckoutForm = ({ width }) => {
             selectId="area-select"
             variant="p"
             displayEmpty={true}
-            renderValue={(selected) => {
-              if (!selected) {
-                return "Виберіть область";
-              }
-              return (
-                areas.find((area) => area.Ref === selected)?.Description ||
-                selected
-              );
-            }}
             register={{
               ...register("area", {
                 required: {
@@ -318,11 +312,11 @@ const CheckoutForm = ({ width }) => {
             }}
             defaultValue=""
             gap={2}
-            error={errors?.area}
+            error={!!errors?.area}
             helperText={errors?.area ? errors.area.message : " "}
           >
             <MenuItem disabled value="">
-              <em>Виберіть область</em>
+              Виберіть область
             </MenuItem>
             {areas?.map((area) => (
               <MenuItem key={area.Ref} value={area.Ref}>
@@ -337,15 +331,6 @@ const CheckoutForm = ({ width }) => {
             variant="p"
             defaultValue=""
             displayEmpty={true}
-            renderValue={(selected) => {
-              if (!selected) {
-                return "Виберіть населений пункт";
-              }
-              return (
-                cities.find((city) => city.Ref === selected)?.Description ||
-                selected
-              );
-            }}
             register={{
               ...register("city", {
                 required: {
@@ -356,7 +341,7 @@ const CheckoutForm = ({ width }) => {
             }}
             disabled={!isAreaChosen}
             gap={2}
-            error={errors?.city}
+            error={!!errors?.city}
             helperText={errors?.city ? errors.city.message : " "}
           >
             <MenuItem disabled value="">
@@ -375,15 +360,6 @@ const CheckoutForm = ({ width }) => {
             variant="p"
             defaultValue=""
             displayEmpty={true}
-            renderValue={(selected) => {
-              if (!selected) {
-                return "Виберіть відділення";
-              }
-              return (
-                warehouses.find((warehouse) => warehouse.Ref === selected)
-                  ?.Description || selected
-              );
-            }}
             register={{
               ...register("warehouse", {
                 required: {
@@ -394,7 +370,7 @@ const CheckoutForm = ({ width }) => {
             }}
             disabled={!isCityChosen}
             gap={2}
-            error={errors?.warehouse}
+            error={!!errors?.warehouse}
             helperText={errors?.warehouse ? errors.warehouse.message : " "}
           >
             <MenuItem disabled value="">
@@ -408,41 +384,47 @@ const CheckoutForm = ({ width }) => {
           </StyledFormControlWithSelect>
         </Stack>
       </Stack>
+
       <Stack
         borderRadius={(theme) => theme.shape.containerBorderRadius}
         border={1}
         borderColor="secondary.light"
-        flexDirection="column"
-        width="400px"
+        flexDirection="row"
+        justifyContent="space-between"
+        width={1}
         gap={8}
         px={12}
         py={10}
       >
         <Typography variant="h6" fontWeight="bold">
-          Спосіб оплати
+          Оплата
         </Typography>
-        <Stack>
-          <StyledFormControlWithCheckbox
-            label="Оплатити зараз"
-            disabled={true}
-          />
-          <StyledFormControlWithCheckbox
-            label="Оплатити при отриманні"
-            defaultChecked={true}
+        <Stack flexDirection="row" width={0.7}>
+          <StyledFormControlWithSelect
+            title="Спосіб оплати"
+            variant="p"
+            selectId="payment-method-select"
+            defaultValue={Object.values(paymentMethods)[1]}
             register={{
-              ...register("afterPayment", {
+              ...register("paymentMethod", {
                 required: {
                   value: true,
                   message: "Field is required!",
                 },
               }),
             }}
-          />
-          {errors?.afterPayment && (
-            <Typography color="error" variant="caption">
-              {errors?.afterPayment?.message || ""}
-            </Typography>
-          )}
+            gap={2}
+          >
+            {Object.entries(paymentMethods).map(([key, value]) => (
+              <MenuItem
+                key={key}
+                value={value}
+                disabled={value === "Зараз" ? true : false}
+              >
+                {value}
+              </MenuItem>
+            ))}
+          </StyledFormControlWithSelect>
         </Stack>
       </Stack>
 

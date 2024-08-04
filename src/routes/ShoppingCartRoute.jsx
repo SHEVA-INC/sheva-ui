@@ -14,7 +14,7 @@ const ShoppingCartRoute = () => {
     pageNumber,
     totalPrice,
     handlePageNumberChange,
-    handleItemRemove,
+    handleItemRemoveFromCart,
   } = useShoppingCart();
 
   return (
@@ -29,7 +29,9 @@ const ShoppingCartRoute = () => {
               totalPages={totalPages}
               pageNumber={pageNumber}
               handlePageNumberChange={handlePageNumberChange}
-              handleItemRemove={handleItemRemove}
+              isAllowedToDelete={true}
+              handleItemRemove={handleItemRemoveFromCart}
+              maxWidth={{ xs: "100%", sm: "240px", md: "260px", lg: "300px" }}
             />
             <ShoppingCartTotal
               width={{ xs: 1, sm: 0.3 }}

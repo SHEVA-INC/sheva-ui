@@ -9,7 +9,10 @@ const OrderList = ({
   handlePageNumberChange,
   width,
   fontVariant,
+  fontVariantTitle,
+  isAllowedToDelete,
   handleItemRemove,
+  maxWidth,
 }) => {
   return (
     <Stack gap={5} width={width} alignItems="center">
@@ -28,7 +31,10 @@ const OrderList = ({
           quantity={orderItem.quantity}
           subtotal={orderItem.subtotal}
           fontVariant={fontVariant}
+          fontVariantTitle={fontVariantTitle}
+          isAllowedToDelete={isAllowedToDelete}
           handleItemRemove={handleItemRemove}
+          maxWidth={maxWidth}
         />
       ))}
       {orders.length > 0 && (
