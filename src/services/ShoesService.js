@@ -56,6 +56,10 @@ class ShoesService {
     ).data;
   }
 
+  async deleteShoes(shoesId) {
+    return (await axiosInstance.delete(`boots/list${shoesId}/`)).data;
+  }
+
   async fetchLikedShoes(pageNum, data) {
     return (await axiosInstance.post(`boots/liked/?page=${pageNum}`, data))
       .data;
