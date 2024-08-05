@@ -1,57 +1,132 @@
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import ShoesList from "../components/shoes/ShoesList";
 import ShoesFilterForm from "../forms/ShoesFilterForm";
 import StyledStackForRoutes from "../components/styled/StyledStackForRoutes";
-import { useEffect, useState } from "react";
 import shoesService from "../services/ShoesService";
 import useLikedShoes from "../custom-hooks/useLikedShoes";
 import { Button, Stack, Typography } from "@mui/material";
 import useAuth from "../auth/useAuth";
-import { useNavigate } from "react-router-dom";
 import { ADD_SHOES_ROUTE } from "../app/Routes";
-import { useForm } from "react-hook-form";
 
 const CatalogRoute = () => {
   const [shoesList, setShoesList] = useState([]);
   const [likedItems, handleLikeClick] = useLikedShoes();
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [filterSize, setFilterSize] = useState("");
+  const [filterType, setFilterType] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+
   const { userRole } = useAuth();
   const navigate = useNavigate();
-  const [selectedColor, setSelectedColor] = useState();
-
-  const { register, watch } = useForm({
-    mode: "all",
-  });
-
-  const size = watch("size");
-  const type = watch("type");
+  const location = useLocation();
 
   useEffect(() => {
-    const getShoesList = async (pageNum, shoesColor, shoesSize, shoesType) => {
+    const params = new URLSearchParams(location.search);
+    const page = parseInt(params.get("pageNumber"), 10) || 1;
+    const size = params.get("size") || "";
+    const type = params.get("type") || "";
+    const color = params.get("color") || "";
+
+    setPageNumber(page);
+    setFilterSize(size);
+    setFilterType(type);
+    setSelectedColor(color);
+  }, [location.search]);
+
+  const prevStateRef = useRef({
+    pageNumber,
+    filterSize,
+    filterType,
+    selectedColor,
+  });
+
+  useEffect(() => {
+    const {
+      pageNumber: prevPage,
+      filterSize: prevSize,
+      filterType: prevType,
+      selectedColor: prevColor,
+    } = prevStateRef.current;
+
+    if (
+      prevPage !== pageNumber ||
+      prevSize !== filterSize ||
+      prevType !== filterType ||
+      prevColor !== selectedColor
+    ) {
+      const params = new URLSearchParams();
+      if (pageNumber) params.set("pageNumber", pageNumber);
+      if (filterSize) params.set("size", filterSize);
+      if (filterType) params.set("type", filterType);
+      if (selectedColor) params.set("color", selectedColor);
+
+      navigate(`?${params.toString()}`, { replace: true });
+
+      prevStateRef.current = {
+        pageNumber,
+        filterSize,
+        filterType,
+        selectedColor,
+      };
+    }
+  }, [pageNumber, filterSize, filterType, selectedColor, navigate]);
+
+  useEffect(() => {
+    const getShoesList = async () => {
       try {
         const response = await shoesService.fetchShoesList(
-          pageNum,
-          shoesColor,
-          shoesSize,
-          shoesType,
+          pageNumber,
+          selectedColor,
+          filterSize,
+          filterType,
         );
         setShoesList(response.results);
         setTotalPages(response.total_pages);
-        setPageNumber(response.current_page);
+
+        if (pageNumber > response.total_pages) {
+          setPageNumber(response.total_pages);
+        }
       } catch (error) {
         console.error("Error fetching shoes list:", error);
       }
     };
 
-    getShoesList(pageNumber, selectedColor, size, type);
-  }, [pageNumber, selectedColor, size, type]);
+    getShoesList();
+  }, [pageNumber, selectedColor, filterSize, filterType]);
+
+  const handleFilterChange = (filterName, value) => {
+    switch (filterName) {
+      case "size":
+        setFilterSize(value);
+        break;
+      case "type":
+        setFilterType(value);
+        break;
+      case "color":
+        setSelectedColor(value);
+        break;
+      default:
+        break;
+    }
+
+    setPageNumber(1);
+  };
 
   const handlePageNumberChange = (event, value) => {
     setPageNumber(value);
   };
 
-  const handldeNavigateToManageBootsRoute = () => {
+  const handleNavigateToManageBootsRoute = () => {
     navigate(ADD_SHOES_ROUTE);
+  };
+
+  const handleResetButtonClick = () => {
+    setSelectedColor("");
+    setFilterSize("");
+    setFilterType("");
+    setPageNumber(1);
   };
 
   return (
@@ -60,7 +135,7 @@ const CatalogRoute = () => {
         <Button
           variant="contained"
           size="large"
-          onClick={() => handldeNavigateToManageBootsRoute()}
+          onClick={handleNavigateToManageBootsRoute}
         >
           Додати бутси
         </Button>
@@ -74,10 +149,13 @@ const CatalogRoute = () => {
       >
         <ShoesFilterForm
           order={1}
-          registerSize={{ ...register("size") }}
-          registerType={{ ...register("type") }}
+          filterSize={filterSize}
+          setFilterSize={(value) => handleFilterChange("size", value)}
+          filterType={filterType}
+          setFilterType={(value) => handleFilterChange("type", value)}
           selectedColor={selectedColor}
-          setSelectedColor={setSelectedColor}
+          setSelectedColor={(value) => handleFilterChange("color", value)}
+          onSubmit={handleResetButtonClick}
         />
         {shoesList.length === 0 ? (
           <Typography variant="h5" order={1}>

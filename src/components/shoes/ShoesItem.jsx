@@ -32,7 +32,7 @@ const ShoesItem = ({
   const { register, watch } = useForm({
     mode: "all",
     values: {
-      size: sizes[0]?.size || "",
+      size: `${sizes[0]?.size}` || "",
     },
   });
 
@@ -111,7 +111,7 @@ const ShoesItem = ({
         <StyledFormControlWithSelect
           title="Розмір"
           selectId="size-select-boots"
-          value={selectedSize}
+          value={`${selectedSize}`}
           formControlSize="small"
           onClick={(e) => {
             e.stopPropagation();
@@ -119,8 +119,8 @@ const ShoesItem = ({
           register={{ ...register("size") }}
         >
           {sizes?.map((size) => (
-            <MenuItem key={size?.size} value={size?.size}>
-              {size?.size}
+            <MenuItem key={size?.size} value={`${size?.size}`}>
+              {`${size?.size}`}
             </MenuItem>
           ))}
         </StyledFormControlWithSelect>

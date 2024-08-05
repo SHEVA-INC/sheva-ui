@@ -8,10 +8,13 @@ import shoesTypes from "../enums/shoesTypes";
 
 const ShoesFilterForm = ({
   order,
-  registerType,
-  registerSize,
+  filterType,
+  setFilterType,
+  filterSize,
+  setFilterSize,
   selectedColor,
   setSelectedColor,
+  onSubmit,
 }) => {
   return (
     <StyledForm
@@ -22,14 +25,15 @@ const ShoesFilterForm = ({
       maxWidth="340px"
       boxShadow="0 0 10px 10px rgba(0, 0, 0, 0.03)"
       borderRadius={(theme) => theme.shape.containerBorderRadius}
+      onSubmit={onSubmit}
     >
       <StyledFormControlWithSelect
         title="Тип"
         selectId="filter-type-select"
         formControlSize="small"
         gap={4}
-        register={registerType}
-        defaultValue=""
+        value={filterType}
+        onChange={(e) => setFilterType(e.target.value)}
         displayEmpty={true}
       >
         <MenuItem disabled value="">
@@ -47,8 +51,8 @@ const ShoesFilterForm = ({
         selectId="filter-size-select"
         formControlSize="small"
         gap={4}
-        register={registerSize}
-        defaultValue=""
+        value={filterSize}
+        onChange={(e) => setFilterSize(e.target.value)}
         displayEmpty={true}
       >
         <MenuItem disabled value="">
@@ -70,7 +74,7 @@ const ShoesFilterForm = ({
         setSelectedColor={setSelectedColor}
       />
 
-      <Button variant="contained" sx={{ width: 1 }}>
+      <Button variant="contained" sx={{ width: 1 }} type="submit">
         <Typography variant="h6" fontWeight="bold">
           Скинути
         </Typography>
