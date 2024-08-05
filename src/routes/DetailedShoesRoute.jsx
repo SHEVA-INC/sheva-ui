@@ -6,7 +6,6 @@ import shoesService from "../services/ShoesService";
 
 const DetailedShoesRoute = () => {
   const [newShoes, setNewShoes] = useState([]);
-  const [popularShoes, setPopularShoes] = useState([]);
 
   useEffect(() => {
     const getNewShoes = async () => {
@@ -21,27 +20,10 @@ const DetailedShoesRoute = () => {
     getNewShoes();
   }, []);
 
-  useEffect(() => {
-    const getPopularShoes = async () => {
-      try {
-        const response = await shoesService.fetchPopularShoes();
-        setPopularShoes(response);
-      } catch (error) {
-        console.error("Error fetching popualar shoes:", error);
-      }
-    };
-
-    getPopularShoes();
-  }, []);
-
   return (
     <StyledStackForRoutes>
       <ShoesDetails />
-      <ShoesCarousel title="Рекомендовані" shoesCarouselData={newShoes} />
-      <ShoesCarousel
-        title="Нещодавно переглянуті"
-        shoesCarouselData={popularShoes}
-      />
+      <ShoesCarousel title="Новинки" shoesCarouselData={newShoes} />
     </StyledStackForRoutes>
   );
 };
