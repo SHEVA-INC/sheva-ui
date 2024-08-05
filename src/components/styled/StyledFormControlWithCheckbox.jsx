@@ -4,19 +4,23 @@ import CheckboxBlankIcon from "../../icons/CheckboxBlankIcon";
 const StyledFormControlWithCheckbox = ({
   label,
   value,
-  defaultChecked,
+  defaultValue,
+  checked,
   register,
   disabled,
 }) => {
   return (
     <FormControlLabel
+      {...register}
       label={label}
       disabled={disabled}
+      value={value}
+      defaultValue={defaultValue}
       control={
         <Checkbox
-          {...register}
           value={value}
-          defaultChecked={defaultChecked}
+          defaultValue={defaultValue}
+          checked={checked}
           size="small"
           color="primary"
           icon={<CheckboxBlankIcon fill="#F3F6F9" />}

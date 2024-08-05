@@ -31,23 +31,11 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
     setSizes(newSizes);
   };
 
-  useEffect(() => {
-    const getShoesDetails = async () => {
-      try {
-        const response = await shoesService.fetchShoesDetails(shoesId);
-        setShoesDetails(response);
-        setSizes(response.sizes);
-      } catch (error) {
-        console.error("Error fetching shoes details:", error);
-      }
-    };
-
-    getShoesDetails();
-  }, [shoesId]);
-
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm({
     values: {
@@ -57,9 +45,47 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
       price: shoesDetails?.price || "",
       color: shoesDetails?.color || "",
       description: shoesDetails?.description || "",
+      new: shoesDetails?.new || false,
+      popular: shoesDetails?.popular || false,
+    },
+    defaultValues: {
+      name: shoesDetails?.name || "",
+      brand: shoesDetails?.brand || "",
+      type: shoesDetails?.type || "",
+      price: shoesDetails?.price || "",
+      color: shoesDetails?.color || "",
+      description: shoesDetails?.description || "",
+      isNew: shoesDetails?.new || false,
+      isPopular: shoesDetails?.popular || false,
     },
     mode: "onBlur",
   });
+
+  useEffect(() => {
+    const getShoesDetails = async () => {
+      try {
+        const response = await shoesService.fetchShoesDetails(shoesId);
+        setShoesDetails(response);
+        setSizes(response.sizes);
+
+        setValue("name", response.name);
+        setValue("brand", response.brand);
+        setValue("type", response.type);
+        setValue("price", response.price);
+        setValue("color", response.color);
+        setValue("description", response.description);
+        setValue("isNew", response.new);
+        setValue("isPopular", response.popular);
+      } catch (error) {
+        console.error("Error fetching shoes details:", error);
+      }
+    };
+
+    getShoesDetails();
+  }, [shoesId, setValue]);
+
+  const isNew = watch("isNew");
+  const isPopular = watch("isPopular");
 
   const onSubmit = async (data) => {
     const updatedData = {
@@ -68,16 +94,12 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
         size: size.size,
         stock: size.stock,
       })),
+      new: isNew,
+      popular: isPopular,
     };
 
-    console.log(updatedData);
-
     try {
-      const response = await shoesService.updateShoesDetails(
-        shoesId,
-        updatedData,
-      );
-      console.log(response);
+      await shoesService.updateShoesDetails(shoesId, updatedData);
     } catch (error) {
       console.error("Error updating shoes details:", error);
     }
@@ -233,7 +255,8 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
 
       <Stack>
         <StyledFormControlWithCheckbox
-          register={{ ...register("new") }}
+          register={{ ...register("isNew") }}
+          checked={Boolean(isNew)}
           label={
             <Typography fontWeight="bold" variant="body1">
               Нове
@@ -241,7 +264,8 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
           }
         />
         <StyledFormControlWithCheckbox
-          register={{ ...register("popular") }}
+          register={{ ...register("isPopular") }}
+          checked={Boolean(isPopular)}
           label={
             <Typography fontWeight="bold" variant="body1">
               Популярне
@@ -254,7 +278,7 @@ const EditDetailsShoesDataForm = ({ shoesId }) => {
         variant="contained"
         size="large"
         type="submit"
-        sx={{ alignSelf: "flex-start" }}
+        sx={{ alignSelf: "flex-end" }}
       >
         <Typography variant="body2" textTransform="uppercase" fontWeight="bold">
           Зберегти
