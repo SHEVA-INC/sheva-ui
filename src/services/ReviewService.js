@@ -12,6 +12,11 @@ class ReviewService {
   async deleteReview(reviewId) {
     return (await axiosInstance.delete(`reviews/delete/${reviewId}`)).data;
   }
+
+  async deleteReviewByAdmin(reviewId) {
+    return (await axiosInstance.delete(`reviews/delete/admin/${reviewId}`))
+      .data;
+  }
 }
 
 const reviewService = new ReviewService();

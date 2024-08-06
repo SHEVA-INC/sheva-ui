@@ -2,6 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import ReviewItem from "./ReviewItem";
 import reviewService from "../../services/ReviewService";
 import StyledPagination from "../styled/StyledPagination";
+import useAuth from "../../auth/useAuth";
 
 const ReviewsList = ({
   id,
@@ -12,12 +13,19 @@ const ReviewsList = ({
   pageNumber,
   handlePageNumberChange,
 }) => {
+  const { userRole } = useAuth();
+
   const handleDeleteReviewClick = async (reviewId) => {
     try {
-      await reviewService.deleteReview(reviewId);
-      setIsReviewDeleted((prev) => !prev);
+      if (userRole === "admin") {
+        await reviewService.deleteReviewByAdmin(reviewId);
+        setIsReviewDeleted((prev) => !prev);
+      } else {
+        await reviewService.deleteReview(reviewId);
+        setIsReviewDeleted((prev) => !prev);
+      }
     } catch (error) {
-      console.error("Error fetching shoes list:", error);
+      console.error("Error deleting review:", error);
     }
   };
 
