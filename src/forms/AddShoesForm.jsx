@@ -18,6 +18,8 @@ import shoesService from "../services/ShoesService";
 import shoesColors from "../enums/shoesColors";
 import StyledFileDropzone from "../components/styled/StyledFileDropzone";
 import StyledFilesDropzone from "../components/styled/StyledFilesDropzone";
+import { useNavigate } from "react-router-dom";
+import { CATALOG_ROUTE } from "../app/Routes";
 
 const AddShoesForm = () => {
   const [sizes, setSizes] = useState([]);
@@ -25,6 +27,8 @@ const AddShoesForm = () => {
   const [uploadedMainImage, setUploadedMainImage] = useState(null);
   const [isEditPhotosOpen, setIsEditPhotosOpen] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleEditPhotosClose = () => {
     setIsEditPhotosOpen(false);
@@ -103,17 +107,7 @@ const AddShoesForm = () => {
 
     try {
       await shoesService.createShoes(formData);
-      setValue("name", "");
-      setValue("brand", Object.keys(shoesBrands)[0]);
-      setValue("type", Object.values(shoesTypes)[0]);
-      setValue("color", Object.keys(shoesColors)[0]);
-      setValue("price", "");
-      setValue("description", "");
-      setValue("main_image", {});
-      setValue("images", []);
-      setSizes([]);
-      setUploadedMainImage(null);
-      setUploadedImages([]);
+      navigate(CATALOG_ROUTE);
     } catch (error) {
       console.error("Error creating shoes:", error);
     }
@@ -292,7 +286,6 @@ const AddShoesForm = () => {
           {uploadedImages.length > 0 ? "Редагувати фото" : "Додати Фото"}
         </Button>
         <StyledFilesDropzone
-          accept="image/*"
           open={isEditPhotosOpen}
           onClose={handleEditPhotosClose}
           onFileChange={handleImagesChange}
