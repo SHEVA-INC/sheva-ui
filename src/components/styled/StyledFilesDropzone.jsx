@@ -40,7 +40,7 @@ const StyledFilesDropzone = ({
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
-      <DialogTitle>Edit Photo</DialogTitle>
+      <DialogTitle>Редагувати</DialogTitle>
       <DialogContent>
         <div
           {...getRootProps()}
@@ -54,21 +54,21 @@ const StyledFilesDropzone = ({
           <Typography variant="body1">
             {uploadedFiles && uploadedFiles.length > 0 ? (
               <span>
-                Uploaded:{" "}
+                Завантажено:{" "}
                 {Array.isArray(uploadedFiles)
                   ? uploadedFiles.map((file) => file.name).join(", ")
                   : uploadedFiles.name}
               </span>
             ) : (
-              <Link>Choose photos</Link>
+              <Link>Оберіть хоча б 3 фото:</Link>
             )}
           </Typography>
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onClose}>Відмінити</Button>
         <Button onClick={handleSave} disabled={!uploadedFiles.length === 0}>
-          Save
+          Зберегти
         </Button>
       </DialogActions>
     </Dialog>

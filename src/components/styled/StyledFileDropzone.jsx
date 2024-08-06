@@ -62,9 +62,9 @@ const StyledFileDropzone = ({
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onClose}>Відмінити</Button>
         <Button onClick={handleSave} disabled={!uploadedFile}>
-          Save
+          Зберегти
         </Button>
       </DialogActions>
     </Dialog>
