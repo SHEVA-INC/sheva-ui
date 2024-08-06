@@ -48,7 +48,7 @@ const ShoppingCartRoute = () => {
             gap={4}
           >
             <Typography variant="h6">
-              Почніть додавати улюблені товари
+              Додайте товар в корзину, щоб оформити замовлення
             </Typography>
             <Link
               component={RouterLink}

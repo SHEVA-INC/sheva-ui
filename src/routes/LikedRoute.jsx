@@ -44,7 +44,7 @@ const LikedRoute = () => {
         gap={6}
         flex={1}
       >
-        {likedItems.length === 0 ? (
+        {likedShoesList.length === 0 ? (
           <Stack
             width={1}
             minHeight={1}
