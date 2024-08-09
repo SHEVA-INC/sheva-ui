@@ -65,7 +65,7 @@ const ShoesItem = ({
           width="100%"
           minWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "380px" }}
           maxWidth={{ xs: "100%", sm: "320px", md: "300px", lg: "380px" }}
-          sx={{ aspectRatio: "4.5 / 3", objectFit: "cover" }}
+          sx={{ aspectRatio: 4.5 / 3, objectFit: "cover" }}
         />
         <Stack
           flexDirection={{ xs: "row", lg: "column" }}
@@ -81,7 +81,7 @@ const ShoesItem = ({
               src={image.image_url}
               alt={image.image_url}
               width={{ xs: "calc(100%/3)", sm: "100px" }}
-              sx={{ aspectRatio: "4.5 / 3", objectFit: "cover" }}
+              sx={{ aspectRatio: 4.5 / 3, objectFit: "cover" }}
             />
           ))}
         </Stack>

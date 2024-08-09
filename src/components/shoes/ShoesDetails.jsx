@@ -186,28 +186,38 @@ const ShoesDetails = () => {
           width={1}
           gap={8}
         >
-          <Typography variant="h6">{shoesDetails.description}</Typography>
+          <Typography variant="h6" width={0.5}>
+            {shoesDetails.description}
+          </Typography>
           <Stack width={{ xs: 1, sm: 0.5 }} gap={4}>
             <Stack
-              width={0.5}
-              alignSelf={{ xs: "flex-start", sm: "center", md: "flex-start" }}
+              width={1}
+              alignItems={{ xs: "flex-start", sm: "center", md: "flex-start" }}
             >
               <Box
                 component="img"
                 src={shoesDetails.images[1].image_url}
                 alt={shoesDetails.name}
-                sx={{ aspectRatio: 4.5 / 3 }}
+                sx={{
+                  width: 0.5,
+                  aspectRatio: 4.5 / 3,
+                  objectFit: "cover",
+                }}
               />
             </Stack>
             <Stack
-              width={0.5}
-              alignSelf={{ xs: "flex-end", sm: "center", md: "flex-end" }}
+              width={1}
+              alignItems={{ xs: "flex-end", sm: "center", md: "flex-end" }}
             >
               <Box
                 component="img"
                 src={shoesDetails.images[2].image_url}
                 alt={shoesDetails.name}
-                sx={{ aspectRatio: 4.5 / 3 }}
+                sx={{
+                  width: 0.5,
+                  aspectRatio: 4.5 / 3,
+                  objectFit: "cover",
+                }}
               />
             </Stack>
           </Stack>
