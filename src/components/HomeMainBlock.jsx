@@ -199,7 +199,7 @@ const HomeMainBlock = () => {
                   color="primary.contrastText"
                   fontWeight="bold"
                 >
-                  Lorem ipsum dolor
+                  Ви знаєте, що таке досконалість?
                 </Typography>
                 <Typography variant="caption" color="primary.contrastText">
                   Ці бутси створені для тих, хто прагне досконалості на полі.

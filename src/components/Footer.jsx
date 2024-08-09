@@ -16,22 +16,16 @@ const socials = [
     socialId: 0,
   },
   {
-    socialName: "Instagram",
+    socialName: "@sheva.lviv",
     linkTo: "https://www.instagram.com/sheva.lviv",
     icon: <InstagramIcon color="white" fontSize="medium" />,
     socialId: 1,
   },
   {
-    socialName: "Instagram",
+    socialName: "@sheva.boots",
     linkTo: "https://www.instagram.com/sheva.boots",
     icon: <InstagramIcon color="white" fontSize="medium" />,
     socialId: 2,
-  },
-  {
-    socialName: "Prom",
-    linkTo: "https://sheva.prom.ua/ua/",
-    icon: <PromIcon color="white" fontSize="medium" />,
-    socialId: 3,
   },
 ];
 
@@ -83,6 +77,7 @@ const Footer = () => {
                 component={RouterLink}
                 color="primary.contrastText"
                 underline="none"
+                target="_blank"
               >
                 {social.socialName}
               </Link>
