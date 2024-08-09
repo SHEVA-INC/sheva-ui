@@ -1,5 +1,5 @@
 import { Button, Link, Typography } from "@mui/material";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import StyledForm from "../components/styled/StyledForm";
 import StyledFormControlWithTextField from "../components/styled/StyledFormControlWithTextField";
 import ArrowIcon from "../icons/ArrowIcon";
@@ -8,8 +8,13 @@ import useAuth from "../auth/useAuth";
 import { HOME_ROUTE } from "../app/Routes";
 import { useForm } from "react-hook-form";
 import StyledFormControlWithCheckbox from "../components/styled/StyledFormControlWithCheckbox";
+import PrivacyPolicyDialog from "../components/PrivacyPolicyDialog";
+import { useState } from "react";
 
 const SignUpForm = () => {
+  const [isPrivacyPolicyDialogOpen, setIsPrivacyPolicyDialogOpen] =
+    useState(false);
+
   const {
     register,
     handleSubmit,
@@ -134,28 +139,25 @@ const SignUpForm = () => {
       <StyledFormControlWithCheckbox
         register={{ ...register("agree") }}
         label={
-          <Typography>
-            Ви погоджуєтеся з{" "}
+          <Typography variant="body2">
+            Я погоджуюся з{" "}
             <Link
-              to={"#"}
-              component={RouterLink}
               underline="none"
               color="info.light"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsPrivacyPolicyDialogOpen(true);
+              }}
             >
-              Terms of Condition{" "}
-            </Link>
-            та{" "}
-            <Link
-              to={"#"}
-              component={RouterLink}
-              underline="none"
-              color="info.light"
-            >
-              Privacy Policy
+              Політикою конфіденційності
             </Link>
             .
           </Typography>
         }
+      />
+      <PrivacyPolicyDialog
+        open={isPrivacyPolicyDialogOpen}
+        onClose={() => setIsPrivacyPolicyDialogOpen(false)}
       />
       <Button
         disabled={!agree}
