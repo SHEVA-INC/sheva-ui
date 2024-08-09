@@ -63,10 +63,6 @@ const ShoesCarousel = ({ title, shoesCarouselData, id }) => {
 
   const handleShoesItemClick = (shoesId) => {
     navigate(`${DETAILED_SHOES_ROUTE.replace(":shoesId", shoesId)}`);
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   };
 
   return (

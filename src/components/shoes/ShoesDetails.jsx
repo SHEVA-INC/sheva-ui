@@ -186,7 +186,7 @@ const ShoesDetails = () => {
           width={1}
           gap={8}
         >
-          <Typography variant="h6" width={0.5}>
+          <Typography variant="h6" width={{ xs: 1, sm: 0.5 }}>
             {shoesDetails.description}
           </Typography>
           <Stack width={{ xs: 1, sm: 0.5 }} gap={4}>
