@@ -23,6 +23,5 @@
 **/secrets.dev.yaml
 **/values.dev.yaml
 **/build
-**/dist
 LICENSE
 README.md
