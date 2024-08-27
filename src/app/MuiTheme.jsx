@@ -101,6 +101,24 @@ let theme = createTheme({
         }),
       },
     },
+    MuiListSubheader: {
+      styleOverrides: {
+        root: () => ({
+          padding: 4,
+        }),
+      },
+      defaultProps: {
+        disableSticky: true,
+        disableGutters: true,
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: () => ({
+          padding: 4,
+        }),
+      },
+    },
   },
 });
 
@@ -155,15 +173,15 @@ theme = createTheme(theme, {
       },
     },
     h5: {
-      fontSize: "1.5rem",
+      fontSize: "1.8rem",
       [theme.breakpoints.down("md")]: {
-        fontSize: "1.125rem",
+        fontSize: "1.5rem",
       },
       [theme.breakpoints.up("md")]: {
-        fontSize: "1.25rem",
+        fontSize: "1.75rem",
       },
       [theme.breakpoints.up("lg")]: {
-        fontSize: "1.5rem",
+        fontSize: "1.8rem",
       },
     },
     h6: {

@@ -143,7 +143,7 @@ const SignUpForm = () => {
             Я погоджуюся з{" "}
             <Link
               underline="none"
-              color="info.light"
+              sx={{ "&:hover": { textDecoration: "underline" } }}
               onClick={(e) => {
                 e.preventDefault();
                 setIsPrivacyPolicyDialogOpen(true);

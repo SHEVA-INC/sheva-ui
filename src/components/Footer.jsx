@@ -3,10 +3,14 @@ import FooterLogo from "../../src/assets/footer-logo.svg";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import TikTokIcon from "../icons/socials/TikTokIcon";
 import InstagramIcon from "../icons/socials/InstagramIcon";
-import PromIcon from "../icons/socials/PromIcon";
 import PhoneIcon from "../icons/contacts/PhoneIcon";
 import EmailIcon from "../icons/contacts/EmailIcon";
-import { HOME_ROUTE } from "../app/Routes";
+import {
+  EXCHANGE_RETURN_POLICY_ROUTE,
+  HOME_ROUTE,
+  PAYMENT_AND_DELIVERY_POLICY_ROUTE,
+  PRIVACY_POLICY_ROUTE,
+} from "../app/Routes";
 
 const socials = [
   {
@@ -90,11 +94,11 @@ const Footer = () => {
             <PhoneIcon color="white" fontSize="medium" />
             <Stack>
               <Link
-                href="tel:+380633469440"
+                href="tel:+380989243843"
                 color="primary.contrastText"
                 underline="none"
               >
-                +380 63 346 94 40
+                +380 98 924 38 43
               </Link>
               <Link
                 href="tel:+380930953452"
@@ -118,13 +122,46 @@ const Footer = () => {
           </Stack>
         </Stack>
 
-        <Typography
-          color="primary.contrastText"
-          maxWidth={{ xs: "100%", md: "140px" }}
-        >
-          Працюємо з <strong>10:00</strong> до{" "}
-          <strong>22:00 без вихідних</strong>
-        </Typography>
+        <Stack gap={4} p={2}>
+          <Stack color="primary.contrastText">
+            <Typography>
+              Будні: <strong>10-18</strong>
+            </Typography>
+            <Typography>
+              Вихідні: <strong>11-15</strong>
+            </Typography>
+          </Stack>
+          <Link
+            component={RouterLink}
+            to={PRIVACY_POLICY_ROUTE}
+            underline="none"
+            color="thirdly.main"
+            variant="body2"
+            sx={{ "&:hover": { textDecoration: "underline" } }}
+          >
+            Політика конфіденційності
+          </Link>
+          <Link
+            component={RouterLink}
+            to={PAYMENT_AND_DELIVERY_POLICY_ROUTE}
+            underline="none"
+            color="thirdly.main"
+            variant="body2"
+            sx={{ "&:hover": { textDecoration: "underline" } }}
+          >
+            Оплата і доставка
+          </Link>
+          <Link
+            component={RouterLink}
+            to={EXCHANGE_RETURN_POLICY_ROUTE}
+            underline="none"
+            color="thirdly.main"
+            variant="body2"
+            sx={{ "&:hover": { textDecoration: "underline" } }}
+          >
+            Умови обміну/повернення
+          </Link>
+        </Stack>
       </Stack>
     </Stack>
   );
