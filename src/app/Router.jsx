@@ -10,12 +10,15 @@ import {
   CATALOG_ROUTE,
   CHECKOUT_ROUTE,
   DETAILED_SHOES_ROUTE,
+  EXCHANGE_RETURN_POLICY_ROUTE,
   FORGOT_PASSWORD_ROUTE,
   HOME_ROUTE,
   LIKED_ROUTE,
   MAIN_ROUTE,
   MANAGE_SHOES_DETAILS_ROUTE,
   NOT_FOUND_ROUTE,
+  PAYMENT_AND_DELIVERY_POLICY_ROUTE,
+  PRIVACY_POLICY_ROUTE,
   PROFILE_ROUTE,
   RESET_PASSWORD_ROUTE,
   SHOPPING_CART_ROUTE,
@@ -25,6 +28,8 @@ import {
 } from "./Routes";
 import useAuth from "../auth/useAuth";
 import RequireAuth from "../auth/RequireAuth";
+import PaymentDeliveryPolicyRoute from "../routes/PaymentDeliveryPolicyRoute";
+import ExchangeReturnPolicyRoute from "../routes/ExchangeReturnPolicyRoute";
 
 const HomeRoute = lazy(() => import("../routes/HomeRoute"));
 const CatalogRoute = lazy(() => import("../routes/CatalogRoute"));
@@ -43,6 +48,7 @@ const SignOutRoute = lazy(() => import("../routes/SignOutRoute"));
 const ManageShoesRoute = lazy(() => import("../routes/ManageShoesRoute"));
 const AddShoesRoute = lazy(() => import("../routes/AddShoesRoute"));
 const CheckoutRoute = lazy(() => import("../routes/CheckoutRoute"));
+const PrivacyPolicyRoute = lazy(() => import("../routes/PrivacyPolicyRoute"));
 
 const Router = () => {
   const { authorized, userRole } = useAuth();
@@ -67,6 +73,19 @@ const Router = () => {
                 element={<DetailedShoesRoute />}
               />
               <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
+
+              <Route
+                path={PRIVACY_POLICY_ROUTE}
+                element={<PrivacyPolicyRoute />}
+              />
+              <Route
+                path={PAYMENT_AND_DELIVERY_POLICY_ROUTE}
+                element={<PaymentDeliveryPolicyRoute />}
+              />
+              <Route
+                path={EXCHANGE_RETURN_POLICY_ROUTE}
+                element={<ExchangeReturnPolicyRoute />}
+              />
             </Route>
 
             <Route path={MAIN_ROUTE} element={<AuthLayout />}>
@@ -106,6 +125,19 @@ const Router = () => {
                 element={<DetailedShoesRoute />}
               />
               <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
+
+              <Route
+                path={PRIVACY_POLICY_ROUTE}
+                element={<PrivacyPolicyRoute />}
+              />
+              <Route
+                path={PAYMENT_AND_DELIVERY_POLICY_ROUTE}
+                element={<PaymentDeliveryPolicyRoute />}
+              />
+              <Route
+                path={EXCHANGE_RETURN_POLICY_ROUTE}
+                element={<ExchangeReturnPolicyRoute />}
+              />
 
               <Route
                 path={SHOPPING_CART_ROUTE}

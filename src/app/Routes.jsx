@@ -21,6 +21,10 @@ export const PROFILE_ROUTE = "/profile";
 export const SHOPPING_CART_ROUTE = "/shopping-cart";
 export const CHECKOUT_ROUTE = "/checkout";
 
+export const PRIVACY_POLICY_ROUTE = "/privacy-policy";
+export const PAYMENT_AND_DELIVERY_POLICY_ROUTE = "/payment-and-delivery-policy";
+export const EXCHANGE_RETURN_POLICY_ROUTE = "/exchange-and-return-policy";
+
 //admin
 export const ADD_SHOES_ROUTE = "/add-shoes-route";
 export const MANAGE_SHOES_DETAILS_ROUTE = "/manage-boots-details/:shoesId";

@@ -19,7 +19,11 @@ const ShoesSmallItem = ({ imageSrc, name, description }) => {
       sx={{ cursor: "pointer" }}
       onClick={() => navigate(CATALOG_ROUTE)}
     >
-      <img src={imageSrc} alt={name} style={{ width: "90px" }} />
+      <img
+        src={imageSrc}
+        alt={name}
+        style={{ width: "90px", aspectRatio: 4.5 / 3 }}
+      />
       <Stack>
         <Typography variant="h6" fontWeight="bold">
           {name}

@@ -4,19 +4,37 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  useMediaQuery,
 } from "@mui/material";
 import PrivacyPolicyContent from "./PrivacyPolicyContent";
+import { useTheme } from "@emotion/react";
 
 const PrivacyPolicyDialog = ({ open, onClose }) => {
+  const theme = useTheme();
+  const xs = useMediaQuery(theme.breakpoints.only("xs"));
+  const subheaderVariant = xs ? "body1" : "h6";
+  const dialogTitleVariant = xs ? "h5" : "h4";
+
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle variant="h4" fontWeight="bold" sx={{ pt: 14, pb: 8, px: 8 }}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      sx={{
+        ".MuiDialog-paperScrollPaper": {
+          px: { xs: 1, md: 8 },
+          py: { xs: 1, md: 8 },
+        },
+      }}
+    >
+      <DialogTitle variant={dialogTitleVariant} fontWeight="bold">
         Політика конфіденційності
       </DialogTitle>
       <DialogContent>
-        <PrivacyPolicyContent />
+        <PrivacyPolicyContent subheaderVariant={subheaderVariant} />
       </DialogContent>
-      <DialogActions sx={{ pb: 14, pt: 8, px: 8 }}>
+      <DialogActions sx={{ px: 6 }}>
         <Button onClick={onClose} variant="contained">
           Закрити
         </Button>
