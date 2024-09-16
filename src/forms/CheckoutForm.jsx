@@ -9,8 +9,9 @@ import novaPostService from "../services/NovaPostService";
 import StyledFormControlWithSelect from "../components/styled/StyledFormControlWithSelect";
 import useShoppingCart from "../custom-hooks/useShoppingCart";
 import paymentMethods from "../enums/paymentMethods";
+import paymentService from "../services/PaymentService";
 
-const CheckoutForm = ({ setIsOrderCreated, setResponseData, width }) => {
+const CheckoutForm = ({ width }) => {
   const [userData, setUserData] = useState({});
   const [areas, setAreas] = useState([]);
   const [isAreaChosen, setIsAreaChosen] = useState(false);
@@ -129,12 +130,22 @@ const CheckoutForm = ({ setIsOrderCreated, setResponseData, width }) => {
 
     try {
       const response = await orderService.createOrder(orderData);
+
       if (response && response.id) {
-        setResponseData(response);
-        setIsOrderCreated(true);
+
+        if (orderData.payment_method === "Зараз") {
+          try {
+            const res = await paymentService.createPayment(response.id);
+            if (res && res.pageUrl) {
+              window.location.href = res.pageUrl;
+            }
+          } catch (err) {
+            console.error("Error processing payment:", err);
+          }
+        }
       }
     } catch (err) {
-      console.error("Error updating user:", err);
+      console.error("Error creating order:", err);
     }
   };
 
@@ -416,11 +427,7 @@ const CheckoutForm = ({ setIsOrderCreated, setResponseData, width }) => {
             gap={2}
           >
             {Object.entries(paymentMethods).map(([key, value]) => (
-              <MenuItem
-                key={key}
-                value={value}
-                disabled={value === "Зараз" ? true : false}
-              >
+              <MenuItem key={key} value={value}>
                 {value}
               </MenuItem>
             ))}

@@ -188,14 +188,6 @@ const AddShoesForm = () => {
               value: true,
               message: "Field is required!",
             },
-            min: {
-              value: 100,
-              message: "Min value is 100!",
-            },
-            max: {
-              value: 10000,
-              message: "Max value is 10000!",
-            },
           }),
         }}
         error={!!errors?.price}
