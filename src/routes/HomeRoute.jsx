@@ -126,7 +126,7 @@ const HomeRoute = () => {
             alignItems="center"
           >
             <ShoesSmallList
-              title="Сьогоднішній розпродаж"
+              title="Розпродаж"
               shoesSmallData={ShoesSmallData1}
             />
             <ShoesAdItem

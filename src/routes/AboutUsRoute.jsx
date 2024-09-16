@@ -19,10 +19,7 @@ const AboutUsRoute = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <ShoesSmallList
-          title="Сьогоднішній розпродаж"
-          shoesSmallData={ShoesSmallData1}
-        />
+        <ShoesSmallList title="Розпродаж" shoesSmallData={ShoesSmallData1} />
         <ShoesSmallList title="Бестселери" shoesSmallData={ShoesSmallData2} />
         <ShoesSmallList
           title="Найкращі рейтинги"
