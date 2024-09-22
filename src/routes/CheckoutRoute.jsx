@@ -5,9 +5,13 @@ import CheckoutForm from "../forms/CheckoutForm";
 import OrderList from "../components/order/OrderList";
 import OrderTotal from "../components/OrderTotal";
 import useShoppingCart from "../custom-hooks/useShoppingCart";
-
+import { useState } from "react";
+import OrderDetails from "../components/order/OrderDetails";
 
 const CheckoutRoute = () => {
+  const [isOrderCreated, setIsOrderCreated] = useState(false);
+  const [responseData, setResponseData] = useState(null);
+
   const {
     shoppingCartList: ordersList,
     totalPages: ordersTotalPages,
@@ -16,6 +20,20 @@ const CheckoutRoute = () => {
     handlePageNumberChange,
   } = useShoppingCart();
 
+  if (isOrderCreated)
+    return (
+      <OrderDetails
+        phoneNumber={responseData.phone_number}
+        email={responseData.email}
+        fullName={responseData.full_name}
+        area={responseData.region}
+        city={responseData.city_town}
+        warehouse={responseData.post_office_number}
+        paymentMethod={responseData.payment_method}
+        date={responseData.created_at}
+      />
+    );
+    
   return (
     <StyledStackForRoutes>
       <StyledTitle title="Оформити замовлення" />
@@ -34,6 +52,8 @@ const CheckoutRoute = () => {
           />
         </Stack>
         <CheckoutForm
+          setIsOrderCreated={setIsOrderCreated}
+          setResponseData={setResponseData}
           width={{ xs: 1, md: 0.6 }}
         />
       </Stack>

@@ -11,13 +11,14 @@ import useShoppingCart from "../custom-hooks/useShoppingCart";
 import paymentMethods from "../enums/paymentMethods";
 import paymentService from "../services/PaymentService";
 
-const CheckoutForm = ({ width }) => {
+const CheckoutForm = ({ setIsOrderCreated, setResponseData, width }) => {
   const [userData, setUserData] = useState({});
   const [areas, setAreas] = useState([]);
   const [isAreaChosen, setIsAreaChosen] = useState(false);
   const [cities, setCities] = useState([]);
   const [isCityChosen, setIsCityChosen] = useState(false);
   const [warehouses, setWarehouses] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -129,21 +130,27 @@ const CheckoutForm = ({ width }) => {
     };
 
     try {
+      if (isSubmitting) return;
+      setIsSubmitting(true); 
       const response = await orderService.createOrder(orderData);
 
       if (response && response.id) {
-
         if (orderData.payment_method === "Зараз") {
           try {
             const res = await paymentService.createPayment(response.id);
             if (res && res.pageUrl) {
               window.location.href = res.pageUrl;
+              setIsSubmitting(false);
             }
           } catch (err) {
             console.error("Error processing payment:", err);
           }
+        } else {
+          setResponseData(response);
+          setIsOrderCreated(true);
         }
       }
+
     } catch (err) {
       console.error("Error creating order:", err);
     }
@@ -435,9 +442,9 @@ const CheckoutForm = ({ width }) => {
         </Stack>
       </Stack>
 
-      <Button variant="contained" size="large" type="submit">
+      <Button variant="contained" size="large" type="submit" disabled={isSubmitting} >
         <Typography variant="body2" textTransform="uppercase" fontWeight="bold">
-          Зберегти
+        {isSubmitting ? "Підготовка.." : "Зберегти"}
         </Typography>
       </Button>
     </StyledForm>
