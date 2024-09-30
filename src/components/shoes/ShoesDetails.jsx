@@ -89,6 +89,8 @@ const ShoesDetails = () => {
     navigate(MANAGE_SHOES_DETAILS_ROUTE.replace(":shoesId", id));
   };
 
+  const descriptionParagraphs = shoesDetails.description.split("/n");
+
   return (
     <Stack gap={6}>
       {userRole === "admin" && (
@@ -186,9 +188,13 @@ const ShoesDetails = () => {
           width={1}
           gap={8}
         >
-          <Typography variant="h6" width={{ xs: 1, sm: 0.5 }}>
-            {shoesDetails.description}
-          </Typography>
+          <Stack width={{ xs: 1, sm: 0.5 }}>
+            {descriptionParagraphs.map((paragraph, index) => (
+              <Typography key={index} variant="h6" sx={{ textIndent: "2em" }}>
+                {paragraph}
+              </Typography>
+            ))}
+          </Stack>
           <Stack width={{ xs: 1, sm: 0.5 }} gap={4}>
             <Stack
               width={1}
