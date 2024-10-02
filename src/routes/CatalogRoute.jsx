@@ -16,6 +16,7 @@ const CatalogRoute = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [filterSize, setFilterSize] = useState("");
   const [filterType, setFilterType] = useState("");
+  const [filterBrand, setFilterBrand] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
 
   const { userRole } = useAuth();
@@ -27,11 +28,13 @@ const CatalogRoute = () => {
     const page = parseInt(params.get("pageNumber"), 10) || 1;
     const size = params.get("size") || "";
     const type = params.get("type") || "";
+    const brand = params.get("brand") || "";
     const color = params.get("color") || "";
 
     setPageNumber(page);
     setFilterSize(size);
     setFilterType(type);
+    setFilterBrand(brand);
     setSelectedColor(color);
   }, [location.search]);
 
@@ -39,6 +42,7 @@ const CatalogRoute = () => {
     pageNumber,
     filterSize,
     filterType,
+    filterBrand,
     selectedColor,
   });
 
@@ -47,6 +51,7 @@ const CatalogRoute = () => {
       pageNumber: prevPage,
       filterSize: prevSize,
       filterType: prevType,
+      filterBrand: prevBrand,
       selectedColor: prevColor,
     } = prevStateRef.current;
 
@@ -54,12 +59,14 @@ const CatalogRoute = () => {
       prevPage !== pageNumber ||
       prevSize !== filterSize ||
       prevType !== filterType ||
+      prevBrand !== filterBrand ||
       prevColor !== selectedColor
     ) {
       const params = new URLSearchParams();
       if (pageNumber) params.set("pageNumber", pageNumber);
       if (filterSize) params.set("size", filterSize);
       if (filterType) params.set("type", filterType);
+      if (filterBrand) params.set("brand", filterBrand);
       if (selectedColor) params.set("color", selectedColor);
 
       navigate(`?${params.toString()}`, { replace: true });
@@ -68,10 +75,18 @@ const CatalogRoute = () => {
         pageNumber,
         filterSize,
         filterType,
+        filterBrand,
         selectedColor,
       };
     }
-  }, [pageNumber, filterSize, filterType, selectedColor, navigate]);
+  }, [
+    pageNumber,
+    filterSize,
+    filterType,
+    filterBrand,
+    selectedColor,
+    navigate,
+  ]);
 
   useEffect(() => {
     const getShoesList = async () => {
@@ -81,6 +96,7 @@ const CatalogRoute = () => {
           selectedColor,
           filterSize,
           filterType,
+          filterBrand,
         );
         setShoesList(response.results);
         setTotalPages(response.total_pages);
@@ -94,7 +110,7 @@ const CatalogRoute = () => {
     };
 
     getShoesList();
-  }, [pageNumber, selectedColor, filterSize, filterType]);
+  }, [pageNumber, selectedColor, filterSize, filterType, filterBrand]);
 
   const handleFilterChange = (filterName, value) => {
     switch (filterName) {
@@ -103,6 +119,9 @@ const CatalogRoute = () => {
         break;
       case "type":
         setFilterType(value);
+        break;
+      case "brand":
+        setFilterBrand(value);
         break;
       case "color":
         setSelectedColor(value);
@@ -126,6 +145,7 @@ const CatalogRoute = () => {
     setSelectedColor("");
     setFilterSize("");
     setFilterType("");
+    setFilterBrand("");
     setPageNumber(1);
   };
 
@@ -153,6 +173,8 @@ const CatalogRoute = () => {
           setFilterSize={(value) => handleFilterChange("size", value)}
           filterType={filterType}
           setFilterType={(value) => handleFilterChange("type", value)}
+          filterBrand={filterBrand}
+          setFilterBrand={(value) => handleFilterChange("brand", value)}
           selectedColor={selectedColor}
           setSelectedColor={(value) => handleFilterChange("color", value)}
           onSubmit={handleResetButtonClick}

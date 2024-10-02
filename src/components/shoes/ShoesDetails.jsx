@@ -4,7 +4,6 @@ import StyledFormControlWithSelect from "../styled/StyledFormControlWithSelect";
 import StyledTitle from "../styled/StyledTitle";
 import { useEffect, useState } from "react";
 import shoesService from "../../services/ShoesService";
-import upperCaseFirstLetter from "../../utils/upperCaseFirstLetter";
 import { useNavigate, useParams } from "react-router-dom";
 import ShoesDetailsImageSlider from "../ShoesDetailsImageSlider";
 import useAuth from "../../auth/useAuth";
@@ -122,7 +121,7 @@ const ShoesDetails = () => {
 
           <Stack width={{ xs: 1, md: 0.5 }} gap={{ xs: 4, sm: 2, md: 6 }}>
             <Typography variant="h4" fontWeight="bold">
-              {upperCaseFirstLetter(shoesDetails.brand)} {shoesDetails.name}
+              {shoesDetails.name}
             </Typography>
             <Typography variant="h5" fontWeight="bold">
               {shoesDetails.price}

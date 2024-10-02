@@ -5,11 +5,14 @@ import StyledForm from "../components/styled/StyledForm";
 import shoesColors from "../enums/shoesColors";
 import shoesSizes from "../enums/shoesSizes";
 import shoesTypes from "../enums/shoesTypes";
+import shoesBrands from "../enums/shoesBrands";
 
 const ShoesFilterForm = ({
   order,
   filterType,
   setFilterType,
+  filterBrand,
+  setFilterBrand,
   filterSize,
   setFilterSize,
   selectedColor,
@@ -41,7 +44,26 @@ const ShoesFilterForm = ({
         </MenuItem>
         {Object.values(shoesTypes).map((type) => (
           <MenuItem key={type} value={type}>
-            {type}
+            {type.slice(0, 1).toUpperCase() + type.slice(1)}
+          </MenuItem>
+        ))}
+      </StyledFormControlWithSelect>
+
+      <StyledFormControlWithSelect
+        title="Бренд"
+        selectId="filter-brand-select"
+        formControlSize="small"
+        gap={4}
+        value={filterBrand}
+        onChange={(e) => setFilterBrand(e.target.value)}
+        displayEmpty={true}
+      >
+        <MenuItem disabled value="">
+          Виберіть бренд
+        </MenuItem>
+        {Object.keys(shoesBrands).map((brand) => (
+          <MenuItem key={brand} value={brand}>
+            {brand.slice(0, 1).toUpperCase() + brand.slice(1)}
           </MenuItem>
         ))}
       </StyledFormControlWithSelect>

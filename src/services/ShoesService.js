@@ -1,7 +1,7 @@
 import { axiosInstance } from "../api/AxiosInterceptor";
 
 class ShoesService {
-  async fetchShoesList(pageNum, color, size, type) {
+  async fetchShoesList(pageNum, color, size, type, brand) {
     let url = `boots/list?&page=${pageNum}`;
 
     if (color) {
@@ -14,6 +14,10 @@ class ShoesService {
 
     if (type) {
       url += `&type=${type}`;
+    }
+
+    if (brand) {
+      url += `&brand=${brand}`;
     }
 
     return (await axiosInstance.get(url)).data;
