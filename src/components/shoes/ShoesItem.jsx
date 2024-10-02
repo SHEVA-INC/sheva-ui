@@ -4,13 +4,11 @@ import StyledColorPicker from "../styled/StyledColorPicker";
 import StyledFormControlWithSelect from "../styled/StyledFormControlWithSelect";
 import { DETAILED_SHOES_ROUTE } from "../../app/Routes";
 import { useNavigate } from "react-router-dom";
-import upperCaseFirstLetter from "../../utils/upperCaseFirstLetter";
 import { useForm } from "react-hook-form";
 
 const ShoesItem = ({
   id,
   name,
-  brand,
   type,
   color,
   price,
@@ -94,7 +92,7 @@ const ShoesItem = ({
         justifyContent="space-between"
       >
         <Typography variant="h5" fontWeight="bold">
-          {upperCaseFirstLetter(brand)} {name}
+          {name}
         </Typography>
 
         <Typography variant="h6">Тип: {type}</Typography>
