@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import AuthManager from "../auth/TokenService";
 import useAuth from "../auth/useAuth";
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
+const baseUrl = "https://api-sheva-shop.azurewebsites.net/api/";
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,
