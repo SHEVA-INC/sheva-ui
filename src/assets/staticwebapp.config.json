@@ -29,12 +29,8 @@
       "allowedRoles": ["authenticated"]
     },
     {
-      "route": "/customers/contoso",
-      "allowedRoles": ["administrator", "customers_contoso"]
-    },
-    {
       "route": "/login",
-      "rewrite": "/.auth/login/github"
+      "rewrite": "/.auth/login"
     },
     {
       "route": "/logout",
@@ -111,7 +107,7 @@
   ],
   "navigationFallback": {
     "rewrite": "index.html",
-    "exclude": ["/*.{png,jpg,gif,svg}", "/css/*"]
+    "exclude": ["/assets/*.{png,jpg,gif,svg}", "/css/*"]
   },
   "responseOverrides": {
     "400": {
