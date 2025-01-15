@@ -37,10 +37,6 @@
           "rewrite": "/.auth/login/github"
       },
       {
-          "route": "/.auth/login/twitter",
-          "statusCode": 404
-      },
-      {
           "route": "/logout",
           "redirect": "/.auth/logout"
       },
@@ -55,7 +51,8 @@
       }
   ],
   "navigationFallback": {
-    "rewrite": "index.html"
+    "rewrite": "index.html",
+    "exclude": ["/*.{png,jpg,gif,svg}", "/css/*"]
   },
   "responseOverrides": {
       "400" : {
