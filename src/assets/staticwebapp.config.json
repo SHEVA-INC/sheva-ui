@@ -107,7 +107,7 @@
   ],
   "navigationFallback": {
     "rewrite": "index.html",
-    "exclude": ["/assets/*.{png,jpg,gif,svg}", "/css/*"]
+    "exclude": ["/src/assets/*.{png,jpg,gif,svg}", "/css/*"]
   },
   "responseOverrides": {
     "400": {
