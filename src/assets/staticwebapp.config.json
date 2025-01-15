@@ -56,7 +56,7 @@
   ],
   "navigationFallback": {
     "rewrite": "index.html",
-    "exclude": ["/images/*.{png,jpg,gif,svg}", "/css/*"]
+    "exclude": ["/*.{ico,js,map,css,svg}"]
   },
   "responseOverrides": {
       "400" : {
