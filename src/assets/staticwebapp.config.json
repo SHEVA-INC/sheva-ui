@@ -125,7 +125,7 @@
     }
   },
   "globalHeaders": {
-    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'; img-src https: data:; script-src 'unsafe-inline' 'unsafe-eval' https://sheva-shop.com https://www.sheva-shop.com https://www.googletagmanager.com; "  
+    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'; img-src https: data: https://sheva-shop.com https://www.sheva-shop.com; script-src 'unsafe-inline' 'unsafe-eval' https://sheva-shop.com https://www.sheva-shop.com https://www.googletagmanager.com;"
   },
   "mimeTypes": {
     ".json": "text/json"
