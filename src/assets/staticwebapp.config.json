@@ -125,7 +125,7 @@
     }
   },
   "globalHeaders": {
-    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'; img-src https: data:; script-src 'unsafe-inline' 'unsafe-eval';"
+    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'; img-src https: data:; script-src 'unsafe-inline' 'unsafe-eval' https://sheva-shop.com https://www.sheva-shop.com; "  
   },
   "mimeTypes": {
     ".json": "text/json"
