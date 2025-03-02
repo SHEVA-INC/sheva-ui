@@ -4,8 +4,9 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import shoesService from "../services/ShoesService";
 import { useEffect, useState } from "react";
 import StyledFileDropzone from "../components/styled/StyledFileDropzone";
+import accessoriesService from "../services/AccessoriesService";
 
-const EditUploadMainImageForm = ({ shoesId }) => {
+const EditUploadMainAccessoriesImageForm = ({ accessoriesId }) => {
   const [isEditMainPhotoOpen, setIsEditMainPhotoOpen] = useState(false);
   const [uploadedMainImage, setUploadedMainImage] = useState(null);
   const [mainImageUrl, setMainImageUrl] = useState("");
@@ -19,17 +20,18 @@ const EditUploadMainImageForm = ({ shoesId }) => {
   };
 
   useEffect(() => {
-    const getShoesDetails = async (shoesId) => {
+    const getAccessoriesDetails = async (accessoriesId) => {
       try {
-        const response = await shoesService.fetchShoesDetails(shoesId);
+        const response =
+          await accessoriesService.fetchAccessoriesDetails(accessoriesId);
         setMainImageUrl(response.main_image);
       } catch (error) {
         console.error("Error fetching shoes details:", error);
       }
     };
 
-    getShoesDetails(shoesId);
-  }, [shoesId]);
+    getAccessoriesDetails(accessoriesId);
+  }, [accessoriesId]);
 
   const { register, setValue, handleSubmit } = useForm({
     values: {
@@ -50,7 +52,7 @@ const EditUploadMainImageForm = ({ shoesId }) => {
     };
 
     try {
-      await shoesService.updateMainImage(shoesId, updatedImageData);
+      await shoesService.updateMainImage(accessoriesId, updatedImageData);
     } catch (error) {
       console.error("Error updating main image:", error);
     }
@@ -98,4 +100,4 @@ const EditUploadMainImageForm = ({ shoesId }) => {
   );
 };
 
-export default EditUploadMainImageForm;
+export default EditUploadMainAccessoriesImageForm;

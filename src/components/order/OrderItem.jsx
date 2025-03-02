@@ -1,13 +1,16 @@
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import upperCaseFirstLetter from "../../utils/upperCaseFirstLetter";
 import { useNavigate } from "react-router-dom";
-import { DETAILED_SHOES_ROUTE } from "../../app/Routes";
+import {
+  DETAILED_ACCESSORIES_ROUTE,
+  DETAILED_SHOES_ROUTE,
+} from "../../app/Routes";
 import DeleteIcon from "../../icons/DeleteIcon";
 import shoppingCartService from "../../services/ShoppingCartService";
 
 const OrderItem = ({
   id,
-  cartProductId,
+  productType,
   mainImage,
   name,
   brand,
@@ -25,20 +28,22 @@ const OrderItem = ({
 }) => {
   const navigate = useNavigate();
 
-  const handleShoesItemClick = (shoesId) => {
-    navigate(`${DETAILED_SHOES_ROUTE.replace(":shoesId", shoesId)}`);
+  const handleOrderItemClick = (productType, id) => {
+    if (productType === "boots")
+      navigate(`${DETAILED_SHOES_ROUTE.replace(":shoesId", id)}`);
+    else if (productType === "accessory")
+      navigate(`${DETAILED_ACCESSORIES_ROUTE.replace(":accessoriesId", id)}`);
   };
 
-  const handleDeleteOrderItemFromCart = async (e, productId) => {
+  const handleDeleteOrderItemFromCart = async (e, id) => {
     e.stopPropagation();
-    await shoppingCartService.deleteProductFromShoppingCart(productId);
+    await shoppingCartService.deleteProductFromShoppingCart(id);
     handleItemRemove(true);
   };
 
   return (
     <Stack
-      id={cartProductId}
-      onClick={() => handleShoesItemClick(id)}
+      onClick={() => handleOrderItemClick(productType, id)}
       flexDirection={{ xs: "column", sm: "row" }}
       justifyContent="flex-start"
       gap={2}
@@ -69,10 +74,10 @@ const OrderItem = ({
         order={{ xs: 3, sm: 2 }}
       >
         <Typography variant={fontVariantTitle} fontWeight="bold">
-          {upperCaseFirstLetter(brand)} {name}
+          {brand && upperCaseFirstLetter(brand)} {name}
         </Typography>
         <Typography variant={fontVariant}>Тип: {type}</Typography>
-        <Typography variant={fontVariant}>Колір: {color}</Typography>
+        {color && <Typography variant={fontVariant}>Колір: {color}</Typography>}
         <Typography variant={fontVariant}>Розмір: {size}</Typography>
         <Typography variant={fontVariant}>Ціна: {price}</Typography>
         <Typography variant={fontVariant}>Кількість: {quantity}</Typography>
@@ -80,7 +85,7 @@ const OrderItem = ({
       </Stack>
       {isAllowedToDelete && (
         <IconButton
-          onClick={(e) => handleDeleteOrderItemFromCart(e, cartProductId)}
+          onClick={(e) => handleDeleteOrderItemFromCart(e, id)}
           sx={{
             p: 2,
             alignSelf: { xs: "flex-end", sm: "flex-start" },

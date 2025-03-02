@@ -19,8 +19,7 @@ const ProfileRoute = () => {
       </StyledStackWithBordersAndTitle>
       <StyledStackWithBordersAndTitle
         title="Змінити пароль"
-        width="100%"
-        maxWidth="340px"
+        width={{ xs: 1, sm: "340px" }}
       >
         <ChangePasswordForm />
       </StyledStackWithBordersAndTitle>

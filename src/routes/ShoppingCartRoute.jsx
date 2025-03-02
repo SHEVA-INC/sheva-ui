@@ -25,7 +25,7 @@ const ShoppingCartRoute = () => {
           <Stack flexDirection={{ xs: "column", sm: "row" }} gap={6} width={1}>
             <OrderList
               fontVariant="h6"
-              fontVariantTitle="h5"  
+              fontVariantTitle="h5"
               width={{ xs: 1, sm: 0.7 }}
               orders={shoppingCartList}
               totalPages={totalPages}

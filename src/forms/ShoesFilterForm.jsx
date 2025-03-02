@@ -25,7 +25,7 @@ const ShoesFilterForm = ({
       py={8}
       alignItems="flex-start"
       order={order}
-      maxWidth="340px"
+      width={{ xs: 1, sm: "340px" }}
       boxShadow="0 0 10px 10px rgba(0, 0, 0, 0.03)"
       borderRadius={(theme) => theme.shape.containerBorderRadius}
       onSubmit={onSubmit}
@@ -34,7 +34,7 @@ const ShoesFilterForm = ({
         title="Тип"
         selectId="filter-type-select"
         formControlSize="small"
-        gap={4}
+        gap={2}
         value={filterType}
         onChange={(e) => setFilterType(e.target.value)}
         displayEmpty={true}
@@ -53,7 +53,7 @@ const ShoesFilterForm = ({
         title="Бренд"
         selectId="filter-brand-select"
         formControlSize="small"
-        gap={4}
+        gap={2}
         value={filterBrand}
         onChange={(e) => setFilterBrand(e.target.value)}
         displayEmpty={true}
@@ -72,7 +72,7 @@ const ShoesFilterForm = ({
         title="Розмір"
         selectId="filter-size-select"
         formControlSize="small"
-        gap={4}
+        gap={2}
         value={filterSize}
         onChange={(e) => setFilterSize(e.target.value)}
         displayEmpty={true}
