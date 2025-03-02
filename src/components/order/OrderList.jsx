@@ -18,16 +18,16 @@ const OrderList = ({
     <Stack gap={5} width={width} alignItems="center">
       {orders.map((orderItem) => (
         <OrderItem
-          key={orderItem.cart_product_id}
+          key={orderItem.id}
+          productType={orderItem.product_type}
           id={orderItem.id}
-          cartProductId={orderItem.cart_product_id}
-          mainImage={orderItem.main_image}
-          name={orderItem.name}
-          brand={orderItem.brand}
-          type={orderItem.type}
-          size={orderItem.size}
-          price={orderItem.price}
-          color={orderItem.color}
+          mainImage={orderItem.product_data.main_image}
+          name={orderItem.product_data.name}
+          brand={orderItem.product_data?.brand}
+          type={orderItem.product_data?.type}
+          size={orderItem?.size}
+          price={orderItem.product_data?.price}
+          color={orderItem.product_data?.color}
           quantity={orderItem.quantity}
           subtotal={orderItem.subtotal}
           fontVariant={fontVariant}

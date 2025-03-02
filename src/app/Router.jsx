@@ -6,15 +6,18 @@ import FullWidthLayout from "../layouts/FullWidthLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import {
   ABOUT_US_ROUTE,
+  ADD_ACCESSORIES_ROUTE,
   ADD_SHOES_ROUTE,
   CATALOG_ROUTE,
   CHECKOUT_ROUTE,
+  DETAILED_ACCESSORIES_ROUTE,
   DETAILED_SHOES_ROUTE,
   EXCHANGE_RETURN_POLICY_ROUTE,
   FORGOT_PASSWORD_ROUTE,
   HOME_ROUTE,
   LIKED_ROUTE,
   MAIN_ROUTE,
+  MANAGE_ACCESSORIES_DETAILS_ROUTE,
   MANAGE_SHOES_DETAILS_ROUTE,
   NOT_FOUND_ROUTE,
   PAYMENT_AND_DELIVERY_POLICY_ROUTE,
@@ -30,6 +33,7 @@ import useAuth from "../auth/useAuth";
 import RequireAuth from "../auth/RequireAuth";
 import PaymentDeliveryPolicyRoute from "../routes/PaymentDeliveryPolicyRoute";
 import ExchangeReturnPolicyRoute from "../routes/ExchangeReturnPolicyRoute";
+import ManageAccessoriesRoute from "../routes/ManageAccessoriesRoute";
 
 const HomeRoute = lazy(() => import("../routes/HomeRoute"));
 const CatalogRoute = lazy(() => import("../routes/CatalogRoute"));
@@ -38,6 +42,9 @@ const LikedRoute = lazy(() => import("../routes/LikedRoute"));
 const ProfileRoute = lazy(() => import("../routes/ProfileRoute"));
 const ShoppingCartRoute = lazy(() => import("../routes/ShoppingCartRoute"));
 const DetailedShoesRoute = lazy(() => import("../routes/DetailedShoesRoute"));
+const DetailedAccessoriesRoute = lazy(
+  () => import("../routes/DetailedAccessoriesRoute"),
+);
 const SignInAndSignUpRoute = lazy(
   () => import("../routes/SignInAndSignUpRoute"),
 );
@@ -45,8 +52,9 @@ const ForgotPasswordRoute = lazy(() => import("../routes/ForgotPasswordRoute"));
 const ResetPasswordRoute = lazy(() => import("../routes/ResetPasswordRoute"));
 const NotFoundRoute = lazy(() => import("../routes/NotFoundRoute"));
 const SignOutRoute = lazy(() => import("../routes/SignOutRoute"));
-const ManageShoesRoute = lazy(() => import("../routes/ManageShoesRoute"));
 const AddShoesRoute = lazy(() => import("../routes/AddShoesRoute"));
+const ManageShoesRoute = lazy(() => import("../routes/ManageShoesRoute"));
+const AddAccessoriesRoute = lazy(() => import("../routes/AddAccessoriesRoute"));
 const CheckoutRoute = lazy(() => import("../routes/CheckoutRoute"));
 const PrivacyPolicyRoute = lazy(() => import("../routes/PrivacyPolicyRoute"));
 
@@ -124,6 +132,10 @@ const Router = () => {
                 path={DETAILED_SHOES_ROUTE}
                 element={<DetailedShoesRoute />}
               />
+              <Route
+                path={DETAILED_ACCESSORIES_ROUTE}
+                element={<DetailedAccessoriesRoute />}
+              />
               <Route path={ABOUT_US_ROUTE} element={<AboutUsRoute />} />
 
               <Route
@@ -147,13 +159,21 @@ const Router = () => {
               <Route path={PROFILE_ROUTE} element={<ProfileRoute />} />
 
               {userRole === "admin" && (
-                <Route path={ADD_SHOES_ROUTE} element={<AddShoesRoute />} />
-              )}
-              {userRole === "admin" && (
-                <Route
-                  path={MANAGE_SHOES_DETAILS_ROUTE}
-                  element={<ManageShoesRoute />}
-                />
+                <>
+                  <Route path={ADD_SHOES_ROUTE} element={<AddShoesRoute />} />
+                  <Route
+                    path={MANAGE_SHOES_DETAILS_ROUTE}
+                    element={<ManageShoesRoute />}
+                  />
+                  <Route
+                    path={ADD_ACCESSORIES_ROUTE}
+                    element={<AddAccessoriesRoute />}
+                  />
+                  <Route
+                    path={MANAGE_ACCESSORIES_DETAILS_ROUTE}
+                    element={<ManageAccessoriesRoute />}
+                  />
+                </>
               )}
 
               <Route path={CHECKOUT_ROUTE} element={<CheckoutRoute />} />

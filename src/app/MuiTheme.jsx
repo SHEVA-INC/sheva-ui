@@ -8,6 +8,7 @@ let theme = createTheme({
     mode: "light",
     primary: {
       main: "#51379B",
+      light: "#ECE5FF",
       contrastText: "#ffffff",
     },
     secondary: {

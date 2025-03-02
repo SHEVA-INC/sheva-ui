@@ -53,7 +53,10 @@ const ShoesDetails = () => {
 
   const isInCart = () => {
     return shoppingCartList.some(
-      (item) => item?.id === shoesDetails?.id && item?.size == selectedSize,
+      (item) =>
+        item?.product_type === "boots" &&
+        item?.id === shoesDetails?.id &&
+        item?.size == selectedSize,
     );
   };
 
@@ -70,6 +73,7 @@ const ShoesDetails = () => {
 
   const onSubmit = async (data) => {
     const cartParams = {
+      product_type: "boots",
       product_id: shoesDetails.id,
       quantity: countValue,
       ...data,

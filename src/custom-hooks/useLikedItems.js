@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
-const useLikedShoes = () => {
+const useLikedItems = (type) => {
+  const storageKey = type === "shoes" ? "likedShoes" : "likedAccessories";
   const [likedItems, setLikedItems] = useState([]);
 
   useEffect(() => {
-    const storedLikedItems = JSON.parse(localStorage.getItem("liked")) || [];
+    const storedLikedItems = JSON.parse(localStorage.getItem(storageKey)) || [];
     setLikedItems(storedLikedItems);
-  }, []);
+  }, [storageKey]);
 
   const handleLikeClick = (id) => {
     setLikedItems((prevLikedItems) => {
@@ -16,7 +17,7 @@ const useLikedShoes = () => {
       } else {
         updatedLikedItems = [...prevLikedItems, id];
       }
-      localStorage.setItem("liked", JSON.stringify(updatedLikedItems));
+      localStorage.setItem(storageKey, JSON.stringify(updatedLikedItems));
       return updatedLikedItems;
     });
   };
@@ -24,4 +25,4 @@ const useLikedShoes = () => {
   return [likedItems, handleLikeClick];
 };
 
-export default useLikedShoes;
+export default useLikedItems;

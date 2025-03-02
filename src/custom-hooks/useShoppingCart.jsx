@@ -17,10 +17,10 @@ const useShoppingCart = () => {
       try {
         const response = await shoppingCartService.getShoppingCart(pageNum);
         setShoppingCartList(response.results.results);
-        setTotalPages(response.results.total_pages);
-        setPageNumber(response.results.current_page);
-        setTotalPrice(response.results.total_price);
         setCartId(response.results.cart_id);
+        setTotalPrice(response.results.total_price);
+        setTotalPages(response.total_pages);
+        setPageNumber(response.current_page);
       } catch (error) {
         console.error("Error fetching cart list:", error);
       }
